@@ -1,0 +1,64 @@
+# .github/workflows/weekly_report.yml
+# Runs every Sunday at 08:00 UTC (4pm SGT)
+# Manually triggerable from the Actions tab for ad-hoc runs
+
+name: Weekly Funnel Report
+
+on:
+  schedule:
+    - cron: "0 8 * * 0"   # 08:00 UTC every Sunday
+  workflow_dispatch:        # manual trigger
+    inputs:
+      mock:
+        description: "Use mock data?"
+        required: false
+        default: "false"
+      start_date:
+        description: "Start date (YYYY-MM-DD, leave blank for auto)"
+        required: false
+      end_date:
+        description: "End date (YYYY-MM-DD, leave blank for auto)"
+        required: false
+
+jobs:
+  collect-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run collector
+        env:
+          CLICKBANK_APP_KEY:   ${{ secrets.CLICKBANK_APP_KEY }}
+          CLICKBANK_DEV_KEY:   ${{ secrets.CLICKBANK_DEV_KEY }}
+          CLICKBANK_ACCOUNT:   ${{ secrets.CLICKBANK_ACCOUNT }}
+          CPVLABS_API_KEY:     ${{ secrets.CPVLABS_API_KEY }}
+          CPVLABS_BASE_URL:    ${{ secrets.CPVLABS_BASE_URL }}
+          FB_ACCESS_TOKEN:     ${{ secrets.FB_ACCESS_TOKEN }}
+          FB_AD_ACCOUNT_ID:    ${{ secrets.FB_AD_ACCOUNT_ID }}
+          FB_SGD_TO_USD_RATE:  ${{ secrets.FB_SGD_TO_USD_RATE }}
+          MAROPOST_API_KEY:    ${{ secrets.MAROPOST_API_KEY }}
+          MAROPOST_ACCOUNT_ID: ${{ secrets.MAROPOST_ACCOUNT_ID }}
+          ANTHROPIC_API_KEY:   ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.mock }}" = "true" ]; then ARGS="$ARGS --mock"; fi
+          if [ -n "${{ github.event.inputs.start_date }}" ]; then ARGS="$ARGS --start ${{ github.event.inputs.start_date }}"; fi
+          if [ -n "${{ github.event.inputs.end_date }}" ]; then ARGS="$ARGS --end ${{ github.event.inputs.end_date }}"; fi
+          python collect.py $ARGS --out output/report_data.json
+
+      - name: Upload report data artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-data-${{ github.run_id }}
+          path: output/report_data.json
+          retention-days: 90
