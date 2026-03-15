@@ -1,6 +1,7 @@
 # .github/workflows/weekly_report.yml
 # Runs every Monday at 01:00 SGT (Sunday 17:00 UTC)
 # Manually triggerable with project + date overrides
+# Matrix strategy runs both projects in parallel
 
 name: Weekly Funnel Report
 
@@ -10,11 +11,11 @@ on:
   workflow_dispatch:
     inputs:
       project:
-        description: "Project to run (leave blank for all)"
+        description: "Project to run (asksabrina / astroloversketch / leave blank for both)"
         required: false
         default: ""
       start_date:
-        description: "Start date YYYY-MM-DD (leave blank for auto)"
+        description: "Start date YYYY-MM-DD (leave blank for auto last Mon-Sun)"
         required: false
       end_date:
         description: "End date YYYY-MM-DD (leave blank for auto)"
@@ -29,71 +30,81 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: false   # if one project fails, still run the other
+      fail-fast: false    # if one project fails, still run the other
       matrix:
         project:
           - asksabrina
           - astroloversketch
 
-    # Skip a project if workflow_dispatch specifies a different one
-    if: |
-      github.event_name == 'schedule' ||
-      github.event.inputs.project == '' ||
-      github.event.inputs.project == matrix.project
-
     steps:
-      # ── Checkout ────────────────────────────────────────────────────────────
+      # ── Skip if a specific project was requested and this is not it ──────────
+      - name: Check if this project should run
+        id: check
+        run: |
+          INPUT="${{ github.event.inputs.project }}"
+          if [ -z "$INPUT" ] || [ "$INPUT" = "${{ matrix.project }}" ]; then
+            echo "run=true" >> $GITHUB_OUTPUT
+          else
+            echo "run=false" >> $GITHUB_OUTPUT
+          fi
+
+      # ── Checkout ──────────────────────────────────────────────────────────────
       - name: Checkout repo
+        if: steps.check.outputs.run == 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # ── Python setup ────────────────────────────────────────────────────────
+      # ── Python setup ──────────────────────────────────────────────────────────
       - name: Set up Python 3.11
+        if: steps.check.outputs.run == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
+        if: steps.check.outputs.run == 'true'
         run: pip install -r requirements.txt
 
-      # ── Google credentials ───────────────────────────────────────────────────
+      # ── Google credentials ────────────────────────────────────────────────────
       - name: Write Google credentials file
+        if: steps.check.outputs.run == 'true'
         run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > google_credentials.json
 
-      # ── Collect data ─────────────────────────────────────────────────────────
+      # ── Collect data ──────────────────────────────────────────────────────────
       - name: Collect data (${{ matrix.project }})
+        if: steps.check.outputs.run == 'true'
         env:
           PROJECT: ${{ matrix.project }}
           GOOGLE_CREDENTIALS_FILE: google_credentials.json
-          # ── Ask Sabrina ──
-          ASKSABRINA_CLICKBANK_API_KEY:  ${{ secrets.ASKSABRINA_CLICKBANK_API_KEY }}
-          ASKSABRINA_CLICKBANK_VENDOR:   ${{ secrets.ASKSABRINA_CLICKBANK_VENDOR }}
-          ASKSABRINA_CPVLABS_API_KEY:    ${{ secrets.ASKSABRINA_CPVLABS_API_KEY }}
-          ASKSABRINA_CPVLABS_BASE_URL:   ${{ secrets.ASKSABRINA_CPVLABS_BASE_URL }}
-          ASKSABRINA_CPVLABS_GROUP:      ${{ secrets.ASKSABRINA_CPVLABS_GROUP }}
-          ASKSABRINA_FB_ACCESS_TOKEN:    ${{ secrets.ASKSABRINA_FB_ACCESS_TOKEN }}
-          ASKSABRINA_FB_AD_ACCOUNT_ID:   ${{ secrets.ASKSABRINA_FB_AD_ACCOUNT_ID }}
-          ASKSABRINA_FB_SGD_TO_USD_RATE: ${{ secrets.ASKSABRINA_FB_SGD_TO_USD_RATE }}
-          ASKSABRINA_MAROPOST_API_KEY:   ${{ secrets.ASKSABRINA_MAROPOST_API_KEY }}
-          ASKSABRINA_MAROPOST_ACCOUNT_ID: ${{ secrets.ASKSABRINA_MAROPOST_ACCOUNT_ID }}
-          ASKSABRINA_USE_CPV_FOR_EMAIL:  ${{ secrets.ASKSABRINA_USE_CPV_FOR_EMAIL }}
-          ASKSABRINA_GA4_PROPERTY_ID:    ${{ secrets.ASKSABRINA_GA4_PROPERTY_ID }}
-          ASKSABRINA_CONFIG_FILE:        config/asksabrina.yaml
-          # ── Astro Lover Sketch ──
-          ASTRO_CLICKBANK_API_KEY:       ${{ secrets.ASTRO_CLICKBANK_API_KEY }}
-          ASTRO_CLICKBANK_VENDOR:        ${{ secrets.ASTRO_CLICKBANK_VENDOR }}
-          ASTRO_CPVLABS_API_KEY:         ${{ secrets.ASTRO_CPVLABS_API_KEY }}
-          ASTRO_CPVLABS_BASE_URL:        ${{ secrets.ASTRO_CPVLABS_BASE_URL }}
-          ASTRO_CPVLABS_GROUP:           ${{ secrets.ASTRO_CPVLABS_GROUP }}
-          ASTRO_FB_ACCESS_TOKEN:         ${{ secrets.ASTRO_FB_ACCESS_TOKEN }}
-          ASTRO_FB_AD_ACCOUNT_ID:        ${{ secrets.ASTRO_FB_AD_ACCOUNT_ID }}
-          ASTRO_FB_SGD_TO_USD_RATE:      ${{ secrets.ASTRO_FB_SGD_TO_USD_RATE }}
-          ASTRO_MAROPOST_API_KEY:        ${{ secrets.ASTRO_MAROPOST_API_KEY }}
-          ASTRO_MAROPOST_ACCOUNT_ID:     ${{ secrets.ASTRO_MAROPOST_ACCOUNT_ID }}
-          ASTRO_USE_CPV_FOR_EMAIL:       ${{ secrets.ASTRO_USE_CPV_FOR_EMAIL }}
-          ASTRO_GA4_PROPERTY_ID:         ${{ secrets.ASTRO_GA4_PROPERTY_ID }}
-          ASTRO_CONFIG_FILE:             config/astroloversketch.yaml
+          # ── Ask Sabrina ──────────────────────────────────────────────────────
+          ASKSABRINA_CLICKBANK_API_KEY:    ${{ secrets.ASKSABRINA_CLICKBANK_API_KEY }}
+          ASKSABRINA_CLICKBANK_VENDOR:     ${{ secrets.ASKSABRINA_CLICKBANK_VENDOR }}
+          ASKSABRINA_CPVLABS_API_KEY:      ${{ secrets.ASKSABRINA_CPVLABS_API_KEY }}
+          ASKSABRINA_CPVLABS_BASE_URL:     ${{ secrets.ASKSABRINA_CPVLABS_BASE_URL }}
+          ASKSABRINA_CPVLABS_GROUP:        ${{ secrets.ASKSABRINA_CPVLABS_GROUP }}
+          ASKSABRINA_FB_ACCESS_TOKEN:      ${{ secrets.ASKSABRINA_FB_ACCESS_TOKEN }}
+          ASKSABRINA_FB_AD_ACCOUNT_ID:     ${{ secrets.ASKSABRINA_FB_AD_ACCOUNT_ID }}
+          ASKSABRINA_FB_SGD_TO_USD_RATE:   ${{ secrets.ASKSABRINA_FB_SGD_TO_USD_RATE }}
+          ASKSABRINA_MAROPOST_API_KEY:     ${{ secrets.ASKSABRINA_MAROPOST_API_KEY }}
+          ASKSABRINA_MAROPOST_ACCOUNT_ID:  ${{ secrets.ASKSABRINA_MAROPOST_ACCOUNT_ID }}
+          ASKSABRINA_USE_CPV_FOR_EMAIL:    ${{ secrets.ASKSABRINA_USE_CPV_FOR_EMAIL }}
+          ASKSABRINA_GA4_PROPERTY_ID:      ${{ secrets.ASKSABRINA_GA4_PROPERTY_ID }}
+          ASKSABRINA_CONFIG_FILE:          config/asksabrina.yaml
+          # ── Astro Lover Sketch ───────────────────────────────────────────────
+          ASTRO_CLICKBANK_API_KEY:         ${{ secrets.ASTRO_CLICKBANK_API_KEY }}
+          ASTRO_CLICKBANK_VENDOR:          ${{ secrets.ASTRO_CLICKBANK_VENDOR }}
+          ASTRO_CPVLABS_API_KEY:           ${{ secrets.ASTRO_CPVLABS_API_KEY }}
+          ASTRO_CPVLABS_BASE_URL:          ${{ secrets.ASTRO_CPVLABS_BASE_URL }}
+          ASTRO_CPVLABS_GROUP:             ${{ secrets.ASTRO_CPVLABS_GROUP }}
+          ASTRO_FB_ACCESS_TOKEN:           ${{ secrets.ASTRO_FB_ACCESS_TOKEN }}
+          ASTRO_FB_AD_ACCOUNT_ID:          ${{ secrets.ASTRO_FB_AD_ACCOUNT_ID }}
+          ASTRO_FB_SGD_TO_USD_RATE:        ${{ secrets.ASTRO_FB_SGD_TO_USD_RATE }}
+          ASTRO_MAROPOST_API_KEY:          ${{ secrets.ASTRO_MAROPOST_API_KEY }}
+          ASTRO_MAROPOST_ACCOUNT_ID:       ${{ secrets.ASTRO_MAROPOST_ACCOUNT_ID }}
+          ASTRO_USE_CPV_FOR_EMAIL:         ${{ secrets.ASTRO_USE_CPV_FOR_EMAIL }}
+          ASTRO_GA4_PROPERTY_ID:           ${{ secrets.ASTRO_GA4_PROPERTY_ID }}
+          ASTRO_CONFIG_FILE:               config/astroloversketch.yaml
         run: |
           ARGS="--project ${{ matrix.project }}"
           if [ "${{ github.event.inputs.mock }}" = "true" ]; then ARGS="$ARGS --mock"; fi
@@ -101,11 +112,12 @@ jobs:
           if [ -n "${{ github.event.inputs.end_date }}" ]; then ARGS="$ARGS --end ${{ github.event.inputs.end_date }}"; fi
           python collect.py $ARGS
 
-      # ── AI analysis ──────────────────────────────────────────────────────────
+      # ── AI analysis ───────────────────────────────────────────────────────────
       - name: Run AI analysis (${{ matrix.project }})
+        if: steps.check.outputs.run == 'true'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          PROJECT: ${{ matrix.project }}
+          ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
+          PROJECT:                ${{ matrix.project }}
           ASKSABRINA_CONFIG_FILE: config/asksabrina.yaml
           ASTRO_CONFIG_FILE:      config/astroloversketch.yaml
         run: |
@@ -117,25 +129,27 @@ jobs:
 
       # ── Build and send report ─────────────────────────────────────────────────
       - name: Build and send report (${{ matrix.project }})
+        if: steps.check.outputs.run == 'true'
         env:
-          GOOGLE_CREDENTIALS_FILE: google_credentials.json
-          PROJECT: ${{ matrix.project }}
-          SENDGRID_API_KEY:        ${{ secrets.SENDGRID_API_KEY }}
-          GOOGLE_DRIVE_FOLDER_ID:  ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
-          ASKSABRINA_SHEET_ID:     ${{ secrets.ASKSABRINA_SHEET_ID }}
+          GOOGLE_CREDENTIALS_FILE:      google_credentials.json
+          PROJECT:                      ${{ matrix.project }}
+          SENDGRID_API_KEY:             ${{ secrets.SENDGRID_API_KEY }}
+          GOOGLE_DRIVE_FOLDER_ID:       ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+          ASKSABRINA_SHEET_ID:          ${{ secrets.ASKSABRINA_SHEET_ID }}
           ASKSABRINA_REPORT_EMAIL_TO:   ${{ secrets.ASKSABRINA_REPORT_EMAIL_TO }}
           ASKSABRINA_REPORT_EMAIL_FROM: ${{ secrets.ASKSABRINA_REPORT_EMAIL_FROM }}
           ASKSABRINA_REPORT_EMAIL_NAME: ${{ secrets.ASKSABRINA_REPORT_EMAIL_NAME }}
-          ASKSABRINA_CONFIG_FILE:  config/asksabrina.yaml
-          ASTRO_SHEET_ID:          ${{ secrets.ASTRO_SHEET_ID }}
-          ASTRO_REPORT_EMAIL_TO:   ${{ secrets.ASTRO_REPORT_EMAIL_TO }}
-          ASTRO_REPORT_EMAIL_FROM: ${{ secrets.ASTRO_REPORT_EMAIL_FROM }}
-          ASTRO_REPORT_EMAIL_NAME: ${{ secrets.ASTRO_REPORT_EMAIL_NAME }}
-          ASTRO_CONFIG_FILE:       config/astroloversketch.yaml
+          ASKSABRINA_CONFIG_FILE:       config/asksabrina.yaml
+          ASTRO_SHEET_ID:               ${{ secrets.ASTRO_SHEET_ID }}
+          ASTRO_REPORT_EMAIL_TO:        ${{ secrets.ASTRO_REPORT_EMAIL_TO }}
+          ASTRO_REPORT_EMAIL_FROM:      ${{ secrets.ASTRO_REPORT_EMAIL_FROM }}
+          ASTRO_REPORT_EMAIL_NAME:      ${{ secrets.ASTRO_REPORT_EMAIL_NAME }}
+          ASTRO_CONFIG_FILE:            config/astroloversketch.yaml
         run: python report.py --project ${{ matrix.project }} --no-docs
 
-      # ── Commit output ─────────────────────────────────────────────────────────
+      # ── Commit output files ───────────────────────────────────────────────────
       - name: Commit output files (${{ matrix.project }})
+        if: steps.check.outputs.run == 'true'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -143,9 +157,9 @@ jobs:
           git diff --staged --quiet || git commit -m "Weekly report ${{ matrix.project }} $(date -u +%Y-%m-%d)"
           git push
 
-      # ── Upload artifacts ──────────────────────────────────────────────────────
+      # ── Upload artifacts for debugging ────────────────────────────────────────
       - name: Upload artifacts (${{ matrix.project }})
-        if: always()
+        if: always() && steps.check.outputs.run == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: report-${{ matrix.project }}-${{ github.run_id }}
