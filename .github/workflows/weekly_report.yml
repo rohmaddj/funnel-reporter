@@ -91,7 +91,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/ docs/
+          git add docs/
           git diff --staged --quiet || git commit -m "Weekly report $(date -u +%Y-%m-%d)"
           git push
 
@@ -102,8 +102,6 @@ jobs:
         with:
           name: report-${{ github.run_id }}
           path: |
-            output/report_data_*.json
-            output/analysis_*.json
             docs/email_*.html
             docs/index.html
           retention-days: 90
