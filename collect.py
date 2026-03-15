@@ -33,11 +33,39 @@ def parse_args():
     parser.add_argument("--start", type=str, help="Start date YYYY-MM-DD (default: last Monday)")
     parser.add_argument("--end", type=str, help="End date YYYY-MM-DD (default: last Sunday)")
     parser.add_argument("--out", type=str, default="", help="Output file path")
+    parser.add_argument("--project", type=str, default="", help="Project name: asksabrina or astroloversketch")
     return parser.parse_args()
 
+def _load_project_env(prefix: str):
+    """Re-map prefixed env vars to the unprefixed names collectors expect."""
+    mappings = {
+        "CLICKBANK_API_KEY":   f"{prefix}_CLICKBANK_API_KEY",
+        "CLICKBANK_VENDOR":    f"{prefix}_CLICKBANK_VENDOR",
+        "CPVLABS_API_KEY":     f"{prefix}_CPVLABS_API_KEY",
+        "CPVLABS_BASE_URL":    f"{prefix}_CPVLABS_BASE_URL",
+        "CPVLABS_GROUP":       f"{prefix}_CPVLABS_GROUP",
+        "FB_ACCESS_TOKEN":     f"{prefix}_FB_ACCESS_TOKEN",
+        "FB_AD_ACCOUNT_ID":    f"{prefix}_FB_AD_ACCOUNT_ID",
+        "FB_SGD_TO_USD_RATE":  f"{prefix}_FB_SGD_TO_USD_RATE",
+        "MAROPOST_API_KEY":    f"{prefix}_MAROPOST_API_KEY",
+        "MAROPOST_ACCOUNT_ID": f"{prefix}_MAROPOST_ACCOUNT_ID",
+        "USE_CPV_FOR_EMAIL":   f"{prefix}_USE_CPV_FOR_EMAIL",
+        "GA4_PROPERTY_ID":     f"{prefix}_GA4_PROPERTY_ID",
+        "CONFIG_FILE":         f"{prefix}_CONFIG_FILE",
+    }
+    for target, source in mappings.items():
+        val = os.environ.get(source, "")
+        if val:
+            os.environ[target] = val
 
 def main():
     args = parse_args()
+
+    # Load project-specific env vars
+    project = args.project or os.environ.get("PROJECT", "asksabrina")
+    prefix  = "ASTRO" if project == "astroloversketch" else "ASKSABRINA"
+    _load_project_env(prefix)
+    log(f"Project: {project}")
 
     # Date range: default to the last full week (Mon–Sun)
     if args.start and args.end:
@@ -50,7 +78,7 @@ def main():
     log(f"Mode: {'MOCK' if args.mock else 'LIVE'}")
 
     if not args.out:
-        args.out = f"output/report_data_{end_date.replace('-', '_')}.json"
+        args.out = f"output/{project}/report_data_{end_date.replace('-', '_')}.json"
 
     # ── Run each collector ───────────────────────────────────────────────────
     collectors = {

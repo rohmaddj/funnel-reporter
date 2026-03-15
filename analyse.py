@@ -31,48 +31,92 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Run AI analysis on collected funnel data")
     parser.add_argument("--input",  default="")
     parser.add_argument("--out",    default="",    help="Output path (default: output/analysis_YYYY_MM_DD.json)")
+    parser.add_argument("--project", type=str, default="", help="Project: asksabrina or astroloversketch")
     parser.add_argument("--mock",   action="store_true",               help="Skip API call, return mock analysis")
     return parser.parse_args()
 
 
 # ── Prompt ────────────────────────────────────────────────────────────────────
 
-SYSTEM_PROMPT = """You are a direct-response funnel analyst for Ask Sabrina, a spiritual coaching offer sold via ClickBank.
+# SYSTEM_PROMPT = """You are a direct-response funnel analyst for Ask Sabrina, a spiritual coaching offer sold via ClickBank.
 
-Funnel structure (always keep this in mind):
-  Traffic → Landing Page → Video VSL → Basic $37 / Advanced $54
-  → Order Bump (free trial → $14.99/mo)
-  → OTO1: Soul Signature Compass $67
-  → OTO1 Downsell: $47
-  → OTO2: Divine Helper Blueprint $97
-  → OTO2 Downsell: $77
+# Funnel structure (always keep this in mind):
+#   Traffic → Landing Page → Video VSL → Basic $37 / Advanced $54
+#   → Order Bump (free trial → $14.99/mo)
+#   → OTO1: Soul Signature Compass $67
+#   → OTO1 Downsell: $47
+#   → OTO2: Divine Helper Blueprint $97
+#   → OTO2 Downsell: $77
 
-Key benchmarks to apply:
-- Healthy LP CTR for cold paid traffic: 4–6%
-- Healthy email campaign CR: 0.3–0.5% (volume), 2%+ (retargeting)
-- OTO take rates: 40%+ is strong, under 20% needs attention
-- Downsell take rates: 0% for 10+ days = likely broken redirect
-- Paid traffic: target CPA below $80 USD (half of $157 avg funnel value)
-- Revenue per visitor (RPV): email ~$0.28–0.35, paid profitable above $1.00
+# Key benchmarks to apply:
+# - Healthy LP CTR for cold paid traffic: 4–6%
+# - Healthy email campaign CR: 0.3–0.5% (volume), 2%+ (retargeting)
+# - OTO take rates: 40%+ is strong, under 20% needs attention
+# - Downsell take rates: 0% for 10+ days = likely broken redirect
+# - Paid traffic: target CPA below $80 USD (half of $157 avg funnel value)
+# - Revenue per visitor (RPV): email ~$0.28–0.35, paid profitable above $1.00
 
-Traffic sources:
-- Email (Maropost, tracked via CPV Labs): warm audience, lower CR expected but high volume
-- Facebook + Instagram (paid): cold audience, judge by LP CTR and CPA not just CR
+# Traffic sources:
+# - Email (Maropost, tracked via CPV Labs): warm audience, lower CR expected but high volume
+# - Facebook + Instagram (paid): cold audience, judge by LP CTR and CPA not just CR
 
-CPV Labs tracks ClickBank postbacks — one buyer who takes frontend + OTO1 + OTO2 fires 3 postbacks.
-So CPV "conversions" > ClickBank frontend sales is normal. Use ClickBank for true buyer count.
+# CPV Labs tracks ClickBank postbacks — one buyer who takes frontend + OTO1 + OTO2 fires 3 postbacks.
+# So CPV "conversions" > ClickBank frontend sales is normal. Use ClickBank for true buyer count.
 
-Funnel variant context (GA4):
- /destiny (v1) = full-screen video, CPV campaigns 77+78
- /destiny/v2 = page with headline + video, CPV campaigns 87+88
- Key GA4 events in sequence: choice_selected → optin_step_1/2/3_completed → optin_flow_completed → checkout_basic_*/checkout_advanced_*
- session_to_choice rate is typically the biggest drop-off — measures how many visitors stay through the ~4min video before first interaction.
- choice_to_optin1 measures how many who interacted then started the opt-in flow.
- Checkout rate is from sessions, not opt-in completions.
+# Funnel variant context (GA4):
+#  /destiny (v1) = full-screen video, CPV campaigns 77+78
+#  /destiny/v2 = page with headline + video, CPV campaigns 87+88
+#  Key GA4 events in sequence: choice_selected → optin_step_1/2/3_completed → optin_flow_completed → checkout_basic_*/checkout_advanced_*
+#  session_to_choice rate is typically the biggest drop-off — measures how many visitors stay through the ~4min video before first interaction.
+#  choice_to_optin1 measures how many who interacted then started the opt-in flow.
+#  Checkout rate is from sessions, not opt-in completions.
 
-Your output must be valid JSON only — no markdown, no preamble, no explanation outside the JSON.
-CRITICAL: Return only valid JSON. No trailing commas. No comments. No text outside the JSON object.
-"""
+# Your output must be valid JSON only — no markdown, no preamble, no explanation outside the JSON.
+# CRITICAL: Return only valid JSON. No trailing commas. No comments. No text outside the JSON object.
+# """
+
+def build_system_prompt(data: dict) -> str:
+    config = data.get("_project_config", {})
+    project_name = config.get("name", "Ask Sabrina")
+    funnel_type  = config.get("funnel_type", "VSL")
+    skus         = data.get("funnel_backend", {}).get("sku_breakdown", {})
+
+    # Build funnel structure description from actual SKU data
+    funnel_lines = []
+    for sku, s in skus.items():
+        funnel_lines.append(f"  {s['label']} ${s['price']}")
+    funnel_str = "\n".join(funnel_lines) if funnel_lines else "  See funnel_backend data"
+
+    return f"""You are a direct-response funnel analyst for {project_name}, a {funnel_type} offer sold via ClickBank.
+
+        Funnel structure (always keep this in mind):
+        Traffic → Landing Page → {funnel_type}
+        {funnel_str}
+
+        Key benchmarks to apply:
+        - Healthy LP CTR for cold paid traffic: 4–6%
+        - Healthy email campaign CR: 0.3–0.5% (volume), 2%+ (retargeting)
+        - OTO take rates: 40%+ is strong, under 20% needs attention
+        - Downsell take rates: 0% for 10+ days = likely broken redirect
+        - Paid traffic: target CPA below $80 USD
+        - Revenue per visitor (RPV): email ~$0.28–0.35, paid profitable above $1.00
+
+        Traffic sources:
+        - Email (Maropost, tracked via CPV Labs): warm audience, lower CR expected but high volume
+        - Facebook + Instagram (paid): cold audience, judge by LP CTR and CPA not just CR
+
+        CPV Labs tracks ClickBank postbacks — one buyer who takes frontend + OTO1 + OTO2 fires 3 postbacks.
+        So CPV "conversions" > ClickBank frontend sales is normal. Use ClickBank for true buyer count.
+
+        Funnel variant context (GA4):
+        Key GA4 events in sequence: choice_selected → optin_step_1/2/3_completed → optin_flow_completed → checkout_*
+        session_to_choice rate is typically the biggest drop-off.
+        choice_to_optin1 measures how many who interacted then started the opt-in flow.
+        Checkout rate is from sessions, not opt-in completions.
+
+        Your output must be valid JSON only — no markdown, no preamble, no explanation outside the JSON.
+        CRITICAL: Return only valid JSON. No trailing commas. No comments. No text outside the JSON object.
+        """
 
 def build_user_prompt(data: dict) -> str:
     # Slim the payload — remove pycache noise, keep what matters
@@ -139,7 +183,7 @@ Rules:
 
 # ── API call ──────────────────────────────────────────────────────────────────
 
-def call_claude(prompt: str) -> dict:
+def call_claude(prompt: str, system_prompt: str = "") -> dict:
     if not ANTHROPIC_API_KEY:
         raise ValueError("ANTHROPIC_API_KEY not set — add it to your .env file")
 
@@ -153,7 +197,7 @@ def call_claude(prompt: str) -> dict:
         json={
             "model":      MODEL,
             "max_tokens": MAX_TOKENS,
-            "system":     SYSTEM_PROMPT,
+            "system":     system_prompt,
             "messages":   [{"role": "user", "content": prompt}],
         },
         timeout=120,
@@ -271,6 +315,7 @@ def mock_analysis() -> dict:
 
 def main():
     args = parse_args()
+    project = args.project or os.environ.get("PROJECT", "asksabrina")
 
     if args.mock:
         print("[analyse] Mock mode — skipping API call")
@@ -279,14 +324,14 @@ def main():
         # Auto-detect latest dated file if no input specified
         if not args.input:
             import glob
-            files = sorted(glob.glob("output/report_data_*.json"))
-            args.input = files[-1] if files else "output/report_data.json"
+            files = sorted(glob.glob(f"output/{project}/report_data_*.json"))
+            args.input = files[-1] if files else f"output/{project}/report_data.json"
             print(f"[analyse] Auto-detected input: {args.input}")
 
         # Auto-generate dated output filename from input filename date
         if not args.out:
             date_part = Path(args.input).stem.replace("report_data_", "")
-            args.out = f"output/analysis_{date_part}.json"
+            args.out = f"output/{project}/analysis_{date_part}.json"
 
         input_path = Path(args.input)
         if not input_path.exists():
@@ -300,7 +345,8 @@ def main():
         print(f"[analyse] Sending to Claude ({MODEL})...")
 
         prompt   = build_user_prompt(data)
-        analysis = call_claude(prompt)
+        system_prompt = build_system_prompt(data)
+        analysis = call_claude(prompt, system_prompt)
         print("[analyse] ✓ Analysis received")
 
     # Wrap with metadata
