@@ -840,9 +840,9 @@ def main():
     if args.mock:
         print("[report] Mock mode — skipping all Google API calls")
         html = build_email_html(data, analysis, doc_url="https://docs.google.com/document/d/MOCK")
-        Path("output").mkdir(exist_ok=True)
-        Path("output/email.html").write_text(html)
-        print("[report] ✓ Email preview saved to output/email.html")
+        Path("docs").mkdir(exist_ok=True)
+        Path("docs/email.html").write_text(html)
+        print("[report] ✓ Email preview saved to docs/email.html")
         print("[report]   Open it in your browser to check the layout")
         return
 
@@ -869,13 +869,14 @@ def main():
         else:
             html = build_email_html(data, analysis, doc_url)
             date_part = Path(args.data).stem.replace("report_data_", "")
-            email_path = f"output/email_{date_part}.html"
+            email_path = f"docs/email_{date_part}.html"
+            Path("docs").mkdir(exist_ok=True)
             Path(email_path).write_text(html)
             print(f"[report] Email saved to {email_path}")
             print("[report] Sending email...")
             send_email(services, html, subject)
 
-            build_index_html("output")
+            build_index_html("docs")
 
     print(f"\n[report] Done ✓")
     if doc_url:
