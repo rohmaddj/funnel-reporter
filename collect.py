@@ -115,6 +115,7 @@ def main():
             "generated_at": datetime.utcnow().isoformat() + "Z",
             "period_start": start_date,
             "period_end": end_date,
+            "project": project,
             "mode": "mock" if args.mock else "live",
             "errors": errors,
         },
