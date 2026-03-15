@@ -22,6 +22,7 @@ from collectors.clickbank import ClickBankCollector
 from collectors.cpvlabs import CPVLabsCollector
 from collectors.facebook import FacebookCollector
 from collectors.maropost import MaropostCollector
+from collectors.ga4 import GA4Collector
 from utils.date_helpers import get_week_range
 from utils.logger import log
 
@@ -31,7 +32,7 @@ def parse_args():
     parser.add_argument("--mock", action="store_true", help="Use mock data instead of live APIs")
     parser.add_argument("--start", type=str, help="Start date YYYY-MM-DD (default: last Monday)")
     parser.add_argument("--end", type=str, help="End date YYYY-MM-DD (default: last Sunday)")
-    parser.add_argument("--out", type=str, default="output/report_data.json", help="Output file path")
+    parser.add_argument("--out", type=str, default="", help="Output file path")
     return parser.parse_args()
 
 
@@ -48,12 +49,16 @@ def main():
     log(f"Collecting data for {start_date} → {end_date}")
     log(f"Mode: {'MOCK' if args.mock else 'LIVE'}")
 
+    if not args.out:
+        args.out = f"output/report_data_{start_date.replace('-', '_')}.json"
+
     # ── Run each collector ───────────────────────────────────────────────────
     collectors = {
         "clickbank": ClickBankCollector(mock=args.mock),
         "cpvlabs":   CPVLabsCollector(mock=args.mock),
         "facebook":  FacebookCollector(mock=args.mock),
         "maropost":  MaropostCollector(mock=args.mock),
+        "ga4":       GA4Collector(mock=args.mock),
     }
 
     results = {}
@@ -93,6 +98,7 @@ def main():
         },
         "funnel_backend": results["clickbank"],
         "cross_check": cross_check,
+        "funnel_variants": results.get("ga4"),
     }
 
     # ── Write output ─────────────────────────────────────────────────────────
@@ -118,7 +124,7 @@ def build_funnel_snapshot(results: dict) -> dict:
     cb = results.get("clickbank") or {}
     fb = results.get("facebook") or {}
     mp = results.get("maropost") or {}
-    cpv = results.get("cpvlabs") or {}
+    cpv_email = (results.get("cpvlabs") or {}).get("totals_by_source", {}).get("email", {})
 
     total_revenue = cb.get("total_revenue", 0)
     frontend_sales = cb.get("frontend_sales_count", 0)
@@ -126,8 +132,6 @@ def build_funnel_snapshot(results: dict) -> dict:
 
     fb_spend_sgd = fb.get("total_spend_sgd", 0)
     fb_spend_usd = fb.get("total_spend_usd", 0)
-
-    cpv_email = cpv.get("totals_by_source", {}).get("email", {})
 
     return {
         "total_revenue_usd": total_revenue,

@@ -29,8 +29,8 @@ MAX_TOKENS = 4000
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run AI analysis on collected funnel data")
-    parser.add_argument("--input",  default="output/report_data.json", help="Path to report_data.json")
-    parser.add_argument("--out",    default="output/analysis.json",    help="Output path")
+    parser.add_argument("--input",  default="")
+    parser.add_argument("--out",    default="",    help="Output path (default: output/analysis_YYYY_MM_DD.json)")
     parser.add_argument("--mock",   action="store_true",               help="Skip API call, return mock analysis")
     return parser.parse_args()
 
@@ -62,6 +62,14 @@ Traffic sources:
 CPV Labs tracks ClickBank postbacks — one buyer who takes frontend + OTO1 + OTO2 fires 3 postbacks.
 So CPV "conversions" > ClickBank frontend sales is normal. Use ClickBank for true buyer count.
 
+Funnel variant context (GA4):
+ /destiny (v1) = full-screen video, CPV campaigns 77+78
+ /destiny/v2 = page with headline + video, CPV campaigns 87+88
+ Key GA4 events in sequence: choice_selected → optin_step_1/2/3_completed → optin_flow_completed → checkout_basic_*/checkout_advanced_*
+ session_to_choice rate is typically the biggest drop-off — measures how many visitors stay through the ~4min video before first interaction.
+ choice_to_optin1 measures how many who interacted then started the opt-in flow.
+ Checkout rate is from sessions, not opt-in completions.
+
 Your output must be valid JSON only — no markdown, no preamble, no explanation outside the JSON.
 CRITICAL: Return only valid JSON. No trailing commas. No comments. No text outside the JSON object.
 """
@@ -75,6 +83,7 @@ def build_user_prompt(data: dict) -> str:
         "paid_campaigns":  data.get("traffic_sources", {}).get("paid", {}).get("campaigns"),
         "funnel_backend":  data.get("funnel_backend"),
         "cross_check":     data.get("cross_check"),
+        "funnel_variants": data.get("funnel_variants"),
     }
 
     return f"""Here is this week's funnel performance data:
@@ -124,6 +133,7 @@ Rules:
 - Be specific with numbers — pull actual figures from the data, don't generalise.
 - If a downsell has $0 revenue for the full period, flag it as likely broken redirect.
 - Do not include campaigns with fewer than 10 views.
+- If funnel_variants data is present, include 1–2 needle movers based on GA4 funnel drop-off. Focus on the biggest drop-off stage per variant (session_to_choice is typically the largest — low choice rate means users are leaving before the first interaction at ~4 min mark). Frame as actionable: what to test, what to change, what to measure. Note that variants run separate traffic so avoid direct winner/loser claims.
 """
 
 
@@ -266,7 +276,18 @@ def main():
         print("[analyse] Mock mode — skipping API call")
         analysis = mock_analysis()
     else:
-        # Load collected data
+        # Auto-detect latest dated file if no input specified
+        if not args.input:
+            import glob
+            files = sorted(glob.glob("output/report_data_*.json"))
+            args.input = files[-1] if files else "output/report_data.json"
+            print(f"[analyse] Auto-detected input: {args.input}")
+
+        # Auto-generate dated output filename from input filename date
+        if not args.out:
+            date_part = Path(args.input).stem.replace("report_data_", "")
+            args.out = f"output/analysis_{date_part}.json"
+
         input_path = Path(args.input)
         if not input_path.exists():
             print(f"Error: {input_path} not found. Run collect.py first.", file=sys.stderr)

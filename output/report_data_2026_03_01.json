@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-14T13:48:49.980442Z",
+    "generated_at": "2026-03-14T15:23:12.927156Z",
     "period_start": "2026-03-01",
     "period_end": "2026-03-14",
     "mode": "live",
@@ -10,9 +10,9 @@
     "total_revenue_usd": 3225.67,
     "frontend_sales": 81,
     "avg_revenue_per_buyer_usd": 39.82,
-    "paid_traffic_spend_sgd": 811.68,
-    "paid_traffic_spend_usd": 603.08,
-    "email_total_views": 6112,
+    "paid_traffic_spend_sgd": 812.59,
+    "paid_traffic_spend_usd": 603.75,
+    "email_total_views": 6113,
     "email_total_conversions": 29,
     "email_total_revenue": 1898.42
   },
@@ -31,24 +31,24 @@
           "cpv_campaign_id": null,
           "platforms": {
             "facebook": {
-              "spend_sgd": 232.71,
-              "spend_usd": 172.9,
-              "impressions": 1726,
+              "spend_sgd": 232.91,
+              "spend_usd": 173.05,
+              "impressions": 1731,
               "lp_views": 54,
-              "lp_ctr_pct": 3.13,
+              "lp_ctr_pct": 3.12,
               "purchases": 3,
               "cr_pct": 0.17,
-              "cpa_sgd": 77.57
+              "cpa_sgd": 77.64
             },
             "instagram": {
-              "spend_sgd": 45.84,
-              "spend_usd": 34.06,
-              "impressions": 263,
+              "spend_sgd": 45.93,
+              "spend_usd": 34.13,
+              "impressions": 264,
               "lp_views": 12,
-              "lp_ctr_pct": 4.56,
+              "lp_ctr_pct": 4.55,
               "purchases": 1,
               "cr_pct": 0.38,
-              "cpa_sgd": 45.84
+              "cpa_sgd": 45.93
             },
             "threads": {
               "spend_sgd": 0.02,
@@ -72,12 +72,12 @@
             }
           },
           "totals": {
-            "spend_sgd": 278.69,
-            "impressions": 1991,
+            "spend_sgd": 278.98,
+            "impressions": 1997,
             "lp_views": 66,
             "purchases": 4,
-            "spend_usd": 207.07,
-            "lp_ctr_pct": 3.31,
+            "spend_usd": 207.28,
+            "lp_ctr_pct": 3.3,
             "cr_pct": 0.2
           }
         },
@@ -86,14 +86,14 @@
           "cpv_campaign_id": null,
           "platforms": {
             "facebook": {
-              "spend_sgd": 315.4,
-              "spend_usd": 234.34,
-              "impressions": 1186,
+              "spend_sgd": 315.79,
+              "spend_usd": 234.63,
+              "impressions": 1191,
               "lp_views": 48,
-              "lp_ctr_pct": 4.05,
+              "lp_ctr_pct": 4.03,
               "purchases": 5,
               "cr_pct": 0.42,
-              "cpa_sgd": 63.08
+              "cpa_sgd": 63.16
             },
             "instagram": {
               "spend_sgd": 23.74,
@@ -107,12 +107,12 @@
             }
           },
           "totals": {
-            "spend_sgd": 339.14,
-            "impressions": 1309,
+            "spend_sgd": 339.53,
+            "impressions": 1314,
             "lp_views": 58,
             "purchases": 6,
-            "spend_usd": 251.98,
-            "lp_ctr_pct": 4.43,
+            "spend_usd": 252.27,
+            "lp_ctr_pct": 4.41,
             "cr_pct": 0.46
           }
         },
@@ -121,14 +121,14 @@
           "cpv_campaign_id": null,
           "platforms": {
             "facebook": {
-              "spend_sgd": 106.49,
-              "spend_usd": 79.12,
-              "impressions": 908,
+              "spend_sgd": 106.5,
+              "spend_usd": 79.13,
+              "impressions": 909,
               "lp_views": 19,
               "lp_ctr_pct": 2.09,
               "purchases": 2,
               "cr_pct": 0.22,
-              "cpa_sgd": 53.24
+              "cpa_sgd": 53.25
             },
             "instagram": {
               "spend_sgd": 20.52,
@@ -152,12 +152,12 @@
             }
           },
           "totals": {
-            "spend_sgd": 127.04,
-            "impressions": 1048,
+            "spend_sgd": 127.05,
+            "impressions": 1049,
             "lp_views": 25,
             "purchases": 2,
-            "spend_usd": 94.39,
-            "lp_ctr_pct": 2.39,
+            "spend_usd": 94.4,
+            "lp_ctr_pct": 2.38,
             "cr_pct": 0.19
           }
         },
@@ -166,39 +166,39 @@
           "cpv_campaign_id": null,
           "platforms": {
             "facebook": {
-              "spend_sgd": 58.68,
-              "spend_usd": 43.6,
-              "impressions": 331,
+              "spend_sgd": 58.88,
+              "spend_usd": 43.75,
+              "impressions": 344,
               "lp_views": 16,
-              "lp_ctr_pct": 4.83,
+              "lp_ctr_pct": 4.65,
               "purchases": 1,
-              "cr_pct": 0.3,
-              "cpa_sgd": 58.68
+              "cr_pct": 0.29,
+              "cpa_sgd": 58.88
             },
             "instagram": {
-              "spend_sgd": 8.13,
-              "spend_usd": 6.04,
-              "impressions": 46,
+              "spend_sgd": 8.15,
+              "spend_usd": 6.06,
+              "impressions": 47,
               "lp_views": 1,
-              "lp_ctr_pct": 2.17,
+              "lp_ctr_pct": 2.13,
               "purchases": 0,
               "cr_pct": 0.0,
               "cpa_sgd": null
             }
           },
           "totals": {
-            "spend_sgd": 66.81,
-            "impressions": 377,
+            "spend_sgd": 67.03,
+            "impressions": 391,
             "lp_views": 17,
             "purchases": 1,
-            "spend_usd": 49.64,
-            "lp_ctr_pct": 4.51,
-            "cr_pct": 0.27
+            "spend_usd": 49.8,
+            "lp_ctr_pct": 4.35,
+            "cr_pct": 0.26
           }
         }
       },
-      "total_spend_sgd": 811.68,
-      "total_spend_usd": 603.08,
+      "total_spend_sgd": 812.59,
+      "total_spend_usd": 603.75,
       "sgd_to_usd_rate": 0.743
     },
     "tracking": {
@@ -215,7 +215,7 @@
         "53": {
           "label": "asksabrina.com - Organic Traffic",
           "source": "unknown",
-          "views": 5603,
+          "views": 5620,
           "conversions": 32,
           "revenue": 921.42,
           "cr_pct": 0.57,
@@ -260,7 +260,7 @@
         "77": {
           "label": "asksabrina.com - Maropost Traffic - Interactive VSL - Lead",
           "source": "email",
-          "views": 749,
+          "views": 750,
           "conversions": 3,
           "revenue": 376.91,
           "cr_pct": 0.4,
@@ -328,12 +328,12 @@
           "revenue": 488.37
         },
         "unknown": {
-          "views": 5603,
+          "views": 5620,
           "conversions": 32,
           "revenue": 921.42
         },
         "email": {
-          "views": 6112,
+          "views": 6113,
           "conversions": 29,
           "revenue": 1898.42
         }
@@ -345,6 +345,20 @@
   "funnel_backend": {
     "total_revenue": 3225.67,
     "frontend_sales_count": 81,
+    "variant_sales": {
+      "destiny_v1": {
+        "sales": 6,
+        "revenue": 277.19
+      },
+      "destiny_v2": {
+        "sales": 18,
+        "revenue": 489.74
+      },
+      "other": {
+        "sales": 57,
+        "revenue": 1141.51
+      }
+    },
     "sku_breakdown": {
       "abdt-basic": {
         "label": "Front-end Basic",
@@ -363,7 +377,7 @@
         "revenue": 1387.96
       },
       "SPR-OB2": {
-        "label": "Order Bump (free\u2192$14.99/mo)",
+        "label": "Order Bump (free trial - $14.99/mo)",
         "stage": "order_bump",
         "price": 0,
         "new_sales": 24,
@@ -422,5 +436,69 @@
     "diff_pct": 2.56,
     "status": "ok",
     "note": "Difference within expected range (rebills / timing)."
+  },
+  "funnel_variants": {
+    "destiny_v1": {
+      "label": "/destiny (full-screen)",
+      "cpv_ids": [
+        "77",
+        "78"
+      ],
+      "sessions": 4753,
+      "total_users": 4033,
+      "avg_session_sec": 164.5,
+      "bounce_rate_pct": 61.2,
+      "choice_selected": 433,
+      "choice_rate_pct": 9.11,
+      "optin_step1": 251,
+      "optin_step2": 234,
+      "optin_step3": 228,
+      "optin_completed": 228,
+      "optin_rate_pct": 4.8,
+      "checkout_basic": 120,
+      "checkout_advanced": 137,
+      "checkout_total": 257,
+      "checkout_rate_pct": 5.41,
+      "checkout_from_optin_pct": 112.72,
+      "dropoff": {
+        "session_to_choice": 9.11,
+        "choice_to_optin1": 57.97,
+        "optin1_to_optin2": 93.23,
+        "optin2_to_optin3": 97.44,
+        "optin3_to_complete": 100.0,
+        "complete_to_checkout": 100.0
+      }
+    },
+    "destiny_v2": {
+      "label": "/destiny/v2 (with-headline)",
+      "cpv_ids": [
+        "87",
+        "88"
+      ],
+      "sessions": 2827,
+      "total_users": 2631,
+      "avg_session_sec": 101.8,
+      "bounce_rate_pct": 47.7,
+      "choice_selected": 189,
+      "choice_rate_pct": 6.69,
+      "optin_step1": 127,
+      "optin_step2": 121,
+      "optin_step3": 119,
+      "optin_completed": 119,
+      "optin_rate_pct": 4.21,
+      "checkout_basic": 44,
+      "checkout_advanced": 97,
+      "checkout_total": 141,
+      "checkout_rate_pct": 4.99,
+      "checkout_from_optin_pct": 118.49,
+      "dropoff": {
+        "session_to_choice": 6.69,
+        "choice_to_optin1": 67.2,
+        "optin1_to_optin2": 95.28,
+        "optin2_to_optin3": 98.35,
+        "optin3_to_complete": 100.0,
+        "complete_to_checkout": 100.0
+      }
+    }
   }
 }

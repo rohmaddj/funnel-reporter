@@ -47,10 +47,42 @@ class FacebookCollector(BaseCollector):
         if self.mock:
             return self._mock_data()
 
+        cpv_mapping = self._get_cpv_mapping()
         raw = self._get_insights(start_date, end_date)
-        return self._process(raw)
+        return self._process(raw, cpv_mapping)
 
     # ── API calls ─────────────────────────────────────────────────────────────
+
+    def _get_cpv_mapping(self) -> dict:
+        """
+        Fetches all ads, extracts clpcid from url_tags,
+        returns {campaign_id: cpv_campaign_id}
+        """
+        resp = requests.get(
+            f"{self.BASE_URL}/{self.account_id}/ads",
+            params={
+                "access_token": self.token,
+                "fields":       "campaign_id,creative{url_tags}",
+                "filtering":    '[{"field":"ad.effective_status","operator":"IN","value":["ACTIVE","PAUSED","ARCHIVED"]}]',
+                "limit":        500,
+            },
+            timeout=30,
+        )
+        if not resp.ok:
+            return {}
+
+        mapping = {}
+        for ad in resp.json().get("data", []):
+            campaign_id = ad.get("campaign_id")
+            url_tags    = ad.get("creative", {}).get("url_tags", "")
+            # Parse clpcid from url_tags string e.g. "source=fb&clpcid=88&utm_..."
+            for part in url_tags.split("&"):
+                if part.startswith("clpcid="):
+                    cpv_id = part.split("=")[1].strip()
+                    mapping[campaign_id] = cpv_id
+                    break
+
+        return mapping
 
     def _get_insights(self, start_date: str, end_date: str) -> list:
         """
@@ -83,7 +115,8 @@ class FacebookCollector(BaseCollector):
 
     # ── Processing ─────────────────────────────────────────────────────────────
 
-    def _process(self, rows: list) -> dict:
+    def _process(self, rows: list, cpv_mapping: dict = None) -> dict:
+        cpv_mapping = cpv_mapping or {}
         campaigns = {}
         total_spend_sgd = 0.0
 
@@ -105,7 +138,7 @@ class FacebookCollector(BaseCollector):
             if ckey not in campaigns:
                 campaigns[ckey] = {
                     "campaign_name": cname,
-                    "cpv_campaign_id": cpv_id,
+                    "cpv_campaign_id": cpv_mapping.get(row.get("campaign_id"), cpv_id),
                     "platforms": {},
                     "totals": {"spend_sgd": 0.0, "impressions": 0, "lp_views": 0, "purchases": 0},
                 }

@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "generated_at": "2026-03-14T15:27:02.230404Z",
+    "model": "claude-sonnet-4-5",
+    "mode": "live"
+  },
+  "analysis": {
+    "period_summary": "March 1\u201314 generated $3,225.67 from 81 front-end sales. Paid traffic is marginally profitable but email is carrying the funnel, with organic + Maropost driving 71% of revenue. Backend conversion is weak: OTO1 at 29.6% and OTO2 at 12.3% are below healthy benchmarks.",
+    "northstar": {
+      "metric": "Revenue Per Visitor (RPV)",
+      "email_rpv": 0.31,
+      "paid_rpv_usd": 0.82,
+      "avg_funnel_value": 39.82,
+      "commentary": "Email RPV at $0.31 is within the healthy $0.28\u20130.35 range, but paid RPV at $0.82 is below the $1.00 profitability threshold with CPA near break-even."
+    },
+    "needle_movers": [
+      {
+        "rank": 1,
+        "priority": "critical",
+        "area": "Scale #88 Facebook (Interactive VSL V2)",
+        "why": "Campaign #88 Facebook delivered 6.67% CR and $62.33 revenue from just 15 views\u2014outlier performance. If this holds at scale, it could be the breakthrough paid campaign. Currently spending only ~$50 over 2 weeks.",
+        "what": [
+          "Increase daily budget by 3x immediately to validate conversion rate with 100+ views",
+          "Duplicate winning ad set and test 2 new audience segments",
+          "Monitor CPA closely\u2014target staying below $80 USD ($107 SGD)"
+        ],
+        "revenue_impact": "At 6.67% CR and $157 avg funnel value (if backend improves), 300 views = 20 sales = $3,140 revenue vs ~$450 spend = $2,690 profit."
+      },
+      {
+        "rank": 2,
+        "priority": "critical",
+        "area": "Fix OTO2 Downsell (dhr-d)",
+        "why": "OTO2 downsell at 1.2% take rate with only 1 sale over 14 days strongly suggests broken redirect. Healthy downsells convert 15\u201325% of OTO2 declines. You're leaving ~$770 on the table.",
+        "what": [
+          "Audit dhr-d redirect link in ClickBank\u2014check it loads correctly",
+          "Test checkout flow manually from OTO2 decline path",
+          "If broken, file ClickBank support ticket and re-test within 24 hours"
+        ],
+        "revenue_impact": "81 frontend sales \u2192 24 OTO1 \u2192 ~57 saw OTO2 \u2192 ~47 declined. At 20% downsell take vs 1.2%, that's 9 sales instead of 1 = 8 \u00d7 $77 = $616 lost revenue."
+      },
+      {
+        "rank": 3,
+        "priority": "high",
+        "area": "Optimize Backend OTO1 Take Rate",
+        "why": "OTO1 (SSR) at 29.6% is below the 40%+ healthy benchmark. Improving by 10 percentage points = 8 more $67 sales per 81 buyers = $536 extra revenue per period.",
+        "what": [
+          "A/B test OTO1 video: add social proof testimonial in first 30 seconds",
+          "Test urgency timer on OTO1 page (24-hour countdown)",
+          "Review OTO1 copy\u2014emphasize transformation gap between frontend and Soul Signature"
+        ],
+        "revenue_impact": "81 buyers \u00d7 10% lift = 8 more OTO1 sales \u00d7 $67 = $536. At 50% take rate, that's 16 more sales = $1,072."
+      },
+      {
+        "rank": 4,
+        "priority": "high",
+        "area": "Scale #51 Facebook (V17)",
+        "why": "Campaign #51 Facebook shows 2.96% CR on 203 views with $301 revenue\u2014solid retargeting performance. This is warm traffic (likely pixel audience), so it can absorb more budget without degrading performance.",
+        "what": [
+          "Increase budget by 50% and monitor for 5 days",
+          "Expand lookalike audience from 1% to 2% and test",
+          "Ensure pixel is firing on OTO pages to build better retargeting pool"
+        ],
+        "revenue_impact": "At 2.96% CR and $157 avg value, doubling traffic to 400 views = 12 sales = $1,884 revenue. Current CPA likely low given retargeting nature."
+      },
+      {
+        "rank": 5,
+        "priority": "medium",
+        "area": "Pause Low-Performing Email Segments",
+        "why": "Campaigns #70, #74, #80, #81 show 0% CR across 137 combined views. These dead segments dilute list health and waste send credits. Cut them and reallocate volume to working campaigns.",
+        "what": [
+          "Pause #70 (Discount), #74 (Scarcity), #80 (Reactivation), #81 (Education) in Maropost",
+          "Redirect that list volume to #87 (Interactive VSL V2) which has 0.43% CR",
+          "Review email cadence\u2014possibly re-engage cold subscribers with content before pitching"
+        ],
+        "revenue_impact": "137 views at 0.43% CR = 0.6 sales = ~$94. Small but compounds over time, and improves sender reputation."
+      },
+      {
+        "rank": 6,
+        "priority": "medium",
+        "area": "Improve Paid Campaign LP CTR",
+        "why": "Campaign 120241560726640718 (InteractiveVSL CopyV3) shows 2.09% LP CTR on Facebook\u2014below the 4\u20136% healthy range. Low CTR = wasted ad spend. Campaign spent $106 SGD but only delivered 19 LP views.",
+        "what": [
+          "Test new ad creative\u2014use curiosity hook instead of direct pitch",
+          "Test video thumbnail image A/B (face vs mystical imagery)",
+          "Review ad copy\u2014ensure alignment with landing page promise"
+        ],
+        "revenue_impact": "Improving LP CTR from 2.09% to 4% = 37 LP views instead of 19 from same 909 impressions. At 0.22% CR, that's 0.08 sales = ~$12.50 per period. At scale, this compounds."
+      }
+    ],
+    "scorecard": [
+      {
+        "area": "Email #88 FB",
+        "cpv_id_or_sku": "88",
+        "status": "green",
+        "status_reason": "6.67% CR, $62 revenue from 15 views",
+        "action": "scale"
+      },
+      {
+        "area": "Email #51 FB",
+        "cpv_id_or_sku": "51",
+        "status": "green",
+        "status_reason": "2.96% CR, strong retargeting",
+        "action": "scale"
+      },
+      {
+        "area": "Email #79 Urgency",
+        "cpv_id_or_sku": "79",
+        "status": "green",
+        "status_reason": "3.57% CR from 28 views",
+        "action": "protect"
+      },
+      {
+        "area": "Email #69 Abandoned",
+        "cpv_id_or_sku": "69",
+        "status": "green",
+        "status_reason": "4.0% CR, $77 from 50 views",
+        "action": "protect"
+      },
+      {
+        "area": "Email #87 Interactive V2",
+        "cpv_id_or_sku": "87",
+        "status": "yellow",
+        "status_reason": "0.43% CR, volume leader but below 0.5%",
+        "action": "fix"
+      },
+      {
+        "area": "Email #54 Split Test",
+        "cpv_id_or_sku": "54",
+        "status": "yellow",
+        "status_reason": "0.5% CR, on low end of healthy",
+        "action": "protect"
+      },
+      {
+        "area": "Email #77 Interactive Lead",
+        "cpv_id_or_sku": "77",
+        "status": "yellow",
+        "status_reason": "0.4% CR, below benchmark",
+        "action": "fix"
+      },
+      {
+        "area": "Email #53 Organic",
+        "cpv_id_or_sku": "53",
+        "status": "yellow",
+        "status_reason": "0.57% CR, high volume but low conversion",
+        "action": "fix"
+      },
+      {
+        "area": "Email #78 FB Interactive Lead",
+        "cpv_id_or_sku": "78",
+        "status": "yellow",
+        "status_reason": "1.64% CR from 122 views, needs volume",
+        "action": "scale"
+      },
+      {
+        "area": "Email #70 Discount",
+        "cpv_id_or_sku": "70",
+        "status": "red",
+        "status_reason": "0% CR, 20 views",
+        "action": "pause"
+      },
+      {
+        "area": "Email #74 Scarcity",
+        "cpv_id_or_sku": "74",
+        "status": "red",
+        "status_reason": "0% CR, 28 views",
+        "action": "pause"
+      },
+      {
+        "area": "Email #80 Reactivation",
+        "cpv_id_or_sku": "80",
+        "status": "red",
+        "status_reason": "0% CR, 56 views",
+        "action": "pause"
+      },
+      {
+        "area": "Email #81 Education",
+        "cpv_id_or_sku": "81",
+        "status": "red",
+        "status_reason": "0% CR, 33 views",
+        "action": "pause"
+      },
+      {
+        "area": "Paid 120241384794290718",
+        "cpv_id_or_sku": "120241384794290718",
+        "status": "green",
+        "status_reason": "4.41% LP CTR, 0.46% CR, $252 spend",
+        "action": "scale"
+      },
+      {
+        "area": "Paid 120241711189470718",
+        "cpv_id_or_sku": "120241711189470718",
+        "status": "green",
+        "status_reason": "4.35% LP CTR, new Interactive V2",
+        "action": "scale"
+      },
+      {
+        "area": "Paid 120241152243260718",
+        "cpv_id_or_sku": "120241152243260718",
+        "status": "yellow",
+        "status_reason": "3.3% LP CTR, below 4% benchmark",
+        "action": "fix"
+      },
+      {
+        "area": "Paid 120241560726640718",
+        "cpv_id_or_sku": "120241560726640718",
+        "status": "red",
+        "status_reason": "2.38% LP CTR, well below benchmark",
+        "action": "pause"
+      },
+      {
+        "area": "OTO1 SSR",
+        "cpv_id_or_sku": "SSR",
+        "status": "yellow",
+        "status_reason": "29.6% take rate, below 40% benchmark",
+        "action": "fix"
+      },
+      {
+        "area": "OTO2 dhr",
+        "cpv_id_or_sku": "dhr",
+        "status": "red",
+        "status_reason": "12.3% take rate, well below 40%",
+        "action": "fix"
+      },
+      {
+        "area": "OTO1 Downsell SSR-D",
+        "cpv_id_or_sku": "SSR-D",
+        "status": "yellow",
+        "status_reason": "7.4% take rate, low but functioning",
+        "action": "fix"
+      },
+      {
+        "area": "OTO2 Downsell dhr-d",
+        "cpv_id_or_sku": "dhr-d",
+        "status": "red",
+        "status_reason": "1.2% take rate, likely broken redirect",
+        "action": "audit"
+      },
+      {
+        "area": "Order Bump SPR-OB2",
+        "cpv_id_or_sku": "SPR-OB2",
+        "status": "yellow",
+        "status_reason": "29.6% attach rate, check rebill retention",
+        "action": "protect"
+      }
+    ],
+    "data_notes": "CPV conversions (70) vs ClickBank sales (81) mismatch is inverted from normal pattern\u2014suggests some postbacks not firing or CPV tracking delayed. Revenue diff of 2.56% is within tolerance. OTO2 downsell dhr-d with only 1 sale over 14 days is statistical red flag for broken redirect\u2014needs immediate audit."
+  }
+}
