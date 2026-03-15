@@ -15,7 +15,7 @@ SKU_MAP = {
     "abdt-basic":    {"label": "Front-end Basic",            "price": 37,  "stage": "frontend"},
     "abdt-advanced": {"label": "Front-end Advanced",         "price": 54,  "stage": "frontend"},
     "SPR-OB1":       {"label": "Order Bump ($14.99/mo)","price": 14.99,  "stage": "order_bump"},
-    "SPR-OB2":       {"label": "Order Bump (free trial - $14.99/mo)",     "price": 0,   "stage": "order_bump"},
+    "SPR-OB2":       {"label": "Order Bump (free trial - $14.99/mo)","price": 0,   "stage": "order_bump"},
     "SSR":           {"label": "OTO1 Soul Signature $67",    "price": 67,  "stage": "oto1"},
     "SSR-D":         {"label": "OTO1 Downsell $47",          "price": 47,  "stage": "oto1_downsell"},
     "dhr":           {"label": "OTO2 Divine Helper $97",     "price": 97,  "stage": "oto2"},
@@ -46,26 +46,27 @@ class ClickBankCollector(BaseCollector):
 
     def _get_all_orders(self, start_date: str, end_date: str) -> list:
         all_orders = []
-        page = 1
-        while True:
-            resp, status_code = self._request("GET", "/orders2/list", params={
-                "vendor":    self.vendor,
-                "startDate": start_date,
-                "endDate":   end_date,
-                "type":      "SALE",
-                "role":      "VENDOR",
-            }, extra_headers={"Page": str(page)})
+        for txn_type in ["SALE", "BILL"]:
+            page = 1
+            while True:
+                resp, status_code = self._request("GET", "/orders2/list", params={
+                    "vendor":    self.vendor,
+                    "startDate": start_date,
+                    "endDate":   end_date,
+                    "type":      txn_type,
+                    "role":      "VENDOR",
+                }, extra_headers={"Page": str(page)})
 
-            if not resp:
-                break
-            if isinstance(resp, list):
-                all_orders.extend(resp)
-                break
-            orders = resp.get("orderData", [])
-            all_orders.extend(orders)
-            if status_code != 206 or len(orders) < 100:
-                break
-            page += 1
+                if not resp:
+                    break
+                if isinstance(resp, list):
+                    all_orders.extend(resp)
+                    break
+                orders = resp.get("orderData", [])
+                all_orders.extend(orders)
+                if status_code != 206 or len(orders) < 100:
+                    break
+                page += 1
         return all_orders
 
     def _request(self, method, path, params=None, extra_headers=None):
@@ -105,8 +106,9 @@ class ClickBankCollector(BaseCollector):
         }
 
         for order in orders:
-            if order.get("transactionType") != "SALE":
+            if order.get("transactionType") not in ("SALE", "BILL"):
                 continue
+            is_order_rebill = order.get("transactionType") == "BILL"
 
             tracking_id = order.get("trackingId", "")
             campaign_id = self._extract_campaign_id(tracking_id)
@@ -119,7 +121,7 @@ class ClickBankCollector(BaseCollector):
                 sku       = line.get("itemNo", "unknown")
                 amount    = float(line.get("accountAmount", 0))
                 line_type = line.get("lineItemType", "")
-                is_rebill = line_type == "REBILL"
+                is_rebill = is_order_rebill or line_type == "REBILL"
 
                 info = SKU_MAP.get(sku, {"label": sku, "price": 0, "stage": "unknown"})
 
