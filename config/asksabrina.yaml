@@ -1,0 +1,159 @@
+# =============================================================================
+# Ask Sabrina — Funnel Reporter Config
+# All campaign mappings, SKU definitions, and variant settings live here.
+# When you add a new campaign or product, only touch this file.
+# =============================================================================
+
+# ── ClickBank SKUs ────────────────────────────────────────────────────────────
+clickbank:
+  account: SABRINAPSY
+  skus:
+    abdt-basic:
+      label: "Front-end Basic"
+      price: 37
+      stage: frontend
+    abdt-advanced:
+      label: "Front-end Advanced"
+      price: 54
+      stage: frontend
+    SPR-OB1:
+      label: "Order Bump Legacy ($14.99/mo)"
+      price: 14.99
+      stage: order_bump
+    SPR-OB2:
+      label: "Order Bump (free trial - $14.99/mo)"
+      price: 0
+      stage: order_bump
+    SSR:
+      label: "OTO1 Soul Signature $67"
+      price: 67
+      stage: oto1
+    SSR-D:
+      label: "OTO1 Downsell $47"
+      price: 47
+      stage: oto1_downsell
+    dhr:
+      label: "OTO2 Divine Helper $97"
+      price: 97
+      stage: oto2
+    dhr-d:
+      label: "OTO2 Downsell $77"
+      price: 77
+      stage: oto2_downsell
+
+# ── CPV Lab Campaigns ─────────────────────────────────────────────────────────
+# Add new campaigns here — source and variant are auto-used by collectors
+cpvlabs:
+  group: "Ask Sabrina"
+  campaigns:
+    "50":
+      label: "asksabrina_default_vs_discount_price"
+      source: email
+      variant: other
+    "51":
+      label: "Facebook Traffic - V17"
+      source: facebook
+      variant: other
+    "52":
+      label: "Maropost Traffic"
+      source: email
+      variant: other
+    "53":
+      label: "Organic Traffic"
+      source: unknown
+      variant: other
+    "54":
+      label: "Maropost Traffic With Headlines Split Test"
+      source: email
+      variant: other
+    "56":
+      label: "V9 Test Funnel"
+      source: unknown
+      variant: other
+    "57":
+      label: "Maropost Traffic for V4"
+      source: email
+      variant: other
+    "58":
+      label: "Maropost Traffic for V16"
+      source: email
+      variant: other
+    "59":
+      label: "Facebook Traffic - V18"
+      source: facebook
+      variant: other
+    "61":
+      label: "Maropost Welcome non buyers"
+      source: email
+      variant: other
+    "63":
+      label: "Facebook Traffic - V17 (mvlabs)"
+      source: facebook
+      variant: other
+    "65":
+      label: "Maropost Traffic (Low Intent)"
+      source: email
+      variant: other
+    "69":
+      label: "Maropost Traffic (Abandoned)"
+      source: email
+      variant: other
+    "70":
+      label: "Maropost Traffic (Discount)"
+      source: email
+      variant: other
+    "72":
+      label: "Facebook Traffic - Chat Bot"
+      source: facebook
+      variant: other
+    "74":
+      label: "Maropost Traffic (Scarcity)"
+      source: email
+      variant: other
+    "76":
+      label: "Maropost Traffic - Interactive VSL"
+      source: email
+      variant: other
+    "77":
+      label: "Maropost Traffic - Interactive VSL V1"
+      source: email
+      variant: destiny_v1
+    "78":
+      label: "Facebook Traffic - Interactive VSL V1"
+      source: facebook
+      variant: destiny_v1
+    "79":
+      label: "Maropost Traffic (Urgency)"
+      source: email
+      variant: other
+    "80":
+      label: "Maropost Traffic (Reactivation)"
+      source: email
+      variant: other
+    "81":
+      label: "Maropost Traffic (Education)"
+      source: email
+      variant: other
+    "87":
+      label: "Maropost Traffic - Interactive VSL V2"
+      source: email
+      variant: destiny_v2
+    "88":
+      label: "Facebook Traffic - Interactive VSL V2"
+      source: facebook
+      variant: destiny_v2
+
+# ── Funnel Variants (GA4 + ClickBank attribution) ─────────────────────────────
+variants:
+  destiny_v1:
+    label: "/destiny (full-screen)"
+    path: "/destiny"
+    exclude: "/destiny/v2"
+  destiny_v2:
+    label: "/destiny/v2 (with-headline)"
+    path: "/destiny/v2"
+    exclude: null
+  other:
+    label: "Other / Email"
+    path: null
+    exclude: null

@@ -6,14 +6,14 @@ All collectors import from here instead of hardcoding mappings.
 import os
 from pathlib import Path
 
-_config = None
+_config_cache = {}
 
 def load_config() -> dict:
-    global _config
-    if _config is not None:
-        return _config
-
     config_path = Path(os.environ.get("CONFIG_FILE", "config.yaml"))
+    path_key = str(config_path.resolve())
+
+    if path_key in _config_cache:
+        return _config_cache[path_key]
     if not config_path.exists():
         raise FileNotFoundError(
             f"config.yaml not found at {config_path.resolve()}\n"
@@ -22,8 +22,8 @@ def load_config() -> dict:
 
     import yaml
     with open(config_path) as f:
-        _config = yaml.safe_load(f)
-    return _config
+        _config_cache[path_key] = yaml.safe_load(f)
+    return _config_cache[path_key]
 
 
 def get_sku_map() -> dict:

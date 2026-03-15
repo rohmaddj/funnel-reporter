@@ -9,11 +9,9 @@ trackingId: {code}_{campaignId}_{clickId} — middle segment = CPV campaign ID
 import os
 import requests
 from .base import BaseCollector
-from utils.config import get_sku_map, get_variant_map
+from utils.config import get_sku_map, get_variant_map, get_variants
 
-SKU_MAP     = get_sku_map()
-VARIANT_MAP = get_variant_map()
-
+# Loaded per instance after project env is set
 
 class ClickBankCollector(BaseCollector):
 
@@ -23,6 +21,8 @@ class ClickBankCollector(BaseCollector):
         super().__init__(mock=mock)
         self.api_key = os.environ.get("CLICKBANK_API_KEY", "")
         self.vendor    = os.environ.get("CLICKBANK_VENDOR", "SABRINAPSY")
+        self.sku_map     = get_sku_map()
+        self.variant_map = get_variant_map()
 
     def fetch(self, start_date: str, end_date: str) -> dict:
         if self.mock:
@@ -85,11 +85,7 @@ class ClickBankCollector(BaseCollector):
         total_revenue = 0.0
         frontend_sales_count = 0
 
-        variant_sales = {
-            "destiny_v1": {"sales": 0, "revenue": 0.0},
-            "destiny_v2": {"sales": 0, "revenue": 0.0},
-            "other":      {"sales": 0, "revenue": 0.0},
-        }
+        variant_sales = {k: {"sales": 0, "revenue": 0.0} for k in get_variants().keys()}
 
         for order in orders:
             txn_type = order.get("transactionType")
@@ -100,7 +96,7 @@ class ClickBankCollector(BaseCollector):
 
             tracking_id = order.get("trackingId", "")
             campaign_id = self._extract_campaign_id(tracking_id)
-            variant     = VARIANT_MAP.get(campaign_id, "other")
+            variant = self.variant_map.get(campaign_id, "other")
 
             line_raw = order.get("lineItemData", {})
             lines    = line_raw if isinstance(line_raw, list) else [line_raw]
@@ -111,7 +107,7 @@ class ClickBankCollector(BaseCollector):
                 line_type = line.get("lineItemType", "")
                 is_rebill = is_order_rebill or line_type == "REBILL"
 
-                info = SKU_MAP.get(sku, {"label": sku, "price": 0, "stage": "unknown"})
+                info = self.sku_map.get(sku, {"label": sku, "price": 0, "stage": "unknown"})
 
                 if sku not in sku_breakdown:
                     sku_breakdown[sku] = {

@@ -1,0 +1,44 @@
+# =============================================================================
+# Astro Lover Sketch — Funnel Reporter Config
+# =============================================================================
+
+# ── Project metadata ──────────────────────────────────────────────────────────
+project:
+  name: "Astro Lover Sketch"
+  domain: "astroloversketch.com"
+  funnel_type: "TSL"   # Text Sales Letter (vs VSL for Ask Sabrina)
+
+# ── ClickBank SKUs ────────────────────────────────────────────────────────────
+clickbank:
+  account: ASTROSKETC
+  skus:
+    alsv1:
+      label: "Front-end"
+      price: 37
+      stage: frontend
+    alsv1-blueprint:
+      label: "OTO1 Blueprint"
+      price: 67
+      stage: oto1
+    alsv1-blueprint-discount:
+      label: "OTO1 Downsell"
+      price: 47
+      stage: oto1_downsell
+
+# ── CPV Lab Campaigns ─────────────────────────────────────────────────────────
+# Add campaigns here as you create them in CPV Labs
+cpvlabs:
+  group: "Astro Lover Sketch"
+  campaigns: {}   # populate once campaigns are created in CPV Labs
+
+# ── Funnel Variants (GA4) ─────────────────────────────────────────────────────
+# Update paths once the funnel pages are live
+variants:
+  main:
+    label: "Main TSL"
+    path: "/"
+    exclude: null
+  other:
+    label: "Other"
+    path: null
+    exclude: null

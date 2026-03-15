@@ -1,6 +1,6 @@
 # .github/workflows/weekly_report.yml
 # Runs every Monday at 01:00 SGT (Sunday 17:00 UTC)
-# Manually triggerable from Actions tab for ad-hoc runs
+# Manually triggerable with project + date overrides
 
 name: Weekly Funnel Report
 
@@ -9,8 +9,12 @@ on:
     - cron: "0 17 * * 0"    # Sunday 17:00 UTC = Monday 01:00 SGT
   workflow_dispatch:
     inputs:
+      project:
+        description: "Project to run (leave blank for all)"
+        required: false
+        default: ""
       start_date:
-        description: "Start date YYYY-MM-DD (leave blank for auto last Mon–Sun)"
+        description: "Start date YYYY-MM-DD (leave blank for auto)"
         required: false
       end_date:
         description: "End date YYYY-MM-DD (leave blank for auto)"
@@ -24,12 +28,25 @@ jobs:
   weekly-report:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false   # if one project fails, still run the other
+      matrix:
+        project:
+          - asksabrina
+          - astroloversketch
+
+    # Skip a project if workflow_dispatch specifies a different one
+    if: |
+      github.event_name == 'schedule' ||
+      github.event.inputs.project == '' ||
+      github.event.inputs.project == matrix.project
+
     steps:
       # ── Checkout ────────────────────────────────────────────────────────────
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # full history needed for git push
+          fetch-depth: 0
 
       # ── Python setup ────────────────────────────────────────────────────────
       - name: Set up Python 3.11
@@ -44,64 +61,95 @@ jobs:
       - name: Write Google credentials file
         run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > google_credentials.json
 
-      # ── Run pipeline ─────────────────────────────────────────────────────────
-      - name: Collect data
+      # ── Collect data ─────────────────────────────────────────────────────────
+      - name: Collect data (${{ matrix.project }})
         env:
-          CLICKBANK_API_KEY:     ${{ secrets.CLICKBANK_API_KEY }}
-          CLICKBANK_VENDOR:      ${{ secrets.CLICKBANK_VENDOR }}
-          CPVLABS_API_KEY:       ${{ secrets.CPVLABS_API_KEY }}
-          CPVLABS_BASE_URL:      ${{ secrets.CPVLABS_BASE_URL }}
-          CPVLABS_GROUP:         ${{ secrets.CPVLABS_GROUP }}
-          USE_CPV_FOR_EMAIL:     ${{ secrets.USE_CPV_FOR_EMAIL }}
-          FB_ACCESS_TOKEN:       ${{ secrets.FB_ACCESS_TOKEN }}
-          FB_AD_ACCOUNT_ID:      ${{ secrets.FB_AD_ACCOUNT_ID }}
-          FB_SGD_TO_USD_RATE:    ${{ secrets.FB_SGD_TO_USD_RATE }}
-          MAROPOST_API_KEY:      ${{ secrets.MAROPOST_API_KEY }}
-          MAROPOST_ACCOUNT_ID:   ${{ secrets.MAROPOST_ACCOUNT_ID }}
-          GA4_PROPERTY_ID:       ${{ secrets.GA4_PROPERTY_ID }}
+          PROJECT: ${{ matrix.project }}
           GOOGLE_CREDENTIALS_FILE: google_credentials.json
+          # ── Ask Sabrina ──
+          ASKSABRINA_CLICKBANK_API_KEY:  ${{ secrets.ASKSABRINA_CLICKBANK_API_KEY }}
+          ASKSABRINA_CLICKBANK_VENDOR:   ${{ secrets.ASKSABRINA_CLICKBANK_VENDOR }}
+          ASKSABRINA_CPVLABS_API_KEY:    ${{ secrets.ASKSABRINA_CPVLABS_API_KEY }}
+          ASKSABRINA_CPVLABS_BASE_URL:   ${{ secrets.ASKSABRINA_CPVLABS_BASE_URL }}
+          ASKSABRINA_CPVLABS_GROUP:      ${{ secrets.ASKSABRINA_CPVLABS_GROUP }}
+          ASKSABRINA_FB_ACCESS_TOKEN:    ${{ secrets.ASKSABRINA_FB_ACCESS_TOKEN }}
+          ASKSABRINA_FB_AD_ACCOUNT_ID:   ${{ secrets.ASKSABRINA_FB_AD_ACCOUNT_ID }}
+          ASKSABRINA_FB_SGD_TO_USD_RATE: ${{ secrets.ASKSABRINA_FB_SGD_TO_USD_RATE }}
+          ASKSABRINA_MAROPOST_API_KEY:   ${{ secrets.ASKSABRINA_MAROPOST_API_KEY }}
+          ASKSABRINA_MAROPOST_ACCOUNT_ID: ${{ secrets.ASKSABRINA_MAROPOST_ACCOUNT_ID }}
+          ASKSABRINA_USE_CPV_FOR_EMAIL:  ${{ secrets.ASKSABRINA_USE_CPV_FOR_EMAIL }}
+          ASKSABRINA_GA4_PROPERTY_ID:    ${{ secrets.ASKSABRINA_GA4_PROPERTY_ID }}
+          ASKSABRINA_CONFIG_FILE:        config/asksabrina.yaml
+          # ── Astro Lover Sketch ──
+          ASTRO_CLICKBANK_API_KEY:       ${{ secrets.ASTRO_CLICKBANK_API_KEY }}
+          ASTRO_CLICKBANK_VENDOR:        ${{ secrets.ASTRO_CLICKBANK_VENDOR }}
+          ASTRO_CPVLABS_API_KEY:         ${{ secrets.ASTRO_CPVLABS_API_KEY }}
+          ASTRO_CPVLABS_BASE_URL:        ${{ secrets.ASTRO_CPVLABS_BASE_URL }}
+          ASTRO_CPVLABS_GROUP:           ${{ secrets.ASTRO_CPVLABS_GROUP }}
+          ASTRO_FB_ACCESS_TOKEN:         ${{ secrets.ASTRO_FB_ACCESS_TOKEN }}
+          ASTRO_FB_AD_ACCOUNT_ID:        ${{ secrets.ASTRO_FB_AD_ACCOUNT_ID }}
+          ASTRO_FB_SGD_TO_USD_RATE:      ${{ secrets.ASTRO_FB_SGD_TO_USD_RATE }}
+          ASTRO_MAROPOST_API_KEY:        ${{ secrets.ASTRO_MAROPOST_API_KEY }}
+          ASTRO_MAROPOST_ACCOUNT_ID:     ${{ secrets.ASTRO_MAROPOST_ACCOUNT_ID }}
+          ASTRO_USE_CPV_FOR_EMAIL:       ${{ secrets.ASTRO_USE_CPV_FOR_EMAIL }}
+          ASTRO_GA4_PROPERTY_ID:         ${{ secrets.ASTRO_GA4_PROPERTY_ID }}
+          ASTRO_CONFIG_FILE:             config/astroloversketch.yaml
         run: |
-          ARGS=""
+          ARGS="--project ${{ matrix.project }}"
           if [ "${{ github.event.inputs.mock }}" = "true" ]; then ARGS="$ARGS --mock"; fi
           if [ -n "${{ github.event.inputs.start_date }}" ]; then ARGS="$ARGS --start ${{ github.event.inputs.start_date }}"; fi
           if [ -n "${{ github.event.inputs.end_date }}" ]; then ARGS="$ARGS --end ${{ github.event.inputs.end_date }}"; fi
           python collect.py $ARGS
 
-      - name: Run AI analysis
+      # ── AI analysis ──────────────────────────────────────────────────────────
+      - name: Run AI analysis (${{ matrix.project }})
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PROJECT: ${{ matrix.project }}
+          ASKSABRINA_CONFIG_FILE: config/asksabrina.yaml
+          ASTRO_CONFIG_FILE:      config/astroloversketch.yaml
         run: |
           if [ "${{ github.event.inputs.mock }}" = "true" ]; then
-            python analyse.py --mock
+            python analyse.py --project ${{ matrix.project }} --mock
           else
-            python analyse.py
+            python analyse.py --project ${{ matrix.project }}
           fi
 
-      - name: Build and send report
+      # ── Build and send report ─────────────────────────────────────────────────
+      - name: Build and send report (${{ matrix.project }})
         env:
           GOOGLE_CREDENTIALS_FILE: google_credentials.json
+          PROJECT: ${{ matrix.project }}
           SENDGRID_API_KEY:        ${{ secrets.SENDGRID_API_KEY }}
-          REPORT_EMAIL_TO:         ${{ secrets.REPORT_EMAIL_TO }}
-          REPORT_EMAIL_FROM:       ${{ secrets.REPORT_EMAIL_FROM }}
           GOOGLE_DRIVE_FOLDER_ID:  ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
-        run: python report.py --no-docs
+          ASKSABRINA_SHEET_ID:     ${{ secrets.ASKSABRINA_SHEET_ID }}
+          ASKSABRINA_REPORT_EMAIL_TO:   ${{ secrets.ASKSABRINA_REPORT_EMAIL_TO }}
+          ASKSABRINA_REPORT_EMAIL_FROM: ${{ secrets.ASKSABRINA_REPORT_EMAIL_FROM }}
+          ASKSABRINA_REPORT_EMAIL_NAME: ${{ secrets.ASKSABRINA_REPORT_EMAIL_NAME }}
+          ASKSABRINA_CONFIG_FILE:  config/asksabrina.yaml
+          ASTRO_SHEET_ID:          ${{ secrets.ASTRO_SHEET_ID }}
+          ASTRO_REPORT_EMAIL_TO:   ${{ secrets.ASTRO_REPORT_EMAIL_TO }}
+          ASTRO_REPORT_EMAIL_FROM: ${{ secrets.ASTRO_REPORT_EMAIL_FROM }}
+          ASTRO_REPORT_EMAIL_NAME: ${{ secrets.ASTRO_REPORT_EMAIL_NAME }}
+          ASTRO_CONFIG_FILE:       config/astroloversketch.yaml
+        run: python report.py --project ${{ matrix.project }} --no-docs
 
-      # ── Commit output files to repo ──────────────────────────────────────────
-      - name: Commit output files
+      # ── Commit output ─────────────────────────────────────────────────────────
+      - name: Commit output files (${{ matrix.project }})
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
-          git diff --staged --quiet || git commit -m "Weekly report $(date -u +%Y-%m-%d)"
+          git diff --staged --quiet || git commit -m "Weekly report ${{ matrix.project }} $(date -u +%Y-%m-%d)"
           git push
 
-      # ── Upload artifacts for debugging ───────────────────────────────────────
-      - name: Upload report artifacts
+      # ── Upload artifacts ──────────────────────────────────────────────────────
+      - name: Upload artifacts (${{ matrix.project }})
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: report-${{ github.run_id }}
+          name: report-${{ matrix.project }}-${{ github.run_id }}
           path: |
-            docs/email_*.html
-            docs/index.html
+            docs/${{ matrix.project }}/email_*.html
+            docs/${{ matrix.project }}/index.html
           retention-days: 90

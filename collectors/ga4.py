@@ -19,9 +19,7 @@ from googleapiclient.discovery import build
 from .base import BaseCollector
 
 
-CREDENTIALS_FILE = os.environ.get("GOOGLE_CREDENTIALS_FILE", "google_credentials.json")
-GA4_PROPERTY_ID  = os.environ.get("GA4_PROPERTY_ID", "")
-SCOPES           = ["https://www.googleapis.com/auth/analytics.readonly"]
+SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 
 def _build_variants() -> dict:
     from utils.config import get_variants, get_campaign_map
@@ -44,7 +42,7 @@ def _build_variants() -> dict:
             }
     return result
 
-VARIANTS = _build_variants()
+# Built lazily per instance — not at module load time
 
 FUNNEL_EVENTS = [
     "choice_selected",
@@ -59,7 +57,9 @@ class GA4Collector(BaseCollector):
 
     def __init__(self, mock=False):
         super().__init__(mock=mock)
-        self.property_id = GA4_PROPERTY_ID
+        self.property_id    = os.environ.get("GA4_PROPERTY_ID", "")
+        self.credentials_file = os.environ.get("GOOGLE_CREDENTIALS_FILE", "google_credentials.json")
+        self.variants = _build_variants()
 
     def fetch(self, start_date: str, end_date: str) -> dict:
         if self.mock:
@@ -74,7 +74,7 @@ class GA4Collector(BaseCollector):
         service = self._get_service()
         results = {}
 
-        for key, variant in VARIANTS.items():
+        for key, variant in self.variants.items():
             try:
                 data = self._fetch_variant(service, variant, start_date, end_date)
                 results[key] = {"label": variant["label"], "cpv_ids": variant["cpv_ids"], **data}
@@ -88,7 +88,7 @@ class GA4Collector(BaseCollector):
 
     def _get_service(self):
         creds = service_account.Credentials.from_service_account_file(
-            CREDENTIALS_FILE, scopes=SCOPES
+            self.credentials_file, scopes=SCOPES
         )
         return build("analyticsdata", "v1beta", credentials=creds, cache_discovery=False)
 

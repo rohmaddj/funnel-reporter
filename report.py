@@ -54,6 +54,7 @@ def parse_args():
     p.add_argument("--no-email",   action="store_true")
     p.add_argument("--no-sheets",  action="store_true")
     p.add_argument("--no-docs",    action="store_true")
+    p.add_argument("--project", type=str, default="", help="Project: asksabrina or astroloversketch")
     return p.parse_args()
 
 
@@ -737,7 +738,7 @@ def create_google_doc(services, data: dict, analysis: dict) -> str:
     print(f"[report] ✓ Google Doc created: {doc_url}")
     return doc_url
 
-def build_index_html(output_dir: str = "output") -> None:
+def build_index_html(output_dir: str = "docs", project: str = "asksabrina") -> None:
     """Scans output/ for email_*.html files and generates index.html."""
     import glob
     from pathlib import Path
@@ -759,7 +760,7 @@ def build_index_html(output_dir: str = "output") -> None:
 
         # Try to pull revenue from matching report_data file for subtitle
         subtitle = ""
-        data_file = Path("output") / f"report_data_{date_part}.json"
+        data_file = Path("output") / project / f"report_data_{date_part}.json"
         if data_file.exists():
             try:
                 import json as _json
@@ -806,7 +807,7 @@ def build_index_html(output_dir: str = "output") -> None:
       <body>
         <div class="container">
           <div class="header">
-            <p>Ask Sabrina · Funnel Performance</p>
+            <p>{project.replace('astroloversketch', 'Astro Lover Sketch').replace('asksabrina', 'Ask Sabrina')} · Funnel Performance</p>
             <h1>Weekly Reports</h1>
             <p style="color:#6b7280;font-size:13px;margin-top:6px">Funnel · Campaign · Revenue · Drop-off Analysis</p>
           </div>
@@ -830,17 +831,25 @@ def build_index_html(output_dir: str = "output") -> None:
 def main():
     args = parse_args()
 
+    project = args.project or os.environ.get("PROJECT", "asksabrina")
+    prefix  = "ASTRO" if project == "astroloversketch" else "ASKSABRINA"
+    # Load project-specific config into globals
+    global SHEET_ID, EMAIL_TO, EMAIL_FROM
+    SHEET_ID   = os.environ.get(f"{prefix}_SHEET_ID", SHEET_ID)
+    EMAIL_TO   = os.environ.get(f"{prefix}_REPORT_EMAIL_TO", EMAIL_TO)
+    EMAIL_FROM = os.environ.get(f"{prefix}_REPORT_EMAIL_FROM", EMAIL_FROM)
+
     # Auto-detect latest files if not specified
     if not args.data:
         import glob
-        files = sorted(glob.glob("output/report_data_*.json"))
-        args.data = files[-1] if files else "output/report_data.json"
+        files = sorted(glob.glob(f"output/{project}/report_data_*.json"))
+        args.data = files[-1] if files else f"output/{project}/report_data.json"
         print(f"[report] Auto-detected data: {args.data}")
 
     if not args.analysis:
         import glob
-        files = sorted(glob.glob("output/analysis_*.json"))
-        args.analysis = files[-1] if files else "output/analysis.json"
+        files = sorted(glob.glob(f"output/{project}/analysis_*.json"))
+        args.analysis = files[-1] if files else f"output/{project}/analysis.json"
         print(f"[report] Auto-detected analysis: {args.analysis}")
 
     # Load data
@@ -888,14 +897,14 @@ def main():
         else:
             html = build_email_html(data, analysis, doc_url)
             date_part = Path(args.data).stem.replace("report_data_", "")
-            email_path = f"docs/email_{date_part}.html"
-            Path("docs").mkdir(exist_ok=True)
+            email_path = f"docs/{project}/email_{date_part}.html"
+            Path(f"docs/{project}").mkdir(parents=True, exist_ok=True)
             Path(email_path).write_text(html)
             print(f"[report] Email saved to {email_path}")
             print("[report] Sending email...")
             send_email(services, html, subject)
 
-    build_index_html("docs")
+    build_index_html(f"docs/{project}", project=project)
     print(f"\n[report] Done ✓")
     if doc_url:
         print(f"  Doc: {doc_url}")
