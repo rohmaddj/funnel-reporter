@@ -213,6 +213,12 @@ def _build_variant_section_safe(data, analysis):
     except Exception as e:
         return f'<div style="padding:20px;color:#dc2626">Variant section error: {e}</div>'
 
+def _refund_note(backend: dict) -> str:
+    total_refunds = backend.get("total_refunds", 0)
+    if not total_refunds:
+        return ""
+    refund_amt = sum(s.get("refund_amount", 0) for s in backend["sku_breakdown"].values())
+    return f'<p style="margin:10px 0 0;font-size:12px;color:#dc2626">⚠ Net revenue after {total_refunds} refund(s)/chargeback(s) totalling ${refund_amt:,.2f} deducted.</p>'
 
 def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
     snap     = data["funnel_snapshot"]
@@ -448,7 +454,7 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
               <td style="padding:8px 10px;font-size:13px;text-align:right">${backend['total_revenue']:,.2f}</td>
             </tfoot>
           </table>
-          {'<p style="margin:10px 0 0;font-size:12px;color:#dc2626">⚠ Net revenue after ' + str(backend.get("total_refunds",0)) + ' refund(s)/chargeback(s) totalling ' + f"{'$' + f"{sum(s.get('refund_amount',0) for s in backend['sku_breakdown'].values()):,.2f}" if sum(s.get('refunds',0) for s in backend['sku_breakdown'].values()) > 0 else '—'}" + ' deducted.</p>' if backend.get("total_refunds",0) > 0 else ''}
+          {_refund_note(backend)}
           <p style="margin:10px 0 0;font-size:12px;color:#6b7280">Advanced vs Basic: {backend['frontend_mix']['advanced_pct']}% choosing ${backend['sku_breakdown']['abdt-advanced']['price']} Advanced ({backend['frontend_mix']['advanced_count']} of {backend['frontend_sales_count']} buyers)</p>
         </div>
 
