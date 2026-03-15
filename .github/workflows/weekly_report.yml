@@ -1,34 +1,38 @@
 # .github/workflows/weekly_report.yml
-# Runs every Sunday at 08:00 UTC (4pm SGT)
-# Manually triggerable from the Actions tab for ad-hoc runs
+# Runs every Monday at 01:00 SGT (Sunday 17:00 UTC)
+# Manually triggerable from Actions tab for ad-hoc runs
 
 name: Weekly Funnel Report
 
 on:
   schedule:
-    - cron: "0 8 * * 0"   # 08:00 UTC every Sunday
-  workflow_dispatch:        # manual trigger
+    - cron: "0 17 * * 0"    # Sunday 17:00 UTC = Monday 01:00 SGT
+  workflow_dispatch:
     inputs:
-      mock:
-        description: "Use mock data?"
-        required: false
-        default: "false"
       start_date:
-        description: "Start date (YYYY-MM-DD, leave blank for auto)"
+        description: "Start date YYYY-MM-DD (leave blank for auto last Mon–Sun)"
         required: false
       end_date:
-        description: "End date (YYYY-MM-DD, leave blank for auto)"
+        description: "End date YYYY-MM-DD (leave blank for auto)"
         required: false
+      mock:
+        description: "Use mock data? (true/false)"
+        required: false
+        default: "false"
 
 jobs:
-  collect-and-report:
+  weekly-report:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # ── Checkout ────────────────────────────────────────────────────────────
+      - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # full history needed for git push
 
-      - name: Set up Python
+      # ── Python setup ────────────────────────────────────────────────────────
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -36,29 +40,70 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run collector
+      # ── Google credentials ───────────────────────────────────────────────────
+      - name: Write Google credentials file
+        run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > google_credentials.json
+
+      # ── Run pipeline ─────────────────────────────────────────────────────────
+      - name: Collect data
         env:
-          CLICKBANK_APP_KEY:   ${{ secrets.CLICKBANK_APP_KEY }}
-          CLICKBANK_DEV_KEY:   ${{ secrets.CLICKBANK_DEV_KEY }}
-          CLICKBANK_ACCOUNT:   ${{ secrets.CLICKBANK_ACCOUNT }}
-          CPVLABS_API_KEY:     ${{ secrets.CPVLABS_API_KEY }}
-          CPVLABS_BASE_URL:    ${{ secrets.CPVLABS_BASE_URL }}
-          FB_ACCESS_TOKEN:     ${{ secrets.FB_ACCESS_TOKEN }}
-          FB_AD_ACCOUNT_ID:    ${{ secrets.FB_AD_ACCOUNT_ID }}
-          FB_SGD_TO_USD_RATE:  ${{ secrets.FB_SGD_TO_USD_RATE }}
-          MAROPOST_API_KEY:    ${{ secrets.MAROPOST_API_KEY }}
-          MAROPOST_ACCOUNT_ID: ${{ secrets.MAROPOST_ACCOUNT_ID }}
-          ANTHROPIC_API_KEY:   ${{ secrets.ANTHROPIC_API_KEY }}
+          CLICKBANK_API_KEY:     ${{ secrets.CLICKBANK_API_KEY }}
+          CLICKBANK_VENDOR:      ${{ secrets.CLICKBANK_VENDOR }}
+          CPVLABS_API_KEY:       ${{ secrets.CPVLABS_API_KEY }}
+          CPVLABS_BASE_URL:      ${{ secrets.CPVLABS_BASE_URL }}
+          CPVLABS_GROUP:         ${{ secrets.CPVLABS_GROUP }}
+          USE_CPV_FOR_EMAIL:     ${{ secrets.USE_CPV_FOR_EMAIL }}
+          FB_ACCESS_TOKEN:       ${{ secrets.FB_ACCESS_TOKEN }}
+          FB_AD_ACCOUNT_ID:      ${{ secrets.FB_AD_ACCOUNT_ID }}
+          FB_SGD_TO_USD_RATE:    ${{ secrets.FB_SGD_TO_USD_RATE }}
+          MAROPOST_API_KEY:      ${{ secrets.MAROPOST_API_KEY }}
+          MAROPOST_ACCOUNT_ID:   ${{ secrets.MAROPOST_ACCOUNT_ID }}
+          GA4_PROPERTY_ID:       ${{ secrets.GA4_PROPERTY_ID }}
+          GOOGLE_CREDENTIALS_FILE: google_credentials.json
         run: |
           ARGS=""
           if [ "${{ github.event.inputs.mock }}" = "true" ]; then ARGS="$ARGS --mock"; fi
           if [ -n "${{ github.event.inputs.start_date }}" ]; then ARGS="$ARGS --start ${{ github.event.inputs.start_date }}"; fi
           if [ -n "${{ github.event.inputs.end_date }}" ]; then ARGS="$ARGS --end ${{ github.event.inputs.end_date }}"; fi
-          python collect.py $ARGS --out output/report_data.json
+          python collect.py $ARGS
 
-      - name: Upload report data artifact
+      - name: Run AI analysis
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ "${{ github.event.inputs.mock }}" = "true" ]; then
+            python analyse.py --mock
+          else
+            python analyse.py
+          fi
+
+      - name: Build and send report
+        env:
+          GOOGLE_CREDENTIALS_FILE: google_credentials.json
+          SENDGRID_API_KEY:        ${{ secrets.SENDGRID_API_KEY }}
+          REPORT_EMAIL_TO:         ${{ secrets.REPORT_EMAIL_TO }}
+          REPORT_EMAIL_FROM:       ${{ secrets.REPORT_EMAIL_FROM }}
+          GOOGLE_DRIVE_FOLDER_ID:  ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+        run: python report.py --no-docs
+
+      # ── Commit output files to repo ──────────────────────────────────────────
+      - name: Commit output files
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/
+          git diff --staged --quiet || git commit -m "Weekly report $(date -u +%Y-%m-%d)"
+          git push
+
+      # ── Upload artifacts for debugging ───────────────────────────────────────
+      - name: Upload report artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: report-data-${{ github.run_id }}
-          path: output/report_data.json
+          name: report-${{ github.run_id }}
+          path: |
+            output/report_data_*.json
+            output/analysis_*.json
+            output/email_*.html
+            output/index.html
           retention-days: 90
