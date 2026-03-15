@@ -192,6 +192,10 @@ def build_variant_section(data: dict, analysis: dict) -> str:
           <td style="padding:7px 10px;font-size:13px;font-weight:600;color:{pct_color(round(variant_sales.get('destiny_v1',{}).get('sales',0)/max(v1_data.get('checkout_total',1),1)*100,1),30,15)}">{round(variant_sales.get('destiny_v1',{}).get('sales',0)/max(v1_data.get('checkout_total',1),1)*100,1)}%</td>
           <td style="padding:7px 10px;font-size:13px;font-weight:600;color:{pct_color(round(variant_sales.get('destiny_v2',{}).get('sales',0)/max(v2_data.get('checkout_total',1),1)*100,1),30,15)}">{round(variant_sales.get('destiny_v2',{}).get('sales',0)/max(v2_data.get('checkout_total',1),1)*100,1)}%</td>
         </tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">Revenue per session</td>
+          <td style="padding:7px 10px;font-size:13px;font-weight:600">${round(variant_sales.get('destiny_v1',{}).get('revenue',0)/max(v1_data.get('sessions',1),1),3)}</td>
+          <td style="padding:7px 10px;font-size:13px;font-weight:600">${round(variant_sales.get('destiny_v2',{}).get('revenue',0)/max(v2_data.get('sessions',1),1),3)}</td>
+        </tr>
         <tr style="background:#fffbeb"><td style="padding:7px 10px;font-size:12px;color:#92400e;font-weight:600">Biggest drop-off</td>
           <td style="padding:7px 10px;font-size:12px;color:#dc2626;font-weight:600">{v1_worst} ({v1_worst_pct}%)</td>
           <td style="padding:7px 10px;font-size:12px;color:#dc2626;font-weight:600">{v2_worst} ({v2_worst_pct}%)</td>
@@ -280,11 +284,15 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
         for sku, s in sorted_skus:
             take = f"{s.get('take_rate_pct', '—')}%" if "take_rate_pct" in s else "—"
             rev_color = "#dc2626" if s["revenue"] == 0 and s["new_sales"] == 0 and s["stage"] not in ("frontend",) else "#111"
+            refunds = s.get("refunds", 0)
+            refund_amt = s.get("refund_amount", 0.0)
+            refund_color = "#dc2626" if refunds > 0 else "#9ca3af"
             rows += f"""
             <tr style="border-bottom:1px solid #f0f0f0">
               <td style="padding:8px 10px;font-size:13px">{s['label']}</td>
               <td style="padding:8px 10px;font-size:13px;text-align:right">{s['new_sales']}</td>
               <td style="padding:8px 10px;font-size:13px;text-align:right">{s.get('rebills', 0)}</td>
+              <td style="padding:8px 10px;font-size:13px;text-align:right;color:{refund_color};font-weight:{'600' if refunds > 0 else '400'}">{'$' + f'{refund_amt:,.2f}' if refunds > 0 else '—'}</td>
               <td style="padding:8px 10px;font-size:13px;text-align:right">{take}</td>
               <td style="padding:8px 10px;font-size:13px;text-align:right;color:{rev_color};font-weight:{'600' if s['revenue'] > 0 else '400'}">${s['revenue']:,.2f}</td>
             </tr>"""
@@ -426,6 +434,7 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
               <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Stage</th>
               <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">New Sales</th>
               <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Rebills</th>
+              <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Refunds</th>
               <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Take Rate</th>
               <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Revenue</th>
             </tr></thead>
@@ -434,10 +443,12 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
               <td style="padding:8px 10px;font-size:13px">Total</td>
               <td style="padding:8px 10px;font-size:13px;text-align:right">{sum(s.get('new_sales',0) for s in backend['sku_breakdown'].values())}</td>
               <td style="padding:8px 10px;font-size:13px;text-align:right">{sum(s.get('rebills',0) for s in backend['sku_breakdown'].values())}</td>
+              <td style="padding:8px 10px;font-size:13px;text-align:right;color:#dc2626">{'$' + f"{sum(s.get('refund_amount',0) for s in backend['sku_breakdown'].values()):,.2f}" if sum(s.get('refunds',0) for s in backend['sku_breakdown'].values()) > 0 else '—'}</td>
               <td></td>
               <td style="padding:8px 10px;font-size:13px;text-align:right">${backend['total_revenue']:,.2f}</td>
             </tfoot>
           </table>
+          {'<p style="margin:10px 0 0;font-size:12px;color:#dc2626">⚠ Net revenue after ' + str(backend.get("total_refunds",0)) + ' refund(s)/chargeback(s) totalling ' + f"{'$' + f"{sum(s.get('refund_amount',0) for s in backend['sku_breakdown'].values()):,.2f}" if sum(s.get('refunds',0) for s in backend['sku_breakdown'].values()) > 0 else '—'}" + ' deducted.</p>' if backend.get("total_refunds",0) > 0 else ''}
           <p style="margin:10px 0 0;font-size:12px;color:#6b7280">Advanced vs Basic: {backend['frontend_mix']['advanced_pct']}% choosing ${backend['sku_breakdown']['abdt-advanced']['price']} Advanced ({backend['frontend_mix']['advanced_count']} of {backend['frontend_sales_count']} buyers)</p>
         </div>
 
@@ -485,7 +496,7 @@ def send_email(services, html: str, subject: str):
             },
             json={
                 "personalizations": [{"to": [{"email": EMAIL_TO}]}],
-                "from":    {"email": EMAIL_FROM},
+                "from":    {"email": EMAIL_FROM, "name": os.environ.get("REPORT_EMAIL_NAME", "Rohmad")},
                 "subject": subject,
                 "content": [{"type": "text/html", "value": html}],
             },
@@ -742,7 +753,7 @@ def build_index_html(output_dir: str = "output") -> None:
 
         # Try to pull revenue from matching report_data file for subtitle
         subtitle = ""
-        data_file = Path(output_dir) / f"report_data_{date_part}.json"
+        data_file = Path("output") / f"report_data_{date_part}.json"
         if data_file.exists():
             try:
                 import json as _json
@@ -833,7 +844,7 @@ def main():
         analysis = json.load(f)
 
     period  = f"{data['meta']['period_start']} → {data['meta']['period_end']}"
-    subject = f"Ask Sabrina — Weekly Report {data['meta']['period_start']}"
+    subject = f"Weekly Report {period}"
 
     doc_url = None
 
@@ -841,9 +852,11 @@ def main():
         print("[report] Mock mode — skipping all Google API calls")
         html = build_email_html(data, analysis, doc_url="https://docs.google.com/document/d/MOCK")
         Path("docs").mkdir(exist_ok=True)
-        Path("docs/email.html").write_text(html)
-        print("[report] ✓ Email preview saved to docs/email.html")
-        print("[report]   Open it in your browser to check the layout")
+        date_part = Path(args.data).stem.replace("report_data_", "")
+        email_path = f"docs/email_{date_part}.html" if date_part else "docs/email.html"
+        Path(email_path).write_text(html)
+        print(f"[report] ✓ Email preview saved to {email_path}")
+        build_index_html("docs")
         return
 
     # Live mode
@@ -876,8 +889,7 @@ def main():
             print("[report] Sending email...")
             send_email(services, html, subject)
 
-            build_index_html("docs")
-
+    build_index_html("docs")
     print(f"\n[report] Done ✓")
     if doc_url:
         print(f"  Doc: {doc_url}")
@@ -886,6 +898,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# ── FUNNEL VARIANT SECTION (injected into email HTML) ─────────────────────────
