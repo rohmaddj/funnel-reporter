@@ -38,123 +38,202 @@ def parse_args():
 
 # ── Prompt ────────────────────────────────────────────────────────────────────
 
-# SYSTEM_PROMPT = """You are a direct-response funnel analyst for Ask Sabrina, a spiritual coaching offer sold via ClickBank.
-
-# Funnel structure (always keep this in mind):
-#   Traffic → Landing Page → Video VSL → Basic $37 / Advanced $54
-#   → Order Bump (free trial → $14.99/mo)
-#   → OTO1: Soul Signature Compass $67
-#   → OTO1 Downsell: $47
-#   → OTO2: Divine Helper Blueprint $97
-#   → OTO2 Downsell: $77
-
-# Key benchmarks to apply:
-# - Healthy LP CTR for cold paid traffic: 4–6%
-# - Healthy email campaign CR: 0.3–0.5% (volume), 2%+ (retargeting)
-# - OTO take rates: 40%+ is strong, under 20% needs attention
-# - Downsell take rates: 0% for 10+ days = likely broken redirect
-# - Paid traffic: target CPA below $80 USD (half of $157 avg funnel value)
-# - Revenue per visitor (RPV): email ~$0.28–0.35, paid profitable above $1.00
-
-# Traffic sources:
-# - Email (Maropost, tracked via CPV Labs): warm audience, lower CR expected but high volume
-# - Facebook + Instagram (paid): cold audience, judge by LP CTR and CPA not just CR
-
-# CPV Labs tracks ClickBank postbacks — one buyer who takes frontend + OTO1 + OTO2 fires 3 postbacks.
-# So CPV "conversions" > ClickBank frontend sales is normal. Use ClickBank for true buyer count.
-
-# Funnel variant context (GA4):
-#  /destiny (v1) = full-screen video, CPV campaigns 77+78
-#  /destiny/v2 = page with headline + video, CPV campaigns 87+88
-#  Key GA4 events in sequence: choice_selected → optin_step_1/2/3_completed → optin_flow_completed → checkout_basic_*/checkout_advanced_*
-#  session_to_choice rate is typically the biggest drop-off — measures how many visitors stay through the ~4min video before first interaction.
-#  choice_to_optin1 measures how many who interacted then started the opt-in flow.
-#  Checkout rate is from sessions, not opt-in completions.
-
-# Your output must be valid JSON only — no markdown, no preamble, no explanation outside the JSON.
-# CRITICAL: Return only valid JSON. No trailing commas. No comments. No text outside the JSON object.
-# """
-
 def build_system_prompt(data: dict) -> str:
-    config = data.get("_project_config", {})
-    project_name = config.get("name", "Ask Sabrina")
-    funnel_type  = config.get("funnel_type", "VSL")
-    skus         = data.get("funnel_backend", {}).get("sku_breakdown", {})
+    from utils.config import load_config
 
-    # Build funnel structure description from actual SKU data
-    funnel_lines = []
-    for sku, s in skus.items():
-        funnel_lines.append(f"  {s['label']} ${s['price']}")
+    try:
+        cfg = load_config()
+        project_meta = cfg.get("project", {})
+        project_name = project_meta.get("name", data.get("meta", {}).get("project", "Ask Sabrina"))
+        funnel_type = project_meta.get("funnel_type", "VSL")
+        paid_platform_label = project_meta.get("paid_platform_label", "Facebook + Instagram")
+    except Exception:
+        project_name = data.get("meta", {}).get("project", "Ask Sabrina")
+        funnel_type = "VSL"
+        paid_platform_label = "Facebook + Instagram"
+
+    skus = data.get("funnel_backend", {}).get("sku_breakdown", {})
+    stage_order = ["frontend", "order_bump", "oto1", "oto1_downsell", "oto2", "oto2_downsell"]
+    sorted_skus = sorted(
+        skus.items(),
+        key=lambda x: stage_order.index(x[1]["stage"]) if x[1].get("stage") in stage_order else 99
+    )
+    funnel_lines = [f"  → {s.get('label', k)} ${s.get('price', 0)}" for k, s in sorted_skus]
     funnel_str = "\n".join(funnel_lines) if funnel_lines else "  See funnel_backend data"
 
-    return f"""You are a direct-response funnel analyst for {project_name}, a {funnel_type} offer sold via ClickBank.
+    variants = data.get("funnel_variants") or {}
+    variant_lines = []
+    for vkey, vdata in variants.items():
+        if isinstance(vdata, dict):
+            cpv_ids = ", ".join(vdata.get("cpv_ids", [])) if vdata.get("cpv_ids") else "n/a"
+            label = vdata.get("label", vkey)
+            variant_lines.append(f"  {label} = CPV campaigns {cpv_ids}")
+    variant_str = "\n".join(variant_lines) if variant_lines else "  No variant data present"
 
-        Funnel structure (always keep this in mind):
-        Traffic → Landing Page → {funnel_type}
-        {funnel_str}
+    snap = data.get("funnel_snapshot", {})
+    avg_value = snap.get("avg_revenue_per_buyer_usd", 0) or 0
+    cpa_target = round(avg_value * 0.5, 2) if avg_value else 80.0
 
-        Key benchmarks to apply:
-        - Healthy LP CTR for cold paid traffic: 4–6%
-        - Healthy email campaign CR: 0.3–0.5% (volume), 2%+ (retargeting)
-        - OTO take rates: 40%+ is strong, under 20% needs attention
-        - Downsell take rates: 0% for 10+ days = likely broken redirect
-        - Paid traffic: target CPA below $80 USD
-        - Revenue per visitor (RPV): email ~$0.28–0.35, paid profitable above $1.00
+    return f"""You are a direct-response funnel analyst for {project_name}, a {funnel_type} funnel.
 
-        Traffic sources:
-        - Email (Maropost, tracked via CPV Labs): warm audience, lower CR expected but high volume
-        - Facebook + Instagram (paid): cold audience, judge by LP CTR and CPA not just CR
+Your job is to produce a weekly commercial funnel brief focused on:
+1. What is driving or hurting revenue right now
+2. Which actions are most likely to move growth next
+3. Which findings are supported directly by tracked data vs inference
 
-        CPV Labs tracks ClickBank postbacks — one buyer who takes frontend + OTO1 + OTO2 fires 3 postbacks.
-        So CPV "conversions" > ClickBank frontend sales is normal. Use ClickBank for true buyer count.
+Funnel structure (keep this in mind):
+  Traffic → Landing Page → {funnel_type}
+{funnel_str}
 
-        Funnel variant context (GA4):
-        Key GA4 events in sequence: choice_selected → optin_step_1/2/3_completed → optin_flow_completed → checkout_*
-        session_to_choice rate is typically the biggest drop-off.
-        choice_to_optin1 measures how many who interacted then started the opt-in flow.
-        Checkout rate is from sessions, not opt-in completions.
+Variant context:
+{variant_str}
 
-        Your output must be valid JSON only — no markdown, no preamble, no explanation outside the JSON.
-        CRITICAL: Return only valid JSON. No trailing commas. No comments. No text outside the JSON object.
-        """
+Traffic context:
+- Email traffic is warm and typically higher intent
+- {paid_platform_label} traffic is colder and should be judged on CTR, conversion efficiency, and CPA
+- CPV Labs tracks ClickBank postbacks, so CPV "conversions" can exceed unique frontend buyers
+- ClickBank / funnel_backend is the source of truth for actual buyer count and backend stage revenue
+- GA4 funnel_variants is the source of truth for session-based variant progression
+- Do NOT invent page-level heatmap, scroll-depth, or click-map findings unless that data explicitly exists in the payload
+
+Commercial benchmarks to use carefully, not blindly:
+- Healthy cold LP CTR: ~4–6%
+- Healthy high-volume email CR: ~0.3–0.5%
+- Strong OTO1 take rate: 40%+
+- OTO2 under 10% is weak and worth attention
+- Paid CPA target: below ${cpa_target:.2f} USD unless backend economics clearly justify higher
+- RPV is a commercial efficiency lens, not the only decision-maker
+
+CRITICAL metric rules:
+- Use funnel_backend / ClickBank numbers for true frontend sales, true backend sales, revenue, refunds, take rates
+- Use traffic_sources.tracking for source-level views, conversions, and revenue by CPV tracking bucket
+- Use traffic_sources.paid for paid spend, platform impressions, LP views, LP CTR, and platform purchase proxies
+- Never mix sessions, views, LP views, platform purchases, CPV conversions, and ClickBank frontend sales as if they are the same thing
+- If a metric uses one source and denominator, keep it consistent and label it clearly
+- If the data only supports a proxy metric, say it is a proxy
+
+CRITICAL RPV rules:
+- email_rpv = tracking email revenue / tracking email views
+- paid_rpv_usd = tracking facebook revenue / tracking facebook views when facebook source totals exist in tracking
+- If paid tracking totals are missing or unusable, return null and explain why
+- Do NOT calculate paid RPV from spend, sessions, or LP views unless explicitly labeled as a different metric
+
+CRITICAL CPA rules:
+- Prefer paid CPA based on paid spend / paid attributed conversions from tracking if available
+- If only platform purchases are available for a specific paid campaign, you may use that as a proxy, but label it as proxy_cpa
+- Do not present proxy CPA as if it were exact buyer CPA
+
+CRITICAL variant rules:
+- variant_sales in funnel_backend understates true revenue by variant because unattributed / organic sales fall into "other"
+- Do NOT use variant_sales revenue or variant_sales count as the sole basis to declare a winner
+- Primary variant signals are:
+  1. checkout_total / sessions
+  2. checkout_from_optin_pct
+  3. bounce_rate_pct
+  4. major drop-off steps
+- variant_sales may be mentioned only as secondary supporting context, with attribution caveat
+- If session-based funnel signals and attributed sales signals disagree, classify the variant read as "mixed"
+- Never say a variant is broken or losing unless multiple important signals are weak at the same time
+- Never contradict yourself inside the same recommendation
+
+CRITICAL reasoning rules:
+- Separate findings into:
+  - observed = directly supported by the data
+  - inferred = a reasonable conclusion from multiple tracked signals
+  - hypothesis = plausible but not proven from this dataset
+- Needle movers must be actions that are practical, specific, and applicable from the current data
+- Do not include trivial actions with tiny projected impact unless they stop active spend waste
+- Prioritize:
+  1. active revenue leaks
+  2. paid spend waste
+  3. scalable winners
+  4. backend monetization gaps
+  5. mixed-signal areas that deserve controlled testing
+- When platform purchase counts are used for paid campaign efficiency, treat them as proxy signals, not source-of-truth buyer counts
+- Do not use proxy purchase counts as the main headline unless no better attributed paid-buyer view exists
+- For small-sample campaigns (fewer than 20 views or fewer than 2 conversions), prefer "protect" or "test scale" over aggressive "scale"
+- Revenue impact estimates should be framed as directional unless directly supported by the underlying funnel math
+- Prefer downstream efficiency metrics that match the funnel stage being discussed
+- Do not frame impressions-to-purchase as a core funnel conversion metric unless clearly labeled as a media proxy
+- Do not imply exact UX friction (e.g. headline issue, checkout friction, VSL drop-off cause) unless the dataset directly isolates that step
+- For score-style judgments, compare the observed metric against the benchmark named in this prompt
+- Do not mark a step as green/protect when it is materially below its stated benchmark, even if it is functional
+- For OTO1 specifically: below 30% should not be green, and below the 40% strong benchmark should usually be yellow unless there is a strong reason otherwise
+- For OTO2 specifically: below 10% should be red or yellow depending on severity, not green
+- A monetization step can be functioning and still be underperforming; treat that as yellow/test or red/fix depending on the size of the gap
+- When unsure between green and yellow for a below-benchmark monetization step, choose yellow
+- Check arithmetic carefully before writing summary lines, especially campaign counts, total views, and combined totals
+- When comparing bounce rate, lower bounce is better; do not describe a higher bounce rate as lower
+- For variant comparison, explicitly verify directional statements against the numeric values before finalizing the explanation
+
+CRITICAL output rules:
+- Output valid JSON only
+- No markdown
+- No prose outside the JSON
+- No comments
+- No trailing commas
+"""
+
 
 def build_user_prompt(data: dict) -> str:
-    # Slim the payload — remove pycache noise, keep what matters
     slim = {
         "period": f"{data['meta']['period_start']} to {data['meta']['period_end']}",
         "funnel_snapshot": data.get("funnel_snapshot"),
         "email_campaigns": data.get("traffic_sources", {}).get("tracking", {}).get("campaigns"),
-        "paid_campaigns":  data.get("traffic_sources", {}).get("paid", {}).get("campaigns"),
-        "funnel_backend":  data.get("funnel_backend"),
-        "cross_check":     data.get("cross_check"),
+        "paid_campaigns": data.get("traffic_sources", {}).get("paid", {}).get("campaigns"),
+        "tracking_totals_by_source": data.get("traffic_sources", {}).get("tracking", {}).get("totals_by_source"),
+        "funnel_backend": data.get("funnel_backend"),
+        "cross_check": data.get("cross_check"),
         "funnel_variants": data.get("funnel_variants"),
     }
 
-    return f"""Here is this week's funnel performance data:
+    return f"""Here is this week's tracked funnel performance data:
 
 {json.dumps(slim, indent=2)}
 
 Analyse this data and return a JSON object with exactly this structure:
 
 {{
-  "period_summary": "2–3 sentence plain-English summary of the week. Include total revenue, front-end sales, and one headline observation.",
+  "period_summary": "2–3 sentence plain-English summary of the week. Include total revenue, frontend sales, and the single most important commercial takeaway.",
 
   "northstar": {{
-    "metric": "Revenue Per Visitor (RPV)",
-    "email_rpv": <float>,
-    "paid_rpv_usd": <float>,
-    "avg_funnel_value": <float>,
-    "commentary": "1 sentence on what the RPV numbers mean right now."
+    "operating_focus": "tracked funnel performance and revenue efficiency",
+    "commercial_metric": "Revenue Per Visitor (RPV)",
+    "email_rpv": <float or null>,
+    "paid_rpv_usd": <float or null>,
+    "avg_funnel_value": <float or null>,
+    "commentary": "1 sentence explaining what these efficiency numbers mean right now."
   }},
+
+  "funnel_leaks": [
+    {{
+      "area": "short label",
+      "metric": "the specific metric showing the leak",
+      "value": "actual figure",
+      "why_it_matters": "1 sentence"
+    }}
+  ],
 
   "needle_movers": [
     {{
       "rank": 1,
       "priority": "critical | high | medium",
-      "area": "short label e.g. Scale #88 Facebook",
-      "why": "1–2 sentences: what the data shows and why this matters in dollar terms.",
+      "area": "short label",
+      "evidence_type": "observed | inferred | hypothesis",
+      "confidence": "high | medium | low",
+      "why": "1–2 sentences: what the data shows and why this matters in commercial terms.",
       "what": ["action step 1", "action step 2", "action step 3"],
-      "revenue_impact": "Quantified estimate e.g. At X% CR and $157 avg value, Y visitors = $Z revenue."
+      "revenue_impact": "Quantified estimate where possible; otherwise state why it cannot be quantified cleanly from this data."
+    }}
+  ],
+
+  "variant_read": [
+    {{
+      "variant": "variant key",
+      "label": "variant label",
+      "status": "strong | weak | mixed",
+      "why": "1–2 sentences using only sessions, bounce, funnel progression, checkout efficiency, and any carefully caveated attributed-sales context.",
+      "action": "protect | test scale | test | audit"
     }}
   ],
 
@@ -164,20 +243,87 @@ Analyse this data and return a JSON object with exactly this structure:
       "cpv_id_or_sku": "e.g. #88 Facebook or SSR-D",
       "status": "green | yellow | red",
       "status_reason": "one short phrase",
-      "action": "protect | scale | fix | pause | audit"
+      "action": "protect | scale | test scale | fix | pause | audit | test"
     }}
   ],
 
-  "data_notes": "Any anomalies, cross-check flags, or data quality issues worth flagging. null if clean."
+  "data_notes": "Anomalies, attribution caveats, or measurement limitations worth flagging. null if clean."
 }}
 
 Rules:
-- needle_movers: 3–6 items max, ranked by revenue impact. Only include items with clear data backing.
-- scorecard: one row per campaign or funnel stage that has data. Include both working and broken items.
-- Be specific with numbers — pull actual figures from the data, don't generalise.
-- If a downsell has $0 revenue for the full period, flag it as likely broken redirect.
-- Do not include campaigns with fewer than 10 views.
-- If funnel_variants data is present, include 1–2 needle movers based on GA4 funnel drop-off. Always cross-reference GA4 drop-off rates against actual ClickBank sales from variant_sales before flagging a variant. A low choice rate with high backend conversion may indicate qualified traffic self-selection — do not flag as broken. Only flag if both engagement AND sales are weak. The key question is: what is the revenue per session for each variant? A variant with fewer interactions but more sales per session is outperforming one with high engagement but low sales. Note variants run separate traffic so avoid direct winner/loser claims.
+- needle_movers: 3–6 items max, ranked by commercial impact
+- Only include needle movers that are practical and applicable from this dataset
+- Prefer actions that either stop active waste or unlock meaningful revenue
+- Do not include speculative UX claims unless explicitly labeled as hypothesis
+- scorecard: include one row per campaign or funnel stage with enough data to judge
+- Exclude campaigns with fewer than 10 tracked views unless they represent active paid spend waste
+- Be specific with numbers and sources
+- If cross_check is clean, say so briefly in data_notes
+- If a downsell or backend stage has very weak take rate, flag it as monetization gap
+- If a paid campaign spends meaningfully and produces 0 tracked conversions or 0 platform purchases, that can be flagged as spend waste
+- Do not mix tracking views with GA4 sessions in the same rate calculation
+- Do not mix CPV conversions with ClickBank buyers unless you explicitly explain it
+- If using platform purchases for paid campaign judgment, explicitly treat them as proxy signals
+- Do not headline the weekly summary with proxy metrics if tracked source-level economics tell the story more reliably
+- For very small-volume winners, prefer "protect" or "test scale" instead of "scale"
+- Revenue impact should be labeled directional when based on scenario math rather than observed realized lift
+- Do not diagnose exact on-page friction from this dataset alone; frame those as hypotheses or validation tasks
+
+For paid CPA:
+- Prefer spend / tracking attributed conversions when possible
+- If using platform purchases instead, label the logic as a proxy
+- Do not treat proxy CPA as exact buyer CPA
+
+For paid RPV:
+- Use tracking facebook revenue / tracking facebook views
+
+For email RPV:
+- Use tracking email revenue / tracking email views
+
+For frontend sales:
+- Use funnel_backend.frontend_sales_count
+
+For avg_funnel_value:
+- Use funnel_snapshot.avg_revenue_per_buyer_usd
+
+For funnel_leaks:
+- Prefer spend efficiency, tracked-view efficiency, checkout efficiency, conversion-to-checkout efficiency, or take rate metrics
+- Do not use impressions-to-purchase as the main funnel leak metric unless explicitly labeled as an ad-delivery proxy
+- Do not use purchases-from-impressions as a main funnel leak metric when better downstream metrics exist in the payload
+- Prefer LP-view efficiency, spend efficiency, tracked-view efficiency, or take-rate metrics over impression-level purchase rates
+- Choose leak metrics that match the stage being discussed
+
+For variant analysis:
+- Do NOT use funnel_backend.variant_sales revenue or variant_sales count as the primary performance evidence
+- Use sessions, bounce_rate_pct, choice_rate_pct, optin_rate_pct, checkout_rate_pct, and checkout_from_optin_pct as the primary basis
+- variant_sales may be mentioned only as secondary supporting context, with clear attribution caveat
+- If one variant has better top-of-funnel engagement but worse checkout efficiency, classify it as mixed, not winner/loser
+- If session-based funnel signals and attributed-sales signals disagree, classify the result as mixed unless one side is overwhelmingly stronger
+- If signals conflict, recommend a test or controlled scale, not a definitive verdict
+- Verify directional statements against the numeric values before writing the explanation
+- Lower bounce is better; do not describe a higher bounce rate as better or lower
+
+For scorecard:
+- green = clearly healthy and supported by the benchmark, or worth protecting
+- yellow = mixed, functioning but below benchmark, or worth testing
+- red = active waste, severe underperformance, or obvious monetization gap
+- A functioning but below-benchmark monetization step should usually be yellow, not green
+- Use "test scale" for promising but still low-sample winners
+- Use "scale" only when the signal is both strong and sufficiently supported
+- For OTO1 main offer:
+  - 40%+ take rate can be green
+  - 30% to 39.9% is usually yellow
+  - below 30% should not be green
+- For OTO1 downsell:
+  - functioning but below benchmark should usually be yellow with action "test" or "fix"
+- For OTO2:
+  - below 10% is weak and should not be green
+
+- Verify combined counts and totals before writing any multi-campaign summary
+
+If revenue impact math would be misleading, be honest and say it is directional only.
+
+Return JSON only.
 """
 
 
