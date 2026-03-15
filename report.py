@@ -148,8 +148,12 @@ def build_variant_section(data: dict, analysis: dict) -> str:
           </div>
         </td>"""
 
-    v1_data = variants.get("destiny_v1", {})
-    v2_data = variants.get("destiny_v2", {})
+    # Get the first two variants that have actual session data
+    active_variants = [(k, v) for k, v in variants.items() if v.get("sessions", 0) > 0]
+    if not active_variants:
+        return ""
+    v1_key, v1_data = active_variants[0] if len(active_variants) > 0 else ("", {})
+    v2_key, v2_data = active_variants[1] if len(active_variants) > 1 else ("", {})
 
     # Biggest drop-off finder
     def biggest_dropoff(vdata):
@@ -179,8 +183,8 @@ def build_variant_section(data: dict, analysis: dict) -> str:
     <table style="width:100%;border-collapse:collapse">
       <thead><tr style="background:#f9fafb">
         <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em;width:30%">Metric</th>
-        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">/destiny (Full Screen)</th>
-        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">/destiny/v2 (Headline)</th>
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">{v1_data.get('label', 'Variant 1')}</th>
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">{v2_data.get('label', 'Variant 2') if v2_data else '—'}</th>
       </tr></thead>
       <tbody>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">Sessions</td><td style="padding:7px 10px;font-size:13px">{v1_data.get('sessions',0):,}</td><td style="padding:7px 10px;font-size:13px">{v2_data.get('sessions',0):,}</td></tr>
@@ -188,14 +192,14 @@ def build_variant_section(data: dict, analysis: dict) -> str:
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">Choice selected</td><td style="padding:7px 10px;font-size:13px">{v1_data.get('choice_selected',0):,} <span style="color:#6b7280;font-size:12px">({v1_data.get('choice_rate_pct',0)}%)</span></td><td style="padding:7px 10px;font-size:13px">{v2_data.get('choice_selected',0):,} <span style="color:#6b7280;font-size:12px">({v2_data.get('choice_rate_pct',0)}%)</span></td></tr>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">Opt-in completed</td><td style="padding:7px 10px;font-size:13px">{v1_data.get('optin_completed',0):,} <span style="color:#6b7280;font-size:12px">({v1_data.get('optin_rate_pct',0)}%)</span></td><td style="padding:7px 10px;font-size:13px">{v2_data.get('optin_completed',0):,} <span style="color:#6b7280;font-size:12px">({v2_data.get('optin_rate_pct',0)}%)</span></td></tr>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">Checkout clicks</td><td style="padding:7px 10px;font-size:13px">{v1_data.get('checkout_total',0):,} <span style="color:#6b7280;font-size:12px">({v1_data.get('checkout_rate_pct',0)}%)</span></td><td style="padding:7px 10px;font-size:13px">{v2_data.get('checkout_total',0):,} <span style="color:#6b7280;font-size:12px">({v2_data.get('checkout_rate_pct',0)}%)</span></td></tr>
-        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">ClickBank sales</td><td style="padding:7px 10px;font-size:13px;font-weight:700">{variant_sales.get('destiny_v1',{}).get('sales',0)}</td><td style="padding:7px 10px;font-size:13px;font-weight:700">{variant_sales.get('destiny_v2',{}).get('sales',0)}</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">ClickBank sales</td><td style="padding:7px 10px;font-size:13px;font-weight:700">{variant_sales.get(v1_key, {}).get('sales',0)}</td><td style="padding:7px 10px;font-size:13px;font-weight:700">{variant_sales.get(v2_key, {}).get('sales',0)}</td></tr>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">Checkout→Sale</td>
-          <td style="padding:7px 10px;font-size:13px;font-weight:600;color:{pct_color(round(variant_sales.get('destiny_v1',{}).get('sales',0)/max(v1_data.get('checkout_total',1),1)*100,1),30,15)}">{round(variant_sales.get('destiny_v1',{}).get('sales',0)/max(v1_data.get('checkout_total',1),1)*100,1)}%</td>
-          <td style="padding:7px 10px;font-size:13px;font-weight:600;color:{pct_color(round(variant_sales.get('destiny_v2',{}).get('sales',0)/max(v2_data.get('checkout_total',1),1)*100,1),30,15)}">{round(variant_sales.get('destiny_v2',{}).get('sales',0)/max(v2_data.get('checkout_total',1),1)*100,1)}%</td>
+          <td style="padding:7px 10px;font-size:13px;font-weight:600;color:{pct_color(round(variant_sales.get(v1_key, {}).get('sales',0)/max(v1_data.get('checkout_total',1),1)*100,1),30,15)}">{round(variant_sales.get(v1_key, {}).get('sales',0)/max(v1_data.get('checkout_total',1),1)*100,1)}%</td>
+          <td style="padding:7px 10px;font-size:13px;font-weight:600;color:{pct_color(round(variant_sales.get(v2_key, {}).get('sales',0)/max(v2_data.get('checkout_total',1),1)*100,1),30,15)}">{round(variant_sales.get(v2_key, {}).get('sales',0)/max(v2_data.get('checkout_total',1),1)*100,1)}%</td>
         </tr>
         <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 10px;font-size:12px;color:#6b7280">Revenue per session</td>
-          <td style="padding:7px 10px;font-size:13px;font-weight:600">${round(variant_sales.get('destiny_v1',{}).get('revenue',0)/max(v1_data.get('sessions',1),1),3)}</td>
-          <td style="padding:7px 10px;font-size:13px;font-weight:600">${round(variant_sales.get('destiny_v2',{}).get('revenue',0)/max(v2_data.get('sessions',1),1),3)}</td>
+          <td style="padding:7px 10px;font-size:13px;font-weight:600">${round(variant_sales.get(v1_key, {}).get('revenue',0)/max(v1_data.get('sessions',1),1),3)}</td>
+          <td style="padding:7px 10px;font-size:13px;font-weight:600">${round(variant_sales.get(v2_key, {}).get('revenue',0)/max(v2_data.get('sessions',1),1),3)}</td>
         </tr>
         <tr style="background:#fffbeb"><td style="padding:7px 10px;font-size:12px;color:#92400e;font-weight:600">Biggest drop-off</td>
           <td style="padding:7px 10px;font-size:12px;color:#dc2626;font-weight:600">{v1_worst} ({v1_worst_pct}%)</td>
@@ -345,7 +349,7 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
 
     html = f"""<!DOCTYPE html>
       <html>
-      <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{period} — Ask Sabrina Funnel Report</title></head>
+      <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{period} — {data.get('meta', {}).get('project', 'Funnel')} Report</title></head>
       <body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
       <div style="max-width:680px;margin:0 auto;padding:24px 16px">
 
@@ -456,7 +460,7 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
             </tfoot>
           </table>
           {_refund_note(backend)}
-          <p style="margin:10px 0 0;font-size:12px;color:#6b7280">Advanced vs Basic: {backend['frontend_mix']['advanced_pct']}% choosing ${backend['sku_breakdown']['abdt-advanced']['price']} Advanced ({backend['frontend_mix']['advanced_count']} of {backend['frontend_sales_count']} buyers)</p>
+          <p style="margin:10px 0 0;font-size:12px;color:#6b7280">Advanced mix: {backend['frontend_mix']['advanced_pct']}% advanced ({backend['frontend_mix']['advanced_count']} of {backend['frontend_sales_count']} buyers)</p>
         </div>
 
         <!-- Scorecard -->
@@ -868,10 +872,11 @@ def main():
         html = build_email_html(data, analysis, doc_url="https://docs.google.com/document/d/MOCK")
         Path("docs").mkdir(exist_ok=True)
         date_part = Path(args.data).stem.replace("report_data_", "")
-        email_path = f"docs/email_{date_part}.html" if date_part else "docs/email.html"
+        Path(f"docs/{project}").mkdir(parents=True, exist_ok=True)
+        email_path = f"docs/{project}/email_{date_part}.html" if date_part else f"docs/{project}/email.html"
         Path(email_path).write_text(html)
         print(f"[report] ✓ Email preview saved to {email_path}")
-        build_index_html("docs")
+        build_index_html(f"docs/{project}", project=project)
         return
 
     # Live mode
