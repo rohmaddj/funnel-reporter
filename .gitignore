@@ -1,4 +1,5 @@
 output/
+docs/
 .env
 google_credentials*
 __pycache__/

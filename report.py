@@ -246,10 +246,11 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
     def action_badge(action):
         colors = {
             "scale":   "#16a34a", "protect": "#2563eb", "fix":    "#dc2626",
-            "pause":   "#9333ea", "audit":   "#d97706",
+            "pause":   "#9333ea", "audit":   "#d97706", "test scale": "#1cce5e",
+            "test": "#FACC15"
         }
         c = colors.get(action, "#6b7280")
-        return f'<span style="background:{c}20;color:{c};font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;border:1px solid {c}40;letter-spacing:.05em">{action.upper()}</span>'
+        return f'<span style="display:inline-block;white-space:nowrap;background:{c}20;color:{c};font-size:10px;font-weight:700;padding:2px 4px;border-radius:3px;border:1px solid {c}40;letter-spacing:.05em">{action.upper()}</span>'
 
     # ── email campaigns table ──
     email_camps = {k: v for k, v in tracking["campaigns"].items() if v["source"] == "email"}
