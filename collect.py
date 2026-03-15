@@ -50,7 +50,7 @@ def main():
     log(f"Mode: {'MOCK' if args.mock else 'LIVE'}")
 
     if not args.out:
-        args.out = f"output/report_data_{start_date.replace('-', '_')}.json"
+        args.out = f"output/report_data_{end_date.replace('-', '_')}.json"
 
     # ── Run each collector ───────────────────────────────────────────────────
     collectors = {
