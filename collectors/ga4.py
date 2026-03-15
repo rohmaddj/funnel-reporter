@@ -23,10 +23,28 @@ CREDENTIALS_FILE = os.environ.get("GOOGLE_CREDENTIALS_FILE", "google_credentials
 GA4_PROPERTY_ID  = os.environ.get("GA4_PROPERTY_ID", "")
 SCOPES           = ["https://www.googleapis.com/auth/analytics.readonly"]
 
-VARIANTS = {
-    "destiny_v1": {"label": "/destiny (full-screen)",  "path": "/destiny",    "exclude": "/destiny/v2", "cpv_ids": ["77","78"]},
-    "destiny_v2": {"label": "/destiny/v2 (with-headline)",  "path": "/destiny/v2", "exclude": None,          "cpv_ids": ["87","88"]},
-}
+def _build_variants() -> dict:
+    from utils.config import get_variants, get_campaign_map
+    variant_defs = get_variants()
+    camp_map     = get_campaign_map()
+
+    cpv_ids_by_variant = {}
+    for cid, data in camp_map.items():
+        v = data.get("variant", "other")
+        cpv_ids_by_variant.setdefault(v, []).append(cid)
+
+    result = {}
+    for key, vdef in variant_defs.items():
+        if vdef.get("path"):
+            result[key] = {
+                "label":   vdef["label"],
+                "path":    vdef["path"],
+                "exclude": vdef.get("exclude"),
+                "cpv_ids": cpv_ids_by_variant.get(key, []),
+            }
+    return result
+
+VARIANTS = _build_variants()
 
 FUNNEL_EVENTS = [
     "choice_selected",
@@ -134,8 +152,7 @@ class GA4Collector(BaseCollector):
                         "expressions": [
                             path_filter,
                             {"orGroup": {"expressions": [
-                                {"filter": {"fieldName": "eventName", "stringFilter": {"matchType": "BEGINS_WITH", "value": "checkout_basic_"}}},
-                                {"filter": {"fieldName": "eventName", "stringFilter": {"matchType": "BEGINS_WITH", "value": "checkout_advanced_"}}},
+                                {"filter": {"fieldName": "eventName", "stringFilter": {"matchType": "ENDS_WITH", "value": "_clicked"}}},
                             ]}}
                         ]
                     }
@@ -143,8 +160,8 @@ class GA4Collector(BaseCollector):
             }
         ).execute()
 
-        checkout_basic    = sum(int(row["metricValues"][0]["value"]) for row in c.get("rows", []) if row["dimensionValues"][0]["value"].startswith("checkout_basic_"))
-        checkout_advanced = sum(int(row["metricValues"][0]["value"]) for row in c.get("rows", []) if row["dimensionValues"][0]["value"].startswith("checkout_advanced_"))
+        checkout_basic    = sum(int(row["metricValues"][0]["value"]) for row in c.get("rows", []) if row["dimensionValues"][0]["value"] == "checkout_basic_clicked")
+        checkout_advanced = sum(int(row["metricValues"][0]["value"]) for row in c.get("rows", []) if row["dimensionValues"][0]["value"] == "checkout_advanced_clicked")
         checkout_total    = checkout_basic + checkout_advanced
 
         # ── Derived rates ─────────────────────────────────────────────────────

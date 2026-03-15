@@ -24,7 +24,7 @@ load_dotenv()
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 MODEL = "claude-sonnet-4-5"
-MAX_TOKENS = 4000
+MAX_TOKENS = 6000
 
 
 def parse_args():
@@ -133,7 +133,7 @@ Rules:
 - Be specific with numbers — pull actual figures from the data, don't generalise.
 - If a downsell has $0 revenue for the full period, flag it as likely broken redirect.
 - Do not include campaigns with fewer than 10 views.
-- If funnel_variants data is present, include 1–2 needle movers based on GA4 funnel drop-off. Focus on the biggest drop-off stage per variant (session_to_choice is typically the largest — low choice rate means users are leaving before the first interaction at ~4 min mark). Frame as actionable: what to test, what to change, what to measure. Note that variants run separate traffic so avoid direct winner/loser claims.
+- If funnel_variants data is present, include 1–2 needle movers based on GA4 funnel drop-off. Always cross-reference GA4 drop-off rates against actual ClickBank sales from variant_sales before flagging a variant. A low choice rate with high backend conversion may indicate qualified traffic self-selection — do not flag as broken. Only flag if both engagement AND sales are weak. The key question is: what is the revenue per session for each variant? A variant with fewer interactions but more sales per session is outperforming one with high engagement but low sales. Note variants run separate traffic so avoid direct winner/loser claims.
 """
 
 

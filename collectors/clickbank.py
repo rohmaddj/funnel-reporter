@@ -9,24 +9,10 @@ trackingId: {code}_{campaignId}_{clickId} — middle segment = CPV campaign ID
 import os
 import requests
 from .base import BaseCollector
+from utils.config import get_sku_map, get_variant_map
 
-
-SKU_MAP = {
-    "abdt-basic":    {"label": "Front-end Basic",            "price": 37,  "stage": "frontend"},
-    "abdt-advanced": {"label": "Front-end Advanced",         "price": 54,  "stage": "frontend"},
-    "SPR-OB1":       {"label": "Order Bump ($14.99/mo)","price": 14.99,  "stage": "order_bump"},
-    "SPR-OB2":       {"label": "Order Bump (free trial - $14.99/mo)","price": 0,   "stage": "order_bump"},
-    "SSR":           {"label": "OTO1 Soul Signature $67",    "price": 67,  "stage": "oto1"},
-    "SSR-D":         {"label": "OTO1 Downsell $47",          "price": 47,  "stage": "oto1_downsell"},
-    "dhr":           {"label": "OTO2 Divine Helper $97",     "price": 97,  "stage": "oto2"},
-    "dhr-d":         {"label": "OTO2 Downsell $77",          "price": 77,  "stage": "oto2_downsell"},
-}
-
-# CPV campaign ID → funnel variant
-VARIANT_MAP = {
-    "77": "destiny_v1", "78": "destiny_v1",
-    "87": "destiny_v2", "88": "destiny_v2",
-}
+SKU_MAP     = get_sku_map()
+VARIANT_MAP = get_variant_map()
 
 
 class ClickBankCollector(BaseCollector):
@@ -46,7 +32,7 @@ class ClickBankCollector(BaseCollector):
 
     def _get_all_orders(self, start_date: str, end_date: str) -> list:
         all_orders = []
-        for txn_type in ["SALE", "BILL"]:
+        for txn_type in ["SALE", "BILL", "RFND", "CGBK"]:
             page = 1
             while True:
                 resp, status_code = self._request("GET", "/orders2/list", params={
@@ -106,9 +92,11 @@ class ClickBankCollector(BaseCollector):
         }
 
         for order in orders:
-            if order.get("transactionType") not in ("SALE", "BILL"):
+            txn_type = order.get("transactionType")
+            if txn_type not in ("SALE", "BILL", "RFND", "CGBK"):
                 continue
-            is_order_rebill = order.get("transactionType") == "BILL"
+            is_order_rebill  = txn_type == "BILL"
+            is_order_refund  = txn_type in ("RFND", "CGBK")
 
             tracking_id = order.get("trackingId", "")
             campaign_id = self._extract_campaign_id(tracking_id)
@@ -132,20 +120,26 @@ class ClickBankCollector(BaseCollector):
                         "price":     info["price"],
                         "new_sales": 0,
                         "rebills":   0,
+                        "refunds":   0,
                         "revenue":   0.0,
                     }
 
                 if is_rebill:
                     sku_breakdown[sku]["rebills"] += 1
+                    sku_breakdown[sku]["revenue"] += amount
+                    total_revenue += amount
+                elif is_order_refund:
+                    sku_breakdown[sku]["refunds"] = sku_breakdown[sku].get("refunds", 0) + 1
+                    sku_breakdown[sku]["refund_amount"] = round(sku_breakdown[sku].get("refund_amount", 0.0) + abs(amount), 2)
+                    total_revenue += amount   # still affects net total
                 else:
                     sku_breakdown[sku]["new_sales"] += 1
+                    sku_breakdown[sku]["revenue"] += amount
+                    total_revenue += amount
                     if info["stage"] == "frontend":
                         frontend_sales_count += 1
                         variant_sales[variant]["sales"]   += 1
                         variant_sales[variant]["revenue"] += amount
-
-                sku_breakdown[sku]["revenue"] += amount
-                total_revenue += amount
 
         frontend_buyers = max(frontend_sales_count, 1)
         for sku, data in sku_breakdown.items():
@@ -159,8 +153,16 @@ class ClickBankCollector(BaseCollector):
         for v in variant_sales.values():
             v["revenue"] = round(v["revenue"], 2)
 
+        # Separate gross and net for reporting
+        gross_revenue  = sum(s["revenue"] for s in sku_breakdown.values() if s["revenue"] > 0)
+        refund_total   = sum(abs(s["revenue"]) for s in sku_breakdown.values() if s["revenue"] < 0)
+        refund_count   = sum(s.get("refunds", 0) for s in sku_breakdown.values())
+
         return {
-            "total_revenue":        round(total_revenue, 2),
+            "total_revenue":        round(total_revenue, 2),   # net (after refunds)
+            "gross_revenue":        round(gross_revenue + refund_total, 2),
+            "total_refunds":        refund_count,
+            "total_refund_amount":  round(refund_total, 2),
             "frontend_sales_count": frontend_sales_count,
             "variant_sales":        variant_sales,
             "sku_breakdown":        sku_breakdown,

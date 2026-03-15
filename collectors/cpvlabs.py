@@ -12,16 +12,9 @@ Auth: API-Key header
 import os
 import requests
 from .base import BaseCollector
+from utils.config import get_campaign_map, get_cpv_group
 
-
-CPV_GROUP  = os.environ.get("CPVLABS_GROUP", "Ask Sabrina")
 MIN_VISITS = 5
-
-SOURCE_KEYWORDS = {
-    "email":    ["maropost", "email", "broadcast", "sequence", "welcome", "abandoned",
-                 "reactivation", "discount", "scarcity", "urgency", "education", "low intent"],
-    "facebook": ["facebook", "fb", "paid", "adv+", "img", "chatbot", "chat bot", "mvlabs"],
-}
 
 
 class CPVLabsCollector(BaseCollector):
@@ -42,12 +35,13 @@ class CPVLabsCollector(BaseCollector):
 
         # Step 1: get all campaigns, filter to Ask Sabrina group
         all_campaigns = self._get_campaigns()
+        CPV_GROUP = get_cpv_group()
         group_campaigns = [c for c in all_campaigns if c.get("CampaignGroup") == CPV_GROUP]
 
         if not group_campaigns:
             available = list({c.get("CampaignGroup", "?") for c in all_campaigns})
             raise Exception(
-                f"No campaigns found for group '{CPV_GROUP}'.\n"
+                f"No campaigns found for group '{get_cpv_group()}'.\n"
                 f"  Available groups: {available}\n"
                 f"  Update CPVLABS_GROUP in .env to match exactly (case sensitive)"
             )
@@ -129,7 +123,7 @@ class CPVLabsCollector(BaseCollector):
             if visits < MIN_VISITS:
                 continue
 
-            source = self._detect_source(cname)
+            source = self._detect_source(cname, campaign_id=cid)
 
             campaigns[cid] = {
                 "label":       cname,
@@ -154,10 +148,22 @@ class CPVLabsCollector(BaseCollector):
             "total_revenue":     round(sum(c["revenue"] for c in campaigns.values()), 2),
         }
 
-    def _detect_source(self, name: str) -> str:
+    def _detect_source(self, name: str, campaign_id: str = None) -> str:
+        """Use config campaign map first, fall back to name keywords."""
+        if campaign_id:
+            camp_config = get_campaign_map().get(str(campaign_id), {})
+            if camp_config.get("source"):
+                return camp_config["source"]
         name_lower = name.lower()
-        for source, keywords in SOURCE_KEYWORDS.items():
-            if any(k in name_lower for k in keywords):
+        keywords = {
+            "email":    ["maropost", "email", "broadcast", "sequence", "welcome",
+                         "abandoned", "reactivation", "discount", "scarcity",
+                         "urgency", "education", "low intent"],
+            "facebook": ["facebook", "fb", "paid", "adv+", "img", "chatbot",
+                         "chat bot", "mvlabs"],
+        }
+        for source, kws in keywords.items():
+            if any(k in name_lower for k in kws):
                 return source
         return "unknown"
 
