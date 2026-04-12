@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "generated_at": "2026-04-12T14:12:17.589727Z",
+    "model": "claude-sonnet-4-5",
+    "mode": "live"
+  },
+  "analysis": {
+    "period_summary": "Week ending April 5 delivered $1,561.82 revenue from 64 frontend buyers, with organic and Facebook traffic carrying the load. The critical commercial issue is paid campaign efficiency: $243.89 spent returned only 2 platform purchases (proxy CPA $121.95), far above the $12.20 target, while email campaigns show strong intent but very low volume.",
+    "northstar": {
+      "operating_focus": "tracked funnel performance and revenue efficiency",
+      "commercial_metric": "Revenue Per Visitor (RPV)",
+      "email_rpv": 0.94,
+      "paid_rpv_usd": 2.1,
+      "avg_funnel_value": 24.4,
+      "commentary": "Email RPV is strong at $0.94 but volume is minimal (290 views); paid RPV at $2.10 is driven by Facebook tracking (campaign 51) but masks the paid campaign hemorrhage."
+    },
+    "funnel_leaks": [
+      {
+        "area": "Paid Campaign Efficiency",
+        "metric": "Proxy CPA (platform purchases)",
+        "value": "$121.95 USD (2 purchases from $243.89 spend)",
+        "why_it_matters": "Paid spend is returning purchases at 10\u00d7 the target CPA, representing active capital waste with no path to profitability at current efficiency."
+      },
+      {
+        "area": "OTO1 Soul Signature Take Rate",
+        "metric": "Take rate from frontend buyers",
+        "value": "23.4% (15 of 64 buyers)",
+        "why_it_matters": "Main upsell is converting 17 points below the 40% strong benchmark, leaving $700+ directional revenue on the table this week alone."
+      },
+      {
+        "area": "OTO2 Divine Helper Take Rate",
+        "metric": "Take rate from OTO1 takers",
+        "value": "7.8% (5 of 64 buyers)",
+        "why_it_matters": "Backend monetization is severely underperforming the 10% minimum threshold, indicating a broken or poorly-presented offer."
+      },
+      {
+        "area": "Email Campaign Volume",
+        "metric": "Total email-sourced tracked views",
+        "value": "290 views, 5 conversions",
+        "why_it_matters": "Email shows strong intent (0.94 RPV, 4.35% CR on abandoned-cart) but is operating at 4% of organic volume, representing underutilized warm traffic."
+      }
+    ],
+    "needle_movers": [
+      {
+        "rank": 1,
+        "priority": "critical",
+        "area": "Paid Campaign Spend Waste",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "AS_IMG16_AI_OctWk2 spent $223.93 USD and returned 2 platform purchases (proxy CPA $111.97); the two MarWk4 campaigns spent $19.95 combined with 0 purchases. All three campaigns are operating at LP CTR of 1.72\u20133.19%, materially below the 4\u20136% healthy cold-traffic benchmark, and delivering no viable buyer economics.",
+        "what": [
+          "Pause all three paid campaigns immediately to stop active capital waste",
+          "Audit creative and LP alignment: 1.72% CTR on the main campaign suggests impression-to-click friction or targeting mismatch",
+          "Before resuming spend, validate LP CTR above 4% and platform purchase proxy CPA below $30 in controlled test budget"
+        ],
+        "revenue_impact": "Stopping waste preserves $240+ USD weekly spend; fixing LP CTR to 5% and improving conversion efficiency to meet $12 CPA target would unlock $600+ weekly profitable spend at current impression volume (directional)."
+      },
+      {
+        "rank": 2,
+        "priority": "high",
+        "area": "OTO1 Soul Signature Monetization Gap",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "OTO1 is converting 23.4% of frontend buyers vs 40% strong benchmark. At 64 buyers this week, closing half the gap to 32% would yield ~5 additional OTO1 sales at $67 each, or $335 incremental revenue. The gap persists across all traffic sources, indicating systemic offer or presentation issue, not variant-specific.",
+        "what": [
+          "Audit OTO1 page copy, headline, and CTA for clarity and urgency alignment with frontend promise",
+          "Test price anchor or bundle variation (e.g., compare-at framing, include digital add-on) to shift perceived value",
+          "Validate that OTO1 load speed and mobile presentation are not creating technical friction"
+        ],
+        "revenue_impact": "Closing 50% of the gap to benchmark (from 23.4% to 32%) would add ~$335 weekly at current volume; full benchmark restoration would add $670+ weekly (directional scenario math)."
+      },
+      {
+        "rank": 3,
+        "priority": "high",
+        "area": "OTO2 Divine Helper Severe Underperformance",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "OTO2 is converting 7.8% of frontend buyers (5 of 64), well below the 10% minimum threshold and dramatically below strong downsell benchmarks. This stage is functioning (5 sales) but monetizing poorly, suggesting broken value proposition or presentation issue rather than technical failure.",
+        "what": [
+          "Audit OTO2 page for offer clarity: is the $97 value case immediately obvious to a buyer who just purchased OTO1 or skipped it?",
+          "Test reframing OTO2 as a complement or missing-piece offer rather than incremental upsell",
+          "Consider A/B test of price point ($67 vs $97) or downsell trigger if main offer is routinely skipped"
+        ],
+        "revenue_impact": "Lifting OTO2 from 7.8% to 15% (modest downsell benchmark) would add ~5 incremental sales weekly at $97, or $485 incremental revenue (directional scenario)."
+      },
+      {
+        "rank": 4,
+        "priority": "medium",
+        "area": "Email Traffic Volume Unlock",
+        "evidence_type": "inferred",
+        "confidence": "medium",
+        "why": "Email campaigns show strong commercial signals: abandoned-cart (campaign 69) converted 4.35% at $2.74 RPV; discount (campaign 70) converted 5.0% at $2.49 RPV. Yet total email tracked views were only 290 vs 6,677 organic, representing 96% untapped warm audience. Scaling email deployment would directly convert high-intent traffic at proven efficiency.",
+        "what": [
+          "Audit email deployment frequency and list segmentation: are high-intent segments (abandoned, discount-eligible) being mailed at optimal cadence?",
+          "Expand working email angles (abandoned, discount) to additional list segments or increase send frequency where engagement supports it",
+          "Test reactivation and education angles (currently 0 conversions from 15 combined views) with revised subject lines or offer framing"
+        ],
+        "revenue_impact": "Doubling email volume from 290 to 580 views weekly at observed 0.94 RPV would add $273 incremental revenue; tripling would add $546 (directional, assumes list capacity and engagement hold)."
+      },
+      {
+        "rank": 5,
+        "priority": "medium",
+        "area": "destiny_v2 Variant Checkout Conversion Failure",
+        "evidence_type": "observed",
+        "confidence": "medium",
+        "why": "destiny_v2 processed 54 sessions, achieved 35.2% bounce (better than v1's 52.7%), and completed 3 optins (5.56% optin rate), but delivered 0 checkouts. The optin-to-checkout step shows 0% conversion vs v1's 21.59%, indicating a late-stage friction point or broken checkout flow for this variant.",
+        "what": [
+          "Audit destiny_v2 checkout page load and payment-form functionality for technical breaks",
+          "Verify that checkout CTA, pricing display, and trust elements render correctly on the v2 layout",
+          "If technical issues are ruled out, consider pausing v2 traffic and reallocating to v1 until v2 checkout path is validated in controlled test"
+        ],
+        "revenue_impact": "v2 sessions are minimal (54 vs v1's 4,972), so immediate revenue impact is small; protecting 54 weekly sessions from zero-conversion outcome would recover ~1 checkout at v1's 2.13% rate, or ~$24 weekly (directional)."
+      }
+    ],
+    "variant_read": [
+      {
+        "variant": "destiny_v1",
+        "label": "/destiny (full-screen)",
+        "status": "strong",
+        "why": "destiny_v1 drove 4,972 sessions with 52.7% bounce, 9.88% optin rate, 2.13% checkout rate, and 21.59% optin-to-checkout conversion. All progression metrics are functioning. funnel_backend.variant_sales shows 2 attributed sales for $60.74, but this understates true performance due to attribution limitations (50 sales fell into 'other'). Session-based funnel health is strong.",
+        "action": "protect"
+      },
+      {
+        "variant": "destiny_v2",
+        "label": "/destiny/v2 (with-headline)",
+        "status": "mixed",
+        "why": "destiny_v2 achieved lower bounce (35.2% vs v1's 52.7%) and processed 3 optins from 54 sessions (5.56% optin rate), suggesting improved top-of-funnel engagement. However, 0 checkouts from 3 completed optins (0% optin-to-checkout vs v1's 21.59%) indicates a severe late-stage breakdown. funnel_backend shows 0 attributed sales. Small sample (54 sessions) limits confidence, but the checkout failure is a clear red flag.",
+        "action": "audit"
+      },
+      {
+        "variant": "index_v17",
+        "label": "/index-v17 (TSL)",
+        "status": "mixed",
+        "why": "index_v17 shows 0 GA4 sessions in funnel_variants, but CPV tracking campaign 51 (tied to v17) recorded 286 views, 9 conversions, and $601.44 revenue with 3.15% CR. funnel_backend.variant_sales attributes 9 sales and $406.34 revenue to index_v17. The session vs tracking view mismatch suggests a GA4 tracking gap or variant-tagging issue, but commercial performance from tracking data is strong.",
+        "action": "test scale"
+      }
+    ],
+    "scorecard": [
+      {
+        "area": "Paid Campaign AS_IMG16_AI_OctWk2 (Facebook)",
+        "cpv_id_or_sku": "120242484880470718 FB",
+        "status": "red",
+        "status_reason": "1.75% LP CTR, 2 purchases, proxy CPA $96.64",
+        "action": "pause"
+      },
+      {
+        "area": "Paid Campaign AS_IMG16_AI_OctWk2 (Instagram)",
+        "cpv_id_or_sku": "120242484880470718 IG",
+        "status": "red",
+        "status_reason": "1.42% LP CTR, 0 purchases, $30.66 waste",
+        "action": "pause"
+      },
+      {
+        "area": "Paid Campaign AS_WrongWants_Mig_MarWk4",
+        "cpv_id_or_sku": "120242656058300718",
+        "status": "red",
+        "status_reason": "3.19% LP CTR, 0 purchases, $9.50 waste",
+        "action": "pause"
+      },
+      {
+        "area": "Paid Campaign AS_ConvergenceWindow_Mig_MarWk4",
+        "cpv_id_or_sku": "120242656058790718",
+        "status": "red",
+        "status_reason": "2.44% LP CTR, 0 purchases, $10.45 waste",
+        "action": "pause"
+      },
+      {
+        "area": "Email Campaign Abandoned (69)",
+        "cpv_id_or_sku": "#69",
+        "status": "green",
+        "status_reason": "4.35% CR, $2.74 RPV, strong intent",
+        "action": "scale"
+      },
+      {
+        "area": "Email Campaign Discount (70)",
+        "cpv_id_or_sku": "#70",
+        "status": "green",
+        "status_reason": "5.0% CR, $2.49 RPV, strong intent",
+        "action": "scale"
+      },
+      {
+        "area": "Email Campaign Interactive VSL Lead (77)",
+        "cpv_id_or_sku": "#77",
+        "status": "yellow",
+        "status_reason": "1.75% CR, functional but below 69/70",
+        "action": "test"
+      },
+      {
+        "area": "Email Campaign Interactive VSL Lead V2 (87)",
+        "cpv_id_or_sku": "#87",
+        "status": "red",
+        "status_reason": "0% CR from 62 views, dead angle",
+        "action": "pause"
+      },
+      {
+        "area": "Facebook Tracking Campaign 51 (index_v17)",
+        "cpv_id_or_sku": "#51",
+        "status": "green",
+        "status_reason": "3.15% CR, $2.10 RPV, strong organic/FB",
+        "action": "protect"
+      },
+      {
+        "area": "OTO1 Soul Signature Main",
+        "cpv_id_or_sku": "SSR",
+        "status": "yellow",
+        "status_reason": "23.4% take rate, 17pts below benchmark",
+        "action": "fix"
+      },
+      {
+        "area": "OTO2 Divine Helper",
+        "cpv_id_or_sku": "dhr",
+        "status": "red",
+        "status_reason": "7.8% take rate, below 10% minimum",
+        "action": "fix"
+      },
+      {
+        "area": "Frontend Advanced Mix",
+        "cpv_id_or_sku": "abdt-advanced",
+        "status": "green",
+        "status_reason": "71.9% mix, healthy preference",
+        "action": "protect"
+      },
+      {
+        "area": "Order Bump Free Trial (SPR-OB2)",
+        "cpv_id_or_sku": "SPR-OB2",
+        "status": "green",
+        "status_reason": "22 new trials, 29 rebills, healthy",
+        "action": "protect"
+      }
+    ],
+    "data_notes": "cross_check shows CPV conversions (63) slightly below CB frontend sales (64) with 8.9% revenue variance; this is within acceptable range and likely reflects postback timing or small attribution drift. GA4 funnel_variants shows 0 sessions for index_v17 despite strong tracking performance (campaign 51: 286 views, 9 conversions), indicating a GA4 variant-tagging issue that does not affect commercial tracking. funnel_backend.variant_sales significantly understates variant performance due to 50 of 64 sales falling into 'other' attribution bucket; session-based funnel progression and tracking-level conversions are more reliable for variant judgment. Platform purchase counts for paid campaigns are used as proxy efficiency signals because CPV tracking does not tie those campaigns to attributed conversions; treat paid CPAs as directional spend-waste indicators rather than exact buyer costs."
+  }
+}

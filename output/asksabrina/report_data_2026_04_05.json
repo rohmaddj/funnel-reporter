@@ -1,0 +1,492 @@
+{
+  "meta": {
+    "generated_at": "2026-04-12T14:10:46.123965Z",
+    "period_start": "2026-03-30",
+    "period_end": "2026-04-05",
+    "project": "asksabrina",
+    "mode": "live",
+    "errors": []
+  },
+  "funnel_snapshot": {
+    "total_revenue_usd": 1561.82,
+    "frontend_sales": 64,
+    "avg_revenue_per_buyer_usd": 24.4,
+    "paid_traffic_spend_sgd": 328.25,
+    "paid_traffic_spend_usd": 243.89,
+    "email_total_views": 290,
+    "email_total_conversions": 5,
+    "email_total_revenue": 273.17
+  },
+  "traffic_sources": {
+    "email": {
+      "note": "Email data sourced from CPV Labs (USE_CPV_FOR_EMAIL=true)",
+      "total_views": null,
+      "total_conversions": null,
+      "total_revenue": null,
+      "campaigns": {}
+    },
+    "paid": {
+      "campaigns": {
+        "120242484880470718": {
+          "campaign_name": "AS_IMG16_AI_OctWk2",
+          "cpv_campaign_id": null,
+          "platforms": {
+            "facebook": {
+              "spend_sgd": 260.13,
+              "spend_usd": 193.28,
+              "impressions": 2283,
+              "lp_views": 40,
+              "lp_ctr_pct": 1.75,
+              "purchases": 2,
+              "cr_pct": 0.09,
+              "cpa_sgd": 130.06
+            },
+            "instagram": {
+              "spend_sgd": 41.26,
+              "spend_usd": 30.66,
+              "impressions": 212,
+              "lp_views": 3,
+              "lp_ctr_pct": 1.42,
+              "purchases": 0,
+              "cr_pct": 0.0,
+              "cpa_sgd": null
+            }
+          },
+          "totals": {
+            "spend_sgd": 301.39,
+            "impressions": 2495,
+            "lp_views": 43,
+            "purchases": 2,
+            "spend_usd": 223.93,
+            "lp_ctr_pct": 1.72,
+            "cr_pct": 0.08
+          }
+        },
+        "120242656058300718": {
+          "campaign_name": "AS_WrongWants_Mig_MarWk4",
+          "cpv_campaign_id": null,
+          "platforms": {
+            "facebook": {
+              "spend_sgd": 11.34,
+              "spend_usd": 8.43,
+              "impressions": 77,
+              "lp_views": 3,
+              "lp_ctr_pct": 3.9,
+              "purchases": 0,
+              "cr_pct": 0.0,
+              "cpa_sgd": null
+            },
+            "instagram": {
+              "spend_sgd": 1.45,
+              "spend_usd": 1.08,
+              "impressions": 17,
+              "lp_views": 0,
+              "lp_ctr_pct": 0.0,
+              "purchases": 0,
+              "cr_pct": 0.0,
+              "cpa_sgd": null
+            }
+          },
+          "totals": {
+            "spend_sgd": 12.79,
+            "impressions": 94,
+            "lp_views": 3,
+            "purchases": 0,
+            "spend_usd": 9.5,
+            "lp_ctr_pct": 3.19,
+            "cr_pct": 0.0
+          }
+        },
+        "120242656058790718": {
+          "campaign_name": "AS_ConvergenceWindow_Mig_MarWk4",
+          "cpv_campaign_id": null,
+          "platforms": {
+            "facebook": {
+              "spend_sgd": 11.63,
+              "spend_usd": 8.64,
+              "impressions": 68,
+              "lp_views": 1,
+              "lp_ctr_pct": 1.47,
+              "purchases": 0,
+              "cr_pct": 0.0,
+              "cpa_sgd": null
+            },
+            "instagram": {
+              "spend_sgd": 2.44,
+              "spend_usd": 1.81,
+              "impressions": 14,
+              "lp_views": 1,
+              "lp_ctr_pct": 7.14,
+              "purchases": 0,
+              "cr_pct": 0.0,
+              "cpa_sgd": null
+            }
+          },
+          "totals": {
+            "spend_sgd": 14.07,
+            "impressions": 82,
+            "lp_views": 2,
+            "purchases": 0,
+            "spend_usd": 10.45,
+            "lp_ctr_pct": 2.44,
+            "cr_pct": 0.0
+          }
+        }
+      },
+      "total_spend_sgd": 328.25,
+      "total_spend_usd": 243.89,
+      "sgd_to_usd_rate": 0.743
+    },
+    "tracking": {
+      "campaigns": {
+        "51": {
+          "label": "asksabrina.com - Facebook Traffic - V17",
+          "source": "facebook",
+          "views": 286,
+          "conversions": 9,
+          "revenue": 601.44,
+          "cr_pct": 3.15,
+          "status": "strong"
+        },
+        "53": {
+          "label": "asksabrina.com - Organic Traffic",
+          "source": "unknown",
+          "views": 6677,
+          "conversions": 49,
+          "revenue": 1049.14,
+          "cr_pct": 0.73,
+          "status": "active"
+        },
+        "54": {
+          "label": "asksabrina.com - Maropost Traffic With Headlines Split Test",
+          "source": "email",
+          "views": 18,
+          "conversions": 0,
+          "revenue": 0.0,
+          "cr_pct": 0.0,
+          "status": "weak"
+        },
+        "69": {
+          "label": "asksabrina.com - Maropost Traffic (Abandoned)",
+          "source": "email",
+          "views": 46,
+          "conversions": 2,
+          "revenue": 125.88,
+          "cr_pct": 4.35,
+          "status": "strong"
+        },
+        "70": {
+          "label": "asksabrina.com - Maropost Traffic (Discount)",
+          "source": "email",
+          "views": 20,
+          "conversions": 1,
+          "revenue": 49.7,
+          "cr_pct": 5.0,
+          "status": "strong"
+        },
+        "74": {
+          "label": "asksabrina.com - Maropost Traffic (Scarcity)",
+          "source": "email",
+          "views": 9,
+          "conversions": 0,
+          "revenue": 0.0,
+          "cr_pct": 0.0,
+          "status": "weak"
+        },
+        "77": {
+          "label": "asksabrina.com - Maropost Traffic - Interactive VSL - Lead",
+          "source": "email",
+          "views": 114,
+          "conversions": 2,
+          "revenue": 97.59,
+          "cr_pct": 1.75,
+          "status": "active"
+        },
+        "79": {
+          "label": "asksabrina.com - Maropost Traffic (Urgency)",
+          "source": "email",
+          "views": 6,
+          "conversions": 0,
+          "revenue": 0.0,
+          "cr_pct": 0.0,
+          "status": "weak"
+        },
+        "80": {
+          "label": "asksabrina.com - Maropost Traffic (Reactivation)",
+          "source": "email",
+          "views": 10,
+          "conversions": 0,
+          "revenue": 0.0,
+          "cr_pct": 0.0,
+          "status": "weak"
+        },
+        "81": {
+          "label": "asksabrina.com - Maropost Traffic (Education)",
+          "source": "email",
+          "views": 5,
+          "conversions": 0,
+          "revenue": 0.0,
+          "cr_pct": 0.0,
+          "status": "weak"
+        },
+        "87": {
+          "label": "asksabrina.com - Maropost Traffic - Interactive VSL - Lead V2",
+          "source": "email",
+          "views": 62,
+          "conversions": 0,
+          "revenue": 0.0,
+          "cr_pct": 0.0,
+          "status": "dead"
+        }
+      },
+      "totals_by_source": {
+        "facebook": {
+          "views": 286,
+          "conversions": 9,
+          "revenue": 601.44
+        },
+        "unknown": {
+          "views": 6677,
+          "conversions": 49,
+          "revenue": 1049.14
+        },
+        "email": {
+          "views": 290,
+          "conversions": 5,
+          "revenue": 273.17
+        }
+      },
+      "total_conversions": 63,
+      "total_revenue": 1923.75
+    }
+  },
+  "funnel_backend": {
+    "total_revenue": 1561.82,
+    "gross_revenue": 1826.42,
+    "total_refunds": 7,
+    "total_refund_amount": 0,
+    "frontend_sales_count": 64,
+    "variant_sales": {
+      "destiny_v1": {
+        "sales": 2,
+        "revenue": 60.74
+      },
+      "destiny_v2": {
+        "sales": 0,
+        "revenue": 0.0
+      },
+      "index_v17": {
+        "sales": 9,
+        "revenue": 406.34
+      },
+      "organic": {
+        "sales": 0,
+        "revenue": 0.0
+      },
+      "abandoned": {
+        "sales": 2,
+        "revenue": 97.9
+      },
+      "discount": {
+        "sales": 1,
+        "revenue": 38.65
+      },
+      "scarcity": {
+        "sales": 0,
+        "revenue": 0.0
+      },
+      "urgency": {
+        "sales": 0,
+        "revenue": 0.0
+      },
+      "reactivation": {
+        "sales": 0,
+        "revenue": 0.0
+      },
+      "education": {
+        "sales": 0,
+        "revenue": 0.0
+      },
+      "other": {
+        "sales": 50,
+        "revenue": 546.55
+      }
+    },
+    "sku_breakdown": {
+      "SPR-OB1": {
+        "label": "Order Bump Legacy ($14.99/mo)",
+        "stage": "order_bump",
+        "price": 14.99,
+        "new_sales": 2,
+        "rebills": 3,
+        "refunds": 0,
+        "revenue": 45.7
+      },
+      "abdt-advanced": {
+        "label": "Front-end Advanced",
+        "stage": "frontend",
+        "price": 54,
+        "new_sales": 46,
+        "rebills": 0,
+        "refunds": 4,
+        "revenue": 952.84,
+        "refund_amount": 82.9
+      },
+      "SPR-OB2": {
+        "label": "Order Bump (free trial - $14.99/mo)",
+        "stage": "order_bump",
+        "price": 0,
+        "new_sales": 22,
+        "rebills": 29,
+        "refunds": 0,
+        "revenue": 155.41
+      },
+      "abdt-basic": {
+        "label": "Front-end Basic",
+        "stage": "frontend",
+        "price": 37,
+        "new_sales": 18,
+        "rebills": 0,
+        "refunds": 1,
+        "revenue": 197.34000000000006,
+        "refund_amount": 32.7
+      },
+      "SSR": {
+        "label": "OTO1 Soul Signature $67",
+        "stage": "oto1",
+        "price": 67,
+        "new_sales": 15,
+        "rebills": 0,
+        "refunds": 1,
+        "revenue": 364.57000000000005,
+        "refund_amount": 60.69,
+        "take_rate_pct": 23.4
+      },
+      "dhr": {
+        "label": "OTO2 Divine Helper $97",
+        "stage": "oto2",
+        "price": 97,
+        "new_sales": 5,
+        "rebills": 0,
+        "refunds": 1,
+        "revenue": 110.56,
+        "refund_amount": 88.31,
+        "take_rate_pct": 7.8
+      }
+    },
+    "frontend_mix": {
+      "basic_count": 18,
+      "advanced_count": 46,
+      "advanced_pct": 71.9
+    }
+  },
+  "cross_check": {
+    "cb_new_sales": 64,
+    "cb_revenue": 1561.82,
+    "cpv_conversions": 63,
+    "cpv_revenue_sgd": 1923.75,
+    "cpv_revenue_usd": 1423.58,
+    "sgd_to_usd_rate": 0.74,
+    "revenue_diff": 138.24,
+    "diff_pct": 8.9,
+    "status": "warn",
+    "note": "CPV conversions (63) < CB frontend sales (64) \u2014 postbacks may be missing.",
+    "currency_note": "CPV revenue in SGD (\u00d70.74 \u2192 USD). CB revenue is net vendor USD after ClickBank fees."
+  },
+  "funnel_variants": {
+    "destiny_v1": {
+      "label": "/destiny (full-screen)",
+      "cpv_ids": [
+        "77",
+        "78"
+      ],
+      "sessions": 4972,
+      "total_users": 4392,
+      "avg_session_sec": 219.6,
+      "bounce_rate_pct": 52.7,
+      "choice_selected": 910,
+      "choice_rate_pct": 18.3,
+      "optin_step1": 540,
+      "optin_step2": 497,
+      "optin_step3": 491,
+      "optin_completed": 491,
+      "optin_rate_pct": 9.88,
+      "checkout_basic": 46,
+      "checkout_advanced": 60,
+      "checkout_total": 106,
+      "checkout_rate_pct": 2.13,
+      "checkout_from_optin_pct": 21.59,
+      "dropoff": {
+        "session_to_choice": 18.3,
+        "choice_to_optin1": 59.34,
+        "optin1_to_optin2": 92.04,
+        "optin2_to_optin3": 98.79,
+        "optin3_to_complete": 100.0,
+        "complete_to_checkout": 21.59
+      }
+    },
+    "destiny_v2": {
+      "label": "/destiny/v2 (with-headline)",
+      "cpv_ids": [
+        "87",
+        "88"
+      ],
+      "sessions": 54,
+      "total_users": 50,
+      "avg_session_sec": 151.0,
+      "bounce_rate_pct": 35.2,
+      "choice_selected": 6,
+      "choice_rate_pct": 11.11,
+      "optin_step1": 3,
+      "optin_step2": 3,
+      "optin_step3": 3,
+      "optin_completed": 3,
+      "optin_rate_pct": 5.56,
+      "checkout_basic": 0,
+      "checkout_advanced": 0,
+      "checkout_total": 0,
+      "checkout_rate_pct": 0.0,
+      "checkout_from_optin_pct": 0.0,
+      "dropoff": {
+        "session_to_choice": 11.11,
+        "choice_to_optin1": 50.0,
+        "optin1_to_optin2": 100.0,
+        "optin2_to_optin3": 100.0,
+        "optin3_to_complete": 100.0,
+        "complete_to_checkout": 0.0
+      }
+    },
+    "index_v17": {
+      "label": "/index-v17 (TSL)",
+      "cpv_ids": [
+        "51",
+        "54",
+        "63"
+      ],
+      "sessions": 0,
+      "total_users": 0,
+      "avg_session_sec": 0.0,
+      "bounce_rate_pct": 0.0,
+      "choice_selected": 0,
+      "choice_rate_pct": 0,
+      "optin_step1": 0,
+      "optin_step2": 0,
+      "optin_step3": 0,
+      "optin_completed": 0,
+      "optin_rate_pct": 0,
+      "checkout_basic": 0,
+      "checkout_advanced": 0,
+      "checkout_total": 0,
+      "checkout_rate_pct": 0,
+      "checkout_from_optin_pct": 0,
+      "dropoff": {
+        "session_to_choice": 0,
+        "choice_to_optin1": 0,
+        "optin1_to_optin2": 0,
+        "optin2_to_optin3": 0,
+        "optin3_to_complete": 0,
+        "complete_to_checkout": 0
+      }
+    }
+  }
+}
