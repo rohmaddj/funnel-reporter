@@ -159,7 +159,12 @@ jobs:
           git add -f output/${{ matrix.project }}/report_data_*.json || true
           git add -f output/${{ matrix.project }}/analysis_*.json    || true
           git diff --staged --quiet || git commit -m "Weekly report ${{ matrix.project }} $(date -u +%Y-%m-%d)"
-          git push
+          # Retry push with rebase to handle parallel matrix job race condition
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break
+            echo "Push attempt $i failed, retrying..."
+            sleep $((i * 5))
+          done
 
       # ── Upload artifacts for debugging ────────────────────────────────────────
       - name: Upload artifacts (${{ matrix.project }})
