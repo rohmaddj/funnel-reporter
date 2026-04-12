@@ -32,11 +32,11 @@ load_dotenv()
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-SHEET_ID        = "116dp7y01lDO6P-eR8zOpiRTxQW-W1fLF3sIDXv8xOdo"
-SHEET_TAB       = "Weekly Data"          # tab name — will be created if missing
+SHEET_ID         = os.environ.get("SHEET_ID", "")
+SHEET_TAB        = os.environ.get("SHEET_TAB", "Weekly Data")
 CREDENTIALS_FILE = os.environ.get("GOOGLE_CREDENTIALS_FILE", "google_credentials.json")
-EMAIL_TO        = os.environ.get("REPORT_EMAIL_TO", "")   # who gets the report
-EMAIL_FROM      = os.environ.get("REPORT_EMAIL_FROM", "") # your Gmail address
+EMAIL_TO         = os.environ.get("REPORT_EMAIL_TO", "")
+EMAIL_FROM       = os.environ.get("REPORT_EMAIL_FROM", "")
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -837,10 +837,22 @@ def main():
     args = parse_args()
 
     project = args.project or os.environ.get("PROJECT", "asksabrina")
+
+    # Delegate to project-specific script when applicable
+    if project == "astroloversketch":
+        import subprocess
+        cmd = [sys.executable, "report_astro.py"]
+        if getattr(args, "mock",       False): cmd += ["--mock"]
+        if getattr(args, "no_email",   False): cmd += ["--no-email"]
+        if getattr(args, "no_sheets",  False): cmd += ["--no-sheets"]
+        # --no-docs is not applicable to report_astro.py (no docs feature) — silently ignored
+        sys.exit(subprocess.run(cmd).returncode)
+
     prefix  = "ASTRO" if project == "astroloversketch" else "ASKSABRINA"
     # Load project-specific config into globals
-    global SHEET_ID, EMAIL_TO, EMAIL_FROM
+    global SHEET_ID, SHEET_TAB, EMAIL_TO, EMAIL_FROM
     SHEET_ID   = os.environ.get(f"{prefix}_SHEET_ID", SHEET_ID)
+    SHEET_TAB  = os.environ.get(f"{prefix}_SHEET_TAB", SHEET_TAB)
     EMAIL_TO   = os.environ.get(f"{prefix}_REPORT_EMAIL_TO", EMAIL_TO)
     EMAIL_FROM = os.environ.get(f"{prefix}_REPORT_EMAIL_FROM", EMAIL_FROM)
 

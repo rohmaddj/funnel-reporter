@@ -1,0 +1,29 @@
+# ----------------------------------------
+# Events: Event name
+# Account: Astrolovers Sketch
+# Property: astroloversketch.com
+# ----------------------------------------
+# 
+# All Users
+# Start date: 20260408
+# End date: 20260408
+Event name,Event count,Total users,Event count per active user,Total revenue
+page_view,3627,1387,2.7750573833205814,0
+scroll_depth,1592,631,2.5310015898251192,0
+view_landing_page,1515,1200,1.3116883116883118,0
+scroll,1460,938,1.6204217536071033,0
+session_start,1399,1308,1.2293497363796133,0
+first_visit,1016,1008,1.007936507936508,0
+cta_click,971,676,1.4363905325443787,0
+user_engagement,964,627,1.580327868852459,0
+view_step,898,390,2.308483290488432,0
+view_opt_in_page,834,655,1.287037037037037,0
+complete_step,795,375,2.12,0
+view_offer_page,469,363,1.2920110192837466,0
+lead_submit,359,328,1.0945121951219512,0
+api_submission_success,354,327,1.0825688073394495,0
+select_option,158,122,1.2950819672131149,0
+view_download_page,25,17,1.5625,0
+click,13,5,2.6,0
+api_submission_error,2,2,1,0
+payment_pending,2,2,1,0

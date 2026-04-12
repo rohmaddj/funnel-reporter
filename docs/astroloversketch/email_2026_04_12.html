@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026-04-06 → 2026-04-12 — Astro Lover Sketch Funnel Report</title>
+</head>
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+<div style="max-width:700px;margin:0 auto;padding:24px 16px">
+
+  <!-- Header -->
+  <div style="background:#111;border-radius:10px 10px 0 0;padding:24px 28px">
+    <p style="margin:0 0 4px;font-size:11px;color:#9ca3af;letter-spacing:.1em;text-transform:uppercase">Astro Lover Sketch · Funnel Performance</p>
+    <h1 style="margin:0 0 4px;font-size:22px;color:#fff;font-weight:700">Weekly Report</h1>
+    <p style="margin:0;font-size:13px;color:#6b7280">2026-04-06 → 2026-04-12</p>
+  </div>
+
+  <!-- Snapshot -->
+  <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
+    <h2 style="margin:0 0 16px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Funnel Snapshot</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div>
+        <p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Revenue</p>
+        <p style="margin:0;font-size:22px;font-weight:700;color:#111">$3,596.70</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">FE Sales</p>
+        <p style="margin:0;font-size:22px;font-weight:700;color:#111">74</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Avg/Buyer</p>
+        <p style="margin:0;font-size:22px;font-weight:700;color:#111">$48.60</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Checkout Clicks</p>
+        <p style="margin:0;font-size:22px;font-weight:700;color:#111">1127</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid #f0f0f0">
+      <div>
+        <p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Landing Views</p>
+        <p style="margin:0;font-size:18px;font-weight:600;color:#374151">7,833</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Optin Submits</p>
+        <p style="margin:0;font-size:18px;font-weight:600;color:#374151">1,458</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Offer Page Views</p>
+        <p style="margin:0;font-size:18px;font-weight:600;color:#374151">1,744</p>
+      </div>
+    </div>
+    <p style="font-size:12px;color:#d97706;margin:8px 0 0">⚠ Data check: CPV conversions (66) < CB frontend sales (74) — postbacks may be missing.</p>
+  </div>
+
+  <!-- Period summary -->
+  <div style="background:#fff;padding:20px 28px;border-bottom:1px solid #f0f0f0">
+    <p style="margin:0;font-size:14px;color:#374151;line-height:1.6">Week ending 2026-04-12 generated $3,596.70 revenue from 74 frontend sales across 8 active funnel flows. The single most critical finding: checkout-to-purchase conversion is severely broken at 5-6% across all major flows (target 20-30%), costing an estimated $5,000+ per week in lost revenue with 1,127 checkout clicks yielding only 66 purchases.</p>
+  </div>
+
+  <!-- Funnel scorecard -->
+  
+  <div style="background:#fff;padding:24px 28px;border-top:3px solid #7c3aed;margin-top:2px">
+    <h2 style="margin:0 0 6px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Funnel Scorecard</h2>
+    <p style="margin:0 0 14px;font-size:12px;color:#9ca3af">Top 5 of 8 flows by traffic · combined total included</p>
+    <div style="overflow-x:auto">
+      <table style="min-width:100%;border-collapse:collapse">
+        <thead><tr style="background:#f9fafb">
+          <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Step</th>
+          <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">/c/ → /offer/v4/</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">/b → /offer/v2</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">/c-v2 → /offer/v4/</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">/c-v2 → /offer/v4-v2</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap"> → /offer/v3</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Combined</th>
+        </tr></thead>
+        <tbody>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;color:#374151;white-space:nowrap">Landing → Optin</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#16a34a;white-space:nowrap">18.34%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#16a34a;white-space:nowrap">20.34%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#16a34a;white-space:nowrap">17.62%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#16a34a;white-space:nowrap">17.64%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#16a34a;white-space:nowrap">33.33%</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#16a34a;white-space:nowrap">18.61%</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;color:#374151;white-space:nowrap">Offer → Checkout</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#16a34a;white-space:nowrap">82.82%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#d97706;white-space:nowrap">60.47%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#d97706;white-space:nowrap">78.33%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#16a34a;white-space:nowrap">88.68%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#dc2626;white-space:nowrap">58.33%</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#d97706;white-space:nowrap">64.62%</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;color:#374151;white-space:nowrap">Checkout → Purchase</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#dc2626;white-space:nowrap">6.22%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#dc2626;white-space:nowrap">5.37%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#dc2626;white-space:nowrap">5.32%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#dc2626;white-space:nowrap">5.32%</td><td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#dc2626;white-space:nowrap">0.0%</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#dc2626;white-space:nowrap">6.57%</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#f9fafb">
+          <td style="padding:8px 10px;font-size:13px;color:#374151;white-space:nowrap">Landing → Optin page view <span style="font-size:10px;color:#9ca3af">(GA4)</span></td>
+          <td colspan="5"></td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700;color:#d97706;white-space:nowrap">29.52%</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;background:#fef2f2;border-radius:6px;padding:10px 14px">
+      <p style="margin:0;font-size:12px;color:#dc2626;font-weight:600">
+        ⚠ Weakest step: checkout → purchase (5.86%)
+      </p>
+      <p style="margin:6px 0 0;font-size:12px;color:#374151">Funnel is hemorrhaging at checkout with 5-6% conversion across all flows (need 20-30%). Landing-to-optin rates are healthy (17-20% on main flows), but ClickBank checkout page is killing 94% of hot buyers who clicked the CTA.</p>
+    </div>
+  </div>
+
+  <!-- Variant comparison -->
+  
+  <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
+    <h2 style="margin:0 0 6px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Funnel Flows</h2>
+    <p style="margin:0 0 14px;font-size:12px;color:#9ca3af">Top 5 of 8 flows by traffic · CPV Labs landing-stats</p>
+    <div style="overflow-x:auto">
+      <table style="border-collapse:collapse;table-layout:fixed">
+        <tbody><tr>
+        <td style="padding:16px 18px;font-size:13px;vertical-align:top;border-left:1px solid #f0f0f0;min-width:200px">
+          <div style="font-weight:700;font-size:13px;margin-bottom:14px;line-height:1.4;color:#111">/c/ → /offer/v4/</div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr><td style="padding:3px 0;color:#6b7280">Landing views</td>
+                <td style="text-align:right;font-weight:600">4,772</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Optin submits</td>
+                <td style="text-align:right;font-weight:600">875</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer page views</td>
+                <td style="text-align:right;font-weight:600">873</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout clicks</td>
+                <td style="text-align:right;font-weight:600">723</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Purchases</td>
+                <td style="text-align:right;font-weight:600">45</td></tr>
+            <tr style="border-top:1px solid #f0f0f0">
+                <td style="padding:5px 0 3px;color:#6b7280">Land → Optin</td>
+                <td style="text-align:right;font-weight:600;color:#16a34a">18.34%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer → Checkout</td>
+                <td style="text-align:right;font-weight:600;color:#16a34a">82.82%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout → Purchase</td>
+                <td style="text-align:right;font-weight:600;color:#dc2626">6.22%</td></tr>
+            
+          </table>
+          <div style="margin-top:10px"><span style="display:inline-block;background:#dc262620;color:#dc2626;font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;border:1px solid #dc262640;letter-spacing:.05em">FIX</span></div>
+        </td>
+        <td style="padding:16px 18px;font-size:13px;vertical-align:top;border-left:1px solid #f0f0f0;min-width:200px">
+          <div style="font-weight:700;font-size:13px;margin-bottom:14px;line-height:1.4;color:#111">/b → /offer/v2</div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr><td style="padding:3px 0;color:#6b7280">Landing views</td>
+                <td style="text-align:right;font-weight:600">1,667</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Optin submits</td>
+                <td style="text-align:right;font-weight:600">339</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer page views</td>
+                <td style="text-align:right;font-weight:600">339</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout clicks</td>
+                <td style="text-align:right;font-weight:600">205</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Purchases</td>
+                <td style="text-align:right;font-weight:600">11</td></tr>
+            <tr style="border-top:1px solid #f0f0f0">
+                <td style="padding:5px 0 3px;color:#6b7280">Land → Optin</td>
+                <td style="text-align:right;font-weight:600;color:#16a34a">20.34%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer → Checkout</td>
+                <td style="text-align:right;font-weight:600;color:#d97706">60.47%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout → Purchase</td>
+                <td style="text-align:right;font-weight:600;color:#dc2626">5.37%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Revenue</td><td style="text-align:right;font-weight:600">$329.98</td></tr>
+          </table>
+          <div style="margin-top:10px"><span style="display:inline-block;background:#dc262620;color:#dc2626;font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;border:1px solid #dc262640;letter-spacing:.05em">FIX</span></div>
+        </td>
+        <td style="padding:16px 18px;font-size:13px;vertical-align:top;border-left:1px solid #f0f0f0;min-width:200px">
+          <div style="font-weight:700;font-size:13px;margin-bottom:14px;line-height:1.4;color:#111">/c-v2 → /offer/v4/</div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr><td style="padding:3px 0;color:#6b7280">Landing views</td>
+                <td style="text-align:right;font-weight:600">681</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Optin submits</td>
+                <td style="text-align:right;font-weight:600">120</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer page views</td>
+                <td style="text-align:right;font-weight:600">120</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout clicks</td>
+                <td style="text-align:right;font-weight:600">94</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Purchases</td>
+                <td style="text-align:right;font-weight:600">5</td></tr>
+            <tr style="border-top:1px solid #f0f0f0">
+                <td style="padding:5px 0 3px;color:#6b7280">Land → Optin</td>
+                <td style="text-align:right;font-weight:600;color:#16a34a">17.62%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer → Checkout</td>
+                <td style="text-align:right;font-weight:600;color:#d97706">78.33%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout → Purchase</td>
+                <td style="text-align:right;font-weight:600;color:#dc2626">5.32%</td></tr>
+            
+          </table>
+          <div style="margin-top:10px"><span style="display:inline-block;background:#dc262620;color:#dc2626;font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;border:1px solid #dc262640;letter-spacing:.05em">FIX</span></div>
+        </td>
+        <td style="padding:16px 18px;font-size:13px;vertical-align:top;border-left:1px solid #f0f0f0;min-width:200px">
+          <div style="font-weight:700;font-size:13px;margin-bottom:14px;line-height:1.4;color:#111">/c-v2 → /offer/v4-v2</div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr><td style="padding:3px 0;color:#6b7280">Landing views</td>
+                <td style="text-align:right;font-weight:600">601</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Optin submits</td>
+                <td style="text-align:right;font-weight:600">106</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer page views</td>
+                <td style="text-align:right;font-weight:600">106</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout clicks</td>
+                <td style="text-align:right;font-weight:600">94</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Purchases</td>
+                <td style="text-align:right;font-weight:600">5</td></tr>
+            <tr style="border-top:1px solid #f0f0f0">
+                <td style="padding:5px 0 3px;color:#6b7280">Land → Optin</td>
+                <td style="text-align:right;font-weight:600;color:#16a34a">17.64%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer → Checkout</td>
+                <td style="text-align:right;font-weight:600;color:#16a34a">88.68%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout → Purchase</td>
+                <td style="text-align:right;font-weight:600;color:#dc2626">5.32%</td></tr>
+            
+          </table>
+          <div style="margin-top:10px"><span style="display:inline-block;background:#dc262620;color:#dc2626;font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;border:1px solid #dc262640;letter-spacing:.05em">FIX</span></div>
+        </td>
+        <td style="padding:16px 18px;font-size:13px;vertical-align:top;border-left:1px solid #f0f0f0;min-width:200px">
+          <div style="font-weight:700;font-size:13px;margin-bottom:14px;line-height:1.4;color:#111"> → /offer/v3</div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr><td style="padding:3px 0;color:#6b7280">Landing views</td>
+                <td style="text-align:right;font-weight:600">36</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Optin submits</td>
+                <td style="text-align:right;font-weight:600">12</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer page views</td>
+                <td style="text-align:right;font-weight:600">12</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout clicks</td>
+                <td style="text-align:right;font-weight:600">7</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Purchases</td>
+                <td style="text-align:right;font-weight:600">0</td></tr>
+            <tr style="border-top:1px solid #f0f0f0">
+                <td style="padding:5px 0 3px;color:#6b7280">Land → Optin</td>
+                <td style="text-align:right;font-weight:600;color:#16a34a">33.33%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Offer → Checkout</td>
+                <td style="text-align:right;font-weight:600;color:#dc2626">58.33%</td></tr>
+            <tr><td style="padding:3px 0;color:#6b7280">Checkout → Purchase</td>
+                <td style="text-align:right;font-weight:600;color:#dc2626">0%</td></tr>
+            
+          </table>
+          <div style="margin-top:10px"><span style="display:inline-block;background:#6b728020;color:#6b7280;font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;border:1px solid #6b728040;letter-spacing:.05em">MONITOR</span></div>
+        </td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Funnel leaks -->
+  
+  <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
+    <h2 style="margin:0 0 14px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Funnel Leaks</h2>
+    
+        <div style="border-left:4px solid #dc2626;background:#fff;border-radius:0 6px 6px 0;
+                    padding:12px 16px;margin-bottom:10px;border:1px solid #e5e7eb;border-left:4px solid #dc2626">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:13px">🔴</span>
+            <span style="font-weight:700;font-size:13px;color:#111">checkout → purchase</span>
+            <span style="font-size:13px;font-weight:700;color:#dc2626;margin-left:auto">5.86%</span>
+          </div>
+          <p style="margin:0;font-size:12px;color:#6b7280">With 1,127 checkout clicks and only 66 purchases, fixing to 20% conversion would add ~160 sales/week × $48.60 AOV = $7,776 weekly revenue lift.</p>
+          <p style="margin:4px 0 0;font-size:11px;color:#9ca3af">Observed</p>
+        </div>
+        <div style="border-left:4px solid #d97706;background:#fff;border-radius:0 6px 6px 0;
+                    padding:12px 16px;margin-bottom:10px;border:1px solid #e5e7eb;border-left:4px solid #d97706">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:13px">🟡</span>
+            <span style="font-weight:700;font-size:13px;color:#111">offer → checkout</span>
+            <span style="font-size:13px;font-weight:700;color:#d97706;margin-left:auto">60.47%</span>
+          </div>
+          <p style="margin:0;font-size:12px;color:#6b7280">Flow /b/ → /offer/v2 converts 20 points lower than /c/ flows (60% vs 80%+), representing 67 lost checkout clicks worth ~$195 per week at current conversion.</p>
+          <p style="margin:4px 0 0;font-size:11px;color:#9ca3af">Observed</p>
+        </div>
+        <div style="border-left:4px solid #dc2626;background:#fff;border-radius:0 6px 6px 0;
+                    padding:12px 16px;margin-bottom:10px;border:1px solid #e5e7eb;border-left:4px solid #dc2626">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:13px">🔴</span>
+            <span style="font-weight:700;font-size:13px;color:#111">offer → checkout</span>
+            <span style="font-size:13px;font-weight:700;color:#dc2626;margin-left:auto">1.04%</span>
+          </div>
+          <p style="margin:0;font-size:12px;color:#6b7280">Legacy /offer path shows 1% checkout rate vs 60-88% on active flows; 289 offer views generated only 3 clicks, indicating broken page or severe mismatch.</p>
+          <p style="margin:4px 0 0;font-size:11px;color:#9ca3af">Observed</p>
+        </div>
+        <div style="border-left:4px solid #d97706;background:#fff;border-radius:0 6px 6px 0;
+                    padding:12px 16px;margin-bottom:10px;border:1px solid #e5e7eb;border-left:4px solid #d97706">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:13px">🟡</span>
+            <span style="font-weight:700;font-size:13px;color:#111">landing → optin</span>
+            <span style="font-size:13px;font-weight:700;color:#d97706;margin-left:auto">3.57%</span>
+          </div>
+          <p style="margin:0;font-size:12px;color:#6b7280">Landing /a converts 3.6% vs 18-20% baseline, but sample size (28 views) is too small to warrant immediate action beyond monitoring.</p>
+          <p style="margin:4px 0 0;font-size:11px;color:#9ca3af">Observed</p>
+        </div>
+  </div>
+
+  <!-- Needle movers -->
+  
+  <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
+    <h2 style="margin:0 0 16px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Needle Movers — Priority Order</h2>
+    
+        <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px 20px;
+                    margin-bottom:12px;border-left:4px solid #dc2626">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span style="background:#dc2626;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.05em">CRITICAL</span>
+            <span style="font-weight:700;font-size:14px;color:#111">#1 — Checkout conversion emergency</span>
+            <span style="margin-left:auto;font-size:11px;color:#9ca3af">observed</span>
+          </div>
+          <p style="margin:0 0 10px;font-size:13px;color:#374151;line-height:1.5">All major flows show 5-6% checkout-to-purchase vs 20-30% benchmark. With 1,127 checkout clicks generating only 66 sales, this is losing 15-20 sales per day. ClickBank page load, payment gateway, or offer-checkout message mismatch is the likely culprit.</p>
+          <ul style="margin:0 0 10px;padding-left:18px"><li style="margin:4px 0;font-size:13px;color:#374151">Audit ClickBank checkout page load speed and payment form display across devices (mobile/desktop)</li><li style="margin:4px 0;font-size:13px;color:#374151">Review offer page CTA copy vs ClickBank order form headline for message continuity and price match</li><li style="margin:4px 0;font-size:13px;color:#374151">Test alternative ClickBank templates or payment methods (PayPal express vs card entry)</li><li style="margin:4px 0;font-size:13px;color:#374151">Install session recording (Hotjar/MS Clarity) on 100 checkout sessions to identify drop-off patterns</li></ul>
+          <div style="background:#f9fafb;border-radius:4px;padding:8px 12px;font-size:12px;color:#6b7280">
+            <strong style="color:#374151">Revenue impact:</strong> Fixing to 20% conversion = +160 sales/week × $48.60 AOV = +$7,776 weekly (+$31,104/month)
+          </div>
+        </div>
+        <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px 20px;
+                    margin-bottom:12px;border-left:4px solid #d97706">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span style="background:#d97706;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.05em">HIGH</span>
+            <span style="font-weight:700;font-size:14px;color:#111">#2 — OTO2 Timeline monetization</span>
+            <span style="margin-left:auto;font-size:11px;color:#9ca3af">observed</span>
+          </div>
+          <p style="margin:0 0 10px;font-size:13px;color:#374151;line-height:1.5">OTO2 Timeline converts 14.9% (weak vs 25% benchmark) and downsell shows 1.4% take rate, suggesting the offer sequence or presentation is failing. With 74 buyers, fixing to 25% would add 7-8 OTO2 sales per week worth $329.</p>
+          <ul style="margin:0 0 10px;padding-left:18px"><li style="margin:4px 0;font-size:13px;color:#374151">Review OTO2 page load and display — check if buyers are even seeing the offer (track page views)</li><li style="margin:4px 0;font-size:13px;color:#374151">A/B test OTO2 price point ($47 vs $37 vs $27) or switch to downsell-first strategy</li><li style="margin:4px 0;font-size:13px;color:#374151">Add urgency/scarcity element to OTO2 (expires in 10 minutes, one-time offer language)</li><li style="margin:4px 0;font-size:13px;color:#374151">Test video sales letter vs text sales letter for OTO2 (current data suggests mixed TSL/VSL approach)</li></ul>
+          <div style="background:#f9fafb;border-radius:4px;padding:8px 12px;font-size:12px;color:#6b7280">
+            <strong style="color:#374151">Revenue impact:</strong> 10 percentage point lift = +7 OTO2 sales/week × $47 = +$329 weekly (+$1,316/month)
+          </div>
+        </div>
+        <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px 20px;
+                    margin-bottom:12px;border-left:4px solid #d97706">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span style="background:#d97706;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.05em">HIGH</span>
+            <span style="font-weight:700;font-size:14px;color:#111">#3 — Flow /b/ → /offer/v2 offer page optimization</span>
+            <span style="margin-left:auto;font-size:11px;color:#9ca3af">observed</span>
+          </div>
+          <p style="margin:0 0 10px;font-size:13px;color:#374151;line-height:1.5">Offer-to-checkout rate 60.5% vs 78-89% on /c/ flows (17-28 points lower) with 339 offer views. Flow /b/ is losing 60-95 checkout clicks per week, worth $175-277 at 5.5% checkout conversion.</p>
+          <ul style="margin:0 0 10px;padding-left:18px"><li style="margin:4px 0;font-size:13px;color:#374151">Side-by-side audit /offer/v2 vs /offer/v4/ — compare CTA prominence, page length, testimonial placement</li><li style="margin:4px 0;font-size:13px;color:#374151">Test direct traffic swap: send /b/ traffic to /offer/v4/ for 7 days to isolate landing vs offer impact</li><li style="margin:4px 0;font-size:13px;color:#374151">Review mobile rendering of /offer/v2 (60% rate suggests desktop vs mobile performance gap)</li><li style="margin:4px 0;font-size:13px;color:#374151">Add exit-intent popup or scroll-triggered CTA on /offer/v2 to recover abandoning visitors</li></ul>
+          <div style="background:#f9fafb;border-radius:4px;padding:8px 12px;font-size:12px;color:#6b7280">
+            <strong style="color:#374151">Revenue impact:</strong> 20-point lift to 80% checkout rate = +67 clicks/week × 5.5% × $48.60 = +$179 weekly (+$716/month)
+          </div>
+        </div>
+        <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px 20px;
+                    margin-bottom:12px;border-left:4px solid #6b7280">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span style="background:#6b7280;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.05em">MEDIUM</span>
+            <span style="font-weight:700;font-size:14px;color:#111">#4 — OTO1 Blueprint lift to strong tier</span>
+            <span style="margin-left:auto;font-size:11px;color:#9ca3af">inferred</span>
+          </div>
+          <p style="margin:0 0 10px;font-size:13px;color:#374151;line-height:1.5">OTO1 at 29.7% is average-performing but below 40% strong threshold. With 74 buyers, a 10-point lift adds 7 OTO1 sales/week worth $469. Given OTO2 is weaker, focusing backend optimization here yields faster ROI.</p>
+          <ul style="margin:0 0 10px;padding-left:18px"><li style="margin:4px 0;font-size:13px;color:#374151">Test OTO1 downsell sequencing — show $47 downsell immediately after decline vs separate page</li><li style="margin:4px 0;font-size:13px;color:#374151">Add video testimonial or case study to OTO1 page (text-only TSL may underperform)</li><li style="margin:4px 0;font-size:13px;color:#374151">Test urgency copy: 'Complete your reading in 24 hours' vs feature-benefit focus</li><li style="margin:4px 0;font-size:13px;color:#374151">Split test OTO1 price: $67 vs $57 vs $47 to find optimal revenue per buyer</li></ul>
+          <div style="background:#f9fafb;border-radius:4px;padding:8px 12px;font-size:12px;color:#6b7280">
+            <strong style="color:#374151">Revenue impact:</strong> 10-point take rate lift = +7 OTO1 sales/week × $67 = +$469 weekly (+$1,876/month)
+          </div>
+        </div>
+        <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px 20px;
+                    margin-bottom:12px;border-left:4px solid #6b7280">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span style="background:#6b7280;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.05em">MEDIUM</span>
+            <span style="font-weight:700;font-size:14px;color:#111">#5 — CPV-ClickBank postback integrity</span>
+            <span style="margin-left:auto;font-size:11px;color:#9ca3af">observed</span>
+          </div>
+          <p style="margin:0 0 10px;font-size:13px;color:#374151;line-height:1.5">CPV shows 66 conversions vs ClickBank 74 frontend sales (8 missing postbacks = 10.8% tracking loss). This undermines campaign optimization decisions and may be masking winning traffic sources.</p>
+          <ul style="margin:0 0 10px;padding-left:18px"><li style="margin:4px 0;font-size:13px;color:#374151">Audit ClickBank IPN/postback URL configuration — verify secret key and endpoint are correct</li><li style="margin:4px 0;font-size:13px;color:#374151">Check CPV Labs conversion pixel placement on ClickBank receipt page (may be blocked by ad blockers)</li><li style="margin:4px 0;font-size:13px;color:#374151">Review CPV campaign attribution window — ClickBank sales may occur outside 30-day default</li><li style="margin:4px 0;font-size:13px;color:#374151">Implement server-to-server postback as backup to pixel-based tracking</li></ul>
+          <div style="background:#f9fafb;border-radius:4px;padding:8px 12px;font-size:12px;color:#6b7280">
+            <strong style="color:#374151">Revenue impact:</strong> Directional — accurate tracking enables better traffic source optimization and budget allocation, preventing $500-1000/week waste on underperforming campaigns
+          </div>
+        </div>
+  </div>
+
+  <!-- CPV Labs campaigns -->
+  
+  <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
+    <h2 style="margin:0 0 4px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">CPV Labs — Campaign Tracking</h2>
+    <p style="margin:0 0 12px;font-size:12px;color:#9ca3af">Top 5 of 10 campaigns by views</p>
+    <div style="overflow-x:auto">
+      <table style="min-width:100%;border-collapse:collapse">
+        <thead><tr style="background:#f9fafb">
+          <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Campaign</th>
+          <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Views</th>
+          <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Conv</th>
+          <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Checkout Clicks</th>
+          <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">View→Checkout%</th>
+          <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Revenue (SGD)</th>
+        </tr></thead>
+        <tbody>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;white-space:nowrap">🟡 #101 — astroloversketch.com - Maropost Traffic - Variant C - Offer V4 - OTO TSL</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">2,450</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">5</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">346</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;color:#16a34a;font-weight:600;white-space:nowrap">14.12%</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">S$212.31</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;white-space:nowrap">🟡 #82 — astroloversketch.com - Organic Traffic</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">1,708</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">5</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">242</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;color:#16a34a;font-weight:600;white-space:nowrap">14.17%</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">S$143.05</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;white-space:nowrap">🟢 #102 — astroloversketch.com - Maropost Traffic - Variant B - Offer V2 - OTO TSL</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">1,659</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">10</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">203</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;color:#16a34a;font-weight:600;white-space:nowrap">12.24%</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">S$761.63</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;white-space:nowrap">🟢 #104 — astroloversketch.com - Maropost Traffic - Variant C-V2 - Offer V4-V2 - OTO1 VSL OTO2 TSL</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">1,282</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">10</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">188</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;color:#16a34a;font-weight:600;white-space:nowrap">14.66%</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">S$652.09</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;white-space:nowrap">🟢 #105 — astroloversketch.com - Maropost Traffic - Variant C - Offer Split (V4&V4-v2) - OTO TSL</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">638</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">35</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">135</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;color:#16a34a;font-weight:600;white-space:nowrap">21.16%</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">S$2,877.90</td>
+        </tr></tbody>
+        <tfoot><tr style="background:#f9fafb;font-weight:700">
+          <td style="padding:8px 10px;font-size:13px;white-space:nowrap">All campaigns total</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">8,121</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">66</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">1127</td>
+          <td></td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;white-space:nowrap">S$4,689.78</td>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- Backend monetisation -->
+  
+  <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
+    <h2 style="margin:0 0 12px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Backend Monetisation (ClickBank)</h2>
+    <table style="width:100%;border-collapse:collapse">
+      <thead><tr style="background:#f9fafb">
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Stage</th>
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Sales</th>
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Take Rate</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px;font-weight:600">Front-end</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:700">74</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;color:#6b7280">—</td>
+        </tr>
+        
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px">OTO1 Blueprint</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right">22</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:600;color:#d97706">
+            29.7%
+          </td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px">OTO1 Downsell</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right">3</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:600;color:#dc2626">
+            —
+          </td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px">OTO2 Timeline</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right">11</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:600;color:#dc2626">
+            14.9%
+          </td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:8px 10px;font-size:13px">OTO2 Downsell</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right">1</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:600;color:#dc2626">
+            —
+          </td>
+        </tr>
+        <tr style="background:#f9fafb;font-weight:700">
+          <td style="padding:8px 10px;font-size:13px">Total Revenue</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right" colspan="2">$1,795.54</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin:10px 0 0;font-size:12px;color:#6b7280">Avg revenue per buyer: <strong>$48.60</strong></p>
+    <p style="margin:6px 0 0;font-size:12px;color:#374151">OTO1 Blueprint at 29.7% is average (target 40%+), but OTO2 Timeline at 14.9% is weak (target 25%+). Combined backend adds $24.26 per buyer; fixing OTO2 to 25% would add ~$7 per buyer ($518/week at current volume).</p>
+  </div>
+
+  <!-- Week-over-week comparison -->
+  
+  <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
+    <h2 style="margin:0 0 6px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Week-over-Week Comparison</h2>
+    <p style="margin:0 0 14px;font-size:12px;color:#9ca3af">Same-length periods — direct comparison valid.</p>
+    <table style="width:100%;border-collapse:collapse">
+      <thead><tr style="background:#f9fafb">
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Metric</th>
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">2026-03-30 → 2026-04-05</th>
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">2026-04-06 → 2026-04-12</th>
+        <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Change</th>
+      </tr></thead>
+      <tbody>
+        <tr style="background:#f9fafb">
+          <td colspan="4" style="padding:6px 10px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em">Overall</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  FE Sales</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">90</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">74</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -17.8%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Revenue (USD)</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">$3,330.00</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">$3,596.70</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#16a34a;font-size:11px;font-weight:700">▲ +8.0%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Avg/Buyer</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">$37.00</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">$48.60</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#16a34a;font-size:11px;font-weight:700">▲ +31.4%</span></td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td colspan="4" style="padding:6px 10px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em">/c/ → /offer/v4/</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Landing views</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">10,658</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">4,772</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -55.2%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Optin submits</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">1,733</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">875</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -49.5%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout clicks</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">1,448</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">723</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -50.1%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Purchases</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">107</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">45</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -57.9%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Land→Optin%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">16.26%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">18.34%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#16a34a;font-size:11px;font-weight:700">▲ +2.08pp</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Offer→Checkout%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">83.51%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">82.82%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -0.69pp</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout→Purchase%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">7.39%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">6.22%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -1.17pp</span></td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td colspan="4" style="padding:6px 10px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em">/b → /offer/v2</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Landing views</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">1,667</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Optin submits</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">339</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout clicks</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">205</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Purchases</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">11</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Land→Optin%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">20.34%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Offer→Checkout%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">60.47%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout→Purchase%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">5.37%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td colspan="4" style="padding:6px 10px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em">/c-v2 → /offer/v4/</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Landing views</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">681</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Optin submits</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">120</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout clicks</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">94</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Purchases</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">5</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Land→Optin%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">17.62%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Offer→Checkout%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">78.33%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout→Purchase%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">5.32%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td colspan="4" style="padding:6px 10px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em">/c-v2 → /offer/v4-v2</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Landing views</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">601</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Optin submits</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">106</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout clicks</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">94</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Purchases</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">5</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Land→Optin%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">17.64%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Offer→Checkout%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">88.68%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout→Purchase%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">5.32%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td colspan="4" style="padding:6px 10px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em"> → /offer/v3</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Landing views</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">36</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Optin submits</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">12</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout clicks</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">7</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Purchases</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Land→Optin%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">33.33%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Offer→Checkout%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">58.33%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout→Purchase%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0.0%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#9ca3af;font-size:11px">—</span></td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td colspan="4" style="padding:6px 10px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em">/a/ /b/ → /offer/v2/</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Landing views</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">270</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -100.0%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Optin submits</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">24</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -100.0%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout clicks</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">12</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -100.0%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Purchases</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">3</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -100.0%</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Land→Optin%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">8.89%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -8.89pp</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Offer→Checkout%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">60.0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -60.0pp</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:7px 10px;font-size:13px;color:#374151">  Checkout→Purchase%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;color:#6b7280">25.0%</td>
+          <td style="padding:7px 10px;font-size:13px;text-align:right;font-weight:600">0%</td>
+          <td style="padding:7px 10px;text-align:right"><span style="color:#dc2626;font-size:11px;font-weight:700">▼ -25.0pp</span></td>
+        </tr></tbody>
+    </table>
+  </div>
+
+  <!-- CPV vs ClickBank discrepancy -->
+  <div style="background:#fff;padding:16px 28px;border-bottom:1px solid #f0f0f0">
+    <h2 style="margin:0 0 8px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">CPV Labs vs ClickBank</h2>
+    <p style="margin:0;font-size:13px;color:#d97706;font-weight:600">
+      WARN — CPV Labs tracking 66 conversions vs ClickBank 74 actual sales (8 missing postbacks = 10.8% loss) — postback integrity issue or attribution window mismatch.
+    </p>
+    <p style="margin:4px 0 0;font-size:12px;color:#6b7280">
+      CPV conversions: 66 &nbsp;·&nbsp;
+      CB frontend sales: 74 &nbsp;·&nbsp;
+      CPV revenue: SGD 4689.78 ≈ USD 3470.44
+    </p>
+    <p style="margin:4px 0 0;font-size:11px;color:#9ca3af">CPV revenue in SGD (×0.74 → USD). CB revenue is net vendor USD after ClickBank fees.</p>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:#fff;border-radius:0 0 10px 10px;padding:20px 28px;text-align:center">
+    <p style="margin:0;font-size:11px;color:#9ca3af">
+      Generated 2026-04-12 13:35 UTC · Astro Lover Sketch Funnel Reporter
+    </p>
+    <p style='margin:4px 0 0;font-size:11px;color:#9ca3af'>Data notes: Three anomalies warrant attention: (1) Flow 'landing→offer' shows 289 offer_page_views from only 1 optin_completion — likely direct traffic or email link bypassing landing page, but 1% checkout rate indicates broken page; (2) Flows with empty landing_paths (landing→offer, landing→offer_v3) suggest URL tracking gaps; (3) Campaign 105 shows exceptional 5.49% CR with 35 conversions from 638 views — investigate traffic source quality vs other email campaigns averaging 0.2-0.78%.</p>
+  </div>
+
+</div>
+</body>
+</html>
