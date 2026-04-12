@@ -53,7 +53,7 @@ cpvlabs:
     "51":
       label: "Facebook Traffic - V17"
       source: facebook
-      variant: other
+      variant: index_v17
     "52":
       label: "Maropost Traffic"
       source: email
@@ -65,7 +65,7 @@ cpvlabs:
     "54":
       label: "Maropost Traffic With Headlines Split Test"
       source: email
-      variant: other
+      variant: index_v17
     "56":
       label: "V9 Test Funnel"
       source: unknown
@@ -73,15 +73,15 @@ cpvlabs:
     "57":
       label: "Maropost Traffic for V4"
       source: email
-      variant: other
+      variant: index_v4
     "58":
       label: "Maropost Traffic for V16"
       source: email
-      variant: other
+      variant: index_v16
     "59":
       label: "Facebook Traffic - V18"
       source: facebook
-      variant: other
+      variant: index_v18
     "61":
       label: "Maropost Welcome non buyers"
       source: email
@@ -89,7 +89,7 @@ cpvlabs:
     "63":
       label: "Facebook Traffic - V17 (mvlabs)"
       source: facebook
-      variant: other
+      variant: index_v17
     "65":
       label: "Maropost Traffic (Low Intent)"
       source: email
@@ -97,11 +97,11 @@ cpvlabs:
     "69":
       label: "Maropost Traffic (Abandoned)"
       source: email
-      variant: other
+      variant: abandoned
     "70":
       label: "Maropost Traffic (Discount)"
       source: email
-      variant: other
+      variant: discount
     "72":
       label: "Facebook Traffic - Chat Bot"
       source: facebook
@@ -109,7 +109,7 @@ cpvlabs:
     "74":
       label: "Maropost Traffic (Scarcity)"
       source: email
-      variant: other
+      variant: scarcity
     "76":
       label: "Maropost Traffic - Interactive VSL"
       source: email
@@ -125,15 +125,15 @@ cpvlabs:
     "79":
       label: "Maropost Traffic (Urgency)"
       source: email
-      variant: other
+      variant: urgency
     "80":
       label: "Maropost Traffic (Reactivation)"
       source: email
-      variant: other
+      variant: reactivation
     "81":
       label: "Maropost Traffic (Education)"
       source: email
-      variant: other
+      variant: education
     "87":
       label: "Maropost Traffic - Interactive VSL V2"
       source: email
@@ -153,7 +153,39 @@ variants:
     label: "/destiny/v2 (with-headline)"
     path: "/destiny/v2"
     exclude: null
+  index_v17:
+    label: "/index-v17 (TSL)"
+    path: "/index-v17.html"
+    exclude: null
+  organic:
+    label: "Organic / Affiliate"
+    path: null
+    exclude: null
+  abandoned:
+    label: "Email - Abandoned"
+    path: null
+    exclude: null
+  discount:
+    label: "Email - Discount"
+    path: null
+    exclude: null
+  scarcity:
+    label: "Email - Scarcity"
+    path: null
+    exclude: null
+  urgency:
+    label: "Email - Urgency"
+    path: null
+    exclude: null
+  reactivation:
+    label: "Email - Reactivation"
+    path: null
+    exclude: null
+  education:
+    label: "Email - Education"
+    path: null
+    exclude: null
   other:
-    label: "Other / Email"
+    label: "Other"
     path: null
     exclude: null

@@ -463,6 +463,18 @@ def main():
     args = parse_args()
     project = args.project or os.environ.get("PROJECT", "asksabrina")
 
+    # Delegate to project-specific script when applicable
+    if project == "astroloversketch":
+        import subprocess
+        cmd = [sys.executable, "analyse_astro.py"]
+        if args.input: cmd += ["--input", args.input]
+        if args.mock:  cmd += ["--mock"]
+        sys.exit(subprocess.run(cmd).returncode)
+
+    if not args.out:
+        from datetime import date
+        args.out = f"output/{project}/analysis_{date.today().isoformat()}.json"
+
     if args.mock:
         print("[analyse] Mock mode — skipping API call")
         analysis = mock_analysis()

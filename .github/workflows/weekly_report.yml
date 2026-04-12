@@ -154,6 +154,10 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
+          # Force-add report data JSON (output/ is gitignored locally but we need
+          # history in the repo so week-over-week comparisons work in future runs)
+          git add -f output/${{ matrix.project }}/report_data_*.json || true
+          git add -f output/${{ matrix.project }}/analysis_*.json    || true
           git diff --staged --quiet || git commit -m "Weekly report ${{ matrix.project }} $(date -u +%Y-%m-%d)"
           git push
 

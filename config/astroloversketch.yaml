@@ -1,44 +1,102 @@
 # =============================================================================
 # Astro Lover Sketch — Funnel Reporter Config
+# All campaign mappings, SKU definitions, and variant settings live here.
+# When you add a new campaign or product, only touch this file.
 # =============================================================================
 
 # ── Project metadata ──────────────────────────────────────────────────────────
 project:
   name: "Astro Lover Sketch"
   domain: "astroloversketch.com"
-  funnel_type: "TSL"   # Text Sales Letter (vs VSL for Ask Sabrina)
+  funnel_type: "TSL"
+  paid_platform_label: "Organic / Email"   # no paid traffic yet
 
 # ── ClickBank SKUs ────────────────────────────────────────────────────────────
 clickbank:
   account: ASTROSKETC
   skus:
-    alsv1:
-      label: "Front-end"
+    alsv1-37:
+      label: "Front-end $37"
       price: 37
+      stage: frontend
+    alsv1:
+      label: "Front-end (default)"
+      price: 37
+      stage: frontend
+    alsv1-47:
+      label: "Front-end $47"
+      price: 47
       stage: frontend
     alsv1-blueprint:
       label: "OTO1 Blueprint"
       price: 67
       stage: oto1
     alsv1-blueprint-discount:
-      label: "OTO1 Downsell"
+      label: "OTO1 Downsell (Blueprint Discount)"
       price: 47
       stage: oto1_downsell
+    alsv1-timeline:
+      label: "OTO2 Timeline"
+      price: 47
+      stage: oto2
+    alsv1-timeline-discount:
+      label: "OTO2 Downsell (Timeline Discount)"
+      price: 37
+      stage: oto2_downsell
 
 # ── CPV Lab Campaigns ─────────────────────────────────────────────────────────
-# Add campaigns here as you create them in CPV Labs
+# Add campaigns here as you create them in CPV Labs.
+# source: email | organic | unknown
+# variant: funnel_v4 | funnel_v2 | other
 cpvlabs:
   group: "Astro Lover Sketch"
-  campaigns: {}   # populate once campaigns are created in CPV Labs
+  campaigns:
+    # Campaign IDs from CPV Labs → used for ClickBank variant attribution only.
+    # Variant detection in landing-stats uses the CPV "Offer" field name dynamically.
+    "82":  { label: "Organic Traffic",                         source: "organic",  variant: "funnel_v4" }
+    "91":  { label: "Maropost - Default",                      source: "email",    variant: "other" }
+    "92":  { label: "Maropost - Follow Up #1",                 source: "email",    variant: "other" }
+    "93":  { label: "Maropost - OTO1",                         source: "email",    variant: "other" }
+    "94":  { label: "Maropost - OTO1 Downsell",                source: "email",    variant: "other" }
+    "95":  { label: "Maropost - Split Test Price Point",        source: "email",    variant: "funnel_v4" }
+    "96":  { label: "Maropost - Split Test Landing A/B V2/V3", source: "email",    variant: "funnel_v2" }
+    "97":  { label: "Maropost - Variant C AI Claude",          source: "email",    variant: "funnel_v4" }
+    "98":  { label: "Maropost - Split Test Landing A V2/V3",   source: "email",    variant: "funnel_v2" }
+    "100": { label: "Maropost - Split Test Landing B/C",       source: "email",    variant: "funnel_v4" }
+    "101": { label: "Maropost - Variant C Offer V4 OTO TSL",   source: "email",    variant: "funnel_v4" }
+    "102": { label: "Maropost - Variant B Offer V2 OTO TSL",   source: "email",    variant: "funnel_v2" }
 
-# ── Funnel Variants (GA4) ─────────────────────────────────────────────────────
-# Update paths once the funnel pages are live
+# ── Funnel Variants (GA4 page_view path filters) ──────────────────────────────
+#
+# How this funnel maps to paths:
+#
+#   Funnel v4:
+#     Homepage      → /c/          (prefix match)
+#     Opt-in page   → /opt-in-v4   (prefix match)
+#     Offer page    → /offer-v4    (prefix match)
+#
+#   Funnel v2:
+#     Homepage      → /a/ or /b/   (two prefix matches, aggregated)
+#     Opt-in page   → /opt-in-v2   (prefix match)
+#     Offer page    → /offer-v2    (prefix match)
+#
+# GA4 signal used: page_view count per path prefix.
+# CTA click proxy: page_view on /opt-in-* = homepage CTA clicked.
+# Lead proxy:      page_view on /offer-*  = opt-in completed / lead captured.
+# Checkout click:  CPV Lab offer-stats Clicks field (ClickBank checkout URL).
+#
 variants:
-  main:
-    label: "Main TSL"
-    path: "/"
-    exclude: null
-  other:
-    label: "Other"
-    path: null
-    exclude: null
+  funnel_v4:
+    label: "Funnel v4 (/c/)"
+    homepage_paths:
+      - "/c/"
+    optin_path: "/opt-in-v4"
+    offer_path: "/offer/v4"     # actual site URL (used for GA4 path filter)
+
+  funnel_v2:
+    label: "Funnel v2 (/a/ /b/)"
+    homepage_paths:
+      - "/a/"
+      - "/b/"
+    optin_path: "/opt-in-v2"
+    offer_path: "/offer/v2"     # actual site URL (used for GA4 path filter)

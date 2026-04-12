@@ -63,6 +63,16 @@ def main():
 
     # Load project-specific env vars
     project = args.project or os.environ.get("PROJECT", "asksabrina")
+
+    # Delegate to project-specific script when applicable
+    if project == "astroloversketch":
+        import subprocess
+        cmd = [sys.executable, "collect_astro.py"]
+        if args.start: cmd += ["--start", args.start]
+        if args.end:   cmd += ["--end",   args.end]
+        if args.mock:  cmd += ["--mock"]
+        sys.exit(subprocess.run(cmd).returncode)
+
     prefix  = "ASTRO" if project == "astroloversketch" else "ASKSABRINA"
     _load_project_env(prefix)
     log(f"Project: {project}")
