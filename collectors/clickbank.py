@@ -46,11 +46,18 @@ class ClickBankCollector(BaseCollector):
                 if not resp:
                     break
                 if isinstance(resp, list):
-                    all_orders.extend(resp)
+                    all_orders.extend(o for o in resp if isinstance(o, dict))
                     break
                 if not isinstance(resp, dict):
                     break
-                orders = resp.get("orderData", [])
+                raw_orders = resp.get("orderData", [])
+                # API returns a single dict (not a list) when there is only one order
+                if isinstance(raw_orders, dict):
+                    orders = [raw_orders]
+                elif isinstance(raw_orders, list):
+                    orders = raw_orders
+                else:
+                    orders = []
                 all_orders.extend(orders)
                 if status_code != 206 or len(orders) < 100:
                     break
