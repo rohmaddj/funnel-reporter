@@ -1,0 +1,284 @@
+{
+  "meta": {
+    "generated_at": "2026-04-13T02:25:29.325304Z",
+    "model": "claude-sonnet-4-6",
+    "mode": "live"
+  },
+  "analysis": {
+    "period_summary": "For the week of 2026-04-06 to 2026-04-12, the funnel generated $5,904.50 USD net revenue (ClickBank) across 113 frontend sales, with an average revenue per buyer of approximately $52.25. The single most critical finding is the checkout-to-purchase rate collapsing to sub-7% across all meaningful flows \u2014 with 1,635 combined checkout clicks producing only 105 CPV-tracked purchases \u2014 representing a severe and universal drop-off at the ClickBank checkout step that is suppressing revenue across every active variant.",
+    "funnel_scorecard": {
+      "upsell1_take_rate_pct": 29.2,
+      "downsell1_take_rate_pct": 3.5,
+      "upsell2_take_rate_pct": 16.8,
+      "downsell2_take_rate_pct": 0.9,
+      "weakest_step": "checkout \u2192 purchase",
+      "weakest_step_rate_pct": 6.92,
+      "weakest_flow": "all",
+      "commentary": "The funnel is healthy through opt-in and checkout click stages \u2014 landing-to-optin rates sit in the 14\u201320% range and offer-to-checkout rates are mostly strong \u2014 but all active flows share a critically low checkout-to-purchase conversion rate (5\u20137%), meaning the vast majority of motivated buyers who click the CTA are not completing payment. Backend monetization is average; OTO1 and OTO2 take rates are below benchmark and leave meaningful revenue on the table."
+    },
+    "variant_comparison": [
+      {
+        "variant": "c\u2192offer_v4",
+        "label": "/c/ \u2192 /offer/v4/",
+        "landing_page_views": 6947,
+        "optin_completions": 1162,
+        "offer_page_views": 1159,
+        "checkout_clicks": 968,
+        "purchases": 67,
+        "landing_to_optin_rate": 16.73,
+        "offer_to_checkout_rate": 83.52,
+        "checkout_to_purchase_rate": 6.92,
+        "revenue": null,
+        "status": "stronger",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "fix"
+      },
+      {
+        "variant": "c\u2192offer_v4_v2",
+        "label": "/c/ \u2192 /offer/v4-v2",
+        "landing_page_views": 1856,
+        "optin_completions": 304,
+        "offer_page_views": 304,
+        "checkout_clicks": 247,
+        "purchases": 16,
+        "landing_to_optin_rate": 16.38,
+        "offer_to_checkout_rate": 81.25,
+        "checkout_to_purchase_rate": 6.48,
+        "revenue": null,
+        "status": "stronger",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "fix"
+      },
+      {
+        "variant": "landing\u2192offer",
+        "label": " \u2192 /offer",
+        "landing_page_views": 25,
+        "optin_completions": 1,
+        "offer_page_views": 352,
+        "checkout_clicks": 3,
+        "purchases": 0,
+        "landing_to_optin_rate": 4.0,
+        "offer_to_checkout_rate": 0.85,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "offer \u2192 checkout",
+        "action": "monitor"
+      },
+      {
+        "variant": "landing\u2192offer_v3",
+        "label": " \u2192 /offer/v3",
+        "landing_page_views": 37,
+        "optin_completions": 12,
+        "offer_page_views": 12,
+        "checkout_clicks": 7,
+        "purchases": 0,
+        "landing_to_optin_rate": 32.43,
+        "offer_to_checkout_rate": 58.33,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "monitor"
+      },
+      {
+        "variant": "a\u2192offer_v2",
+        "label": "/a \u2192 /offer/v2",
+        "landing_page_views": 28,
+        "optin_completions": 1,
+        "offer_page_views": 1,
+        "checkout_clicks": 1,
+        "purchases": 0,
+        "landing_to_optin_rate": 3.57,
+        "offer_to_checkout_rate": 100.0,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "landing \u2192 opt-in",
+        "action": "monitor"
+      },
+      {
+        "variant": "b\u2192offer_v2",
+        "label": "/b \u2192 /offer/v2",
+        "landing_page_views": 1677,
+        "optin_completions": 340,
+        "offer_page_views": 340,
+        "checkout_clicks": 206,
+        "purchases": 11,
+        "landing_to_optin_rate": 20.27,
+        "offer_to_checkout_rate": 60.59,
+        "checkout_to_purchase_rate": 5.34,
+        "revenue": 329.98,
+        "status": "weaker",
+        "weakest_step": "offer \u2192 checkout",
+        "action": "fix"
+      },
+      {
+        "variant": "c_v2\u2192offer_v4",
+        "label": "/c-v2 \u2192 /offer/v4/",
+        "landing_page_views": 911,
+        "optin_completions": 135,
+        "offer_page_views": 135,
+        "checkout_clicks": 105,
+        "purchases": 6,
+        "landing_to_optin_rate": 14.82,
+        "offer_to_checkout_rate": 77.78,
+        "checkout_to_purchase_rate": 5.71,
+        "revenue": null,
+        "status": "weaker",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "fix"
+      },
+      {
+        "variant": "c_v2\u2192offer_v4_v2",
+        "label": "/c-v2 \u2192 /offer/v4-v2",
+        "landing_page_views": 762,
+        "optin_completions": 113,
+        "offer_page_views": 113,
+        "checkout_clicks": 98,
+        "purchases": 5,
+        "landing_to_optin_rate": 14.83,
+        "offer_to_checkout_rate": 86.73,
+        "checkout_to_purchase_rate": 5.1,
+        "revenue": null,
+        "status": "weaker",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "fix"
+      }
+    ],
+    "funnel_leaks": [
+      {
+        "variant": "all",
+        "step": "checkout \u2192 purchase",
+        "rate_pct": 6.48,
+        "severity": "critical",
+        "evidence_type": "observed",
+        "why_it_matters": "With 1,635 checkout clicks across active flows this week, lifting checkout-to-purchase from ~6.5% to even 15% would approximately double frontend sales, adding an estimated 140+ additional purchases and over $5,000 in incremental frontend revenue at $37 AOV."
+      },
+      {
+        "variant": "b\u2192offer_v2",
+        "step": "offer \u2192 checkout",
+        "rate_pct": 60.59,
+        "severity": "high",
+        "evidence_type": "observed",
+        "why_it_matters": "The /b/ landing page sends traffic to /offer/v2/ which converts 39% fewer visitors to checkout clicks than the v4 offer pages, meaning roughly 130 additional checkout entries per week are being forfeited relative to the stronger offer variants."
+      },
+      {
+        "variant": "all",
+        "step": "OTO1 take rate",
+        "rate_pct": 29.2,
+        "severity": "high",
+        "evidence_type": "observed",
+        "why_it_matters": "OTO1 (Blueprint $67) take rate sits at 29.2%, below the 40%+ strong benchmark \u2014 with 113 buyers, improving take rate to 40% would generate approximately 12 additional OTO1 sales worth ~$804 in incremental backend revenue per week."
+      },
+      {
+        "variant": "all",
+        "step": "OTO2 take rate",
+        "rate_pct": 16.8,
+        "severity": "high",
+        "evidence_type": "observed",
+        "why_it_matters": "OTO2 (Timeline $47) take rate of 16.8% is below the 25%+ strong benchmark; closing this gap to 25% across 113 buyers would add approximately 9 incremental OTO2 sales worth ~$423 weekly."
+      },
+      {
+        "variant": "landing\u2192offer",
+        "step": "offer \u2192 checkout",
+        "rate_pct": 0.85,
+        "severity": "medium",
+        "evidence_type": "observed",
+        "why_it_matters": "The /offer (non-versioned) page shows an anomalous 0.85% offer-to-checkout rate despite 352 offer page views, suggesting a broken or missing CTA link that is wasting any traffic reaching this page \u2014 sample size is small but the signal is unambiguous."
+      }
+    ],
+    "upsell_analysis": {
+      "frontend_sales": 113,
+      "oto1_sales": 33,
+      "oto1_take_rate_pct": 29.2,
+      "oto1_downsell_sales": 4,
+      "oto2_sales": 19,
+      "oto2_take_rate_pct": 16.8,
+      "oto2_downsell_sales": 1,
+      "total_backend_revenue": 5904.5,
+      "avg_revenue_per_buyer": 52.25,
+      "commentary": "Backend monetization is underperforming relative to benchmarks: OTO1 take rate (29.2%) is in the average band but well short of the 40%+ strong threshold, and OTO2 (16.8%) is at the low end of average with the downsell almost completely unused (0.9% take rate). The OTO1 downsell at $47 is also poorly differentiated from the full Blueprint at $67, suggesting the pricing gap may not feel compelling enough to recover fence-sitters."
+    },
+    "needle_movers": [
+      {
+        "rank": 1,
+        "priority": "critical",
+        "area": "Checkout conversion fix",
+        "variant": "all",
+        "evidence_type": "observed",
+        "why": "Every active flow shows checkout-to-purchase rates of 5\u20137%, far below the 20\u201330% target. With 1,635 checkout clicks this week, even a conservative improvement to 12% checkout completion would yield ~88 additional sales ($3,256 frontend revenue) plus backend multiplier.",
+        "what": [
+          "Audit the ClickBank order form for friction: remove unnecessary fields, verify mobile rendering, check load speed and SSL trust signals",
+          "Add order bump or price-justification copy directly on the ClickBank checkout page (e.g. 'What you get for $37' summary)",
+          "Test a 3-day urgency or scarcity element on the sales page immediately before the CTA to pre-sell the checkout decision, reducing cold clicks"
+        ],
+        "revenue_impact": "Improving checkout-to-purchase from 6.5% to 12% across 1,635 weekly checkout clicks adds ~88 frontend sales \u2248 $3,256 frontend + ~$1,500 estimated backend upsell revenue per week."
+      },
+      {
+        "rank": 2,
+        "priority": "high",
+        "area": "OTO1 take rate improvement",
+        "variant": "all",
+        "evidence_type": "observed",
+        "why": "OTO1 Blueprint take rate is 29.2% against a 40%+ benchmark; with 113 buyers, closing to 40% means 12 additional Blueprint sales at $67 = ~$804/week in recoverable revenue with no additional traffic cost.",
+        "what": [
+          "Rewrite the OTO1 page headline to lead with the specific outcome gap the Blueprint fills that the core product does not cover",
+          "Add a short (2\u20133 min) video or audio testimonial from a buyer who specifically purchased the Blueprint above the fold",
+          "A/B test reducing OTO1 price to $57 or adding a limited-quantity framing to improve impulse acceptance rate"
+        ],
+        "revenue_impact": "Lifting OTO1 take rate from 29% to 40% generates approximately $804 additional revenue per week at current frontend sales volume, scaling proportionally if checkout fix is implemented simultaneously."
+      },
+      {
+        "rank": 3,
+        "priority": "high",
+        "area": "Fix /offer/v2/ offer-to-checkout rate for /b/ traffic",
+        "variant": "b\u2192offer_v2",
+        "evidence_type": "observed",
+        "why": "The /b/ \u2192 /offer/v2/ flow converts only 60.6% of offer viewers to checkout clicks versus 77\u201387% for v4-based offers; this gap costs approximately 82 checkout entries per week from this flow alone.",
+        "what": [
+          "Audit /offer/v2/ CTA placement, button copy, and page length versus /offer/v4/ \u2014 identify structural differences causing the drop",
+          "Test replacing the /offer/v2/ CTA section with the v4 CTA block while keeping the rest of v2 copy intact",
+          "If /b/ landing page traffic is email-sourced, consider routing /b/ subscribers directly to /offer/v4/ to leverage the stronger offer page"
+        ],
+        "revenue_impact": "Lifting /b/ offer-to-checkout from 60.6% to 80% adds ~66 checkout clicks/week; at current 5.34% purchase rate that is ~3\u20134 additional sales ($111\u2013$148 frontend) plus upsell tail \u2014 directional uplift."
+      },
+      {
+        "rank": 4,
+        "priority": "high",
+        "area": "OTO2 take rate and downsell optimization",
+        "variant": "all",
+        "evidence_type": "observed",
+        "why": "OTO2 Timeline take rate of 16.8% is below the 25% benchmark, and the downsell is nearly invisible at 0.9% \u2014 the downsell may have a redirect or presentation issue, and the OTO2 page itself may need urgency or value reinforcement.",
+        "what": [
+          "Verify OTO2 downsell redirect is functioning correctly \u2014 0.9% take rate on a $37 offer for people who declined $47 suggests most decliners are not seeing or engaging with the downsell page",
+          "Add a 'why you need this now' urgency block to the OTO2 page specific to the timing/timeline angle of the product",
+          "Test lowering OTO2 downsell to $27 to create a more compelling price contrast with the $47 full price"
+        ],
+        "revenue_impact": "Lifting OTO2 take rate from 16.8% to 25% adds ~9 Timeline sales at $47 = ~$423/week; fixing the downsell funnel could recover an additional $27\u2013$37 per declining buyer."
+      },
+      {
+        "rank": 5,
+        "priority": "medium",
+        "area": "Investigate and fix /offer (non-versioned) page CTA",
+        "variant": "landing\u2192offer",
+        "evidence_type": "observed",
+        "why": "The /offer page shows 352 offer page views but only 3 checkout clicks (0.85% offer-to-checkout), which is anomalously broken relative to every other offer page and indicates a non-functional or missing CTA rather than a copy problem.",
+        "what": [
+          "Immediately QA the /offer page CTA button link \u2014 confirm ClickBank hop URL is correctly embedded and not returning a 404 or redirecting incorrectly",
+          "Check whether this page is being served to live traffic intentionally (email campaign 92 with 351 views appears to route here) and pause or redirect if broken",
+          "Once CTA is fixed, assess whether /offer copy is competitive with v4 variants before scaling traffic back to it"
+        ],
+        "revenue_impact": "At a corrected 80% offer-to-checkout rate, 352 weekly viewers would generate ~282 checkout clicks; even at the current low 6.5% purchase rate that is ~18 additional sales worth ~$666/week \u2014 though this flow may be intentionally low-traffic."
+      }
+    ],
+    "cpv_cb_discrepancy": {
+      "cpv_purchases": 105,
+      "cb_frontend_sales": 113,
+      "revenue_diff_usd": 298.01,
+      "status": "warn",
+      "note": "CPV Labs is under-counting purchases by 8 relative to ClickBank (105 vs 113 frontend sales), indicating missing ClickBank postback fires \u2014 likely from traffic that completed purchase outside tracked CPV sessions; postback configuration should be audited to ensure all ClickBank conversion events are firing back to CPV."
+    },
+    "data_notes": "1) The 'landing\u2192offer' flow shows a large discrepancy between landing_page_views (25) and offer_page_views (352), suggesting direct/untracked traffic is landing on /offer without passing through a CPV-tracked landing page \u2014 this inflates the offer_page_views count for that flow and makes the offer_to_checkout rate (0.85%) even more anomalous. 2) GA4 supplement data covers funnel_v4 and funnel_v2 aggregated funnels only and cannot be mapped 1:1 to individual CPV flow keys; optin_page_to_submit rates (38.85% for v4, 45.83% for v2) are above the 30% caution threshold and are healthy, suggesting the opt-in page itself is not a primary leak. 3) funnel_backend.variant_sales shows 84 of 113 sales attributed to 'other' with $2,688.88 revenue, meaning the majority of ClickBank sales cannot be attributed to a specific named funnel variant \u2014 ClickBank variant tracking parameters may need review. 4) CPV campaign 100 shows 12.5% CR on only 8 views and 1 conversion \u2014 statistically meaningless, flag as noise."
+  }
+}
