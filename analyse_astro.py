@@ -27,8 +27,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
-MODEL      = "claude-sonnet-4-5"
-MAX_TOKENS = 5000
+MODEL      = "claude-sonnet-4-6"
+MAX_TOKENS = 8192
 
 
 def parse_args():
@@ -289,7 +289,13 @@ def call_claude(user_prompt: str, system_prompt: str) -> dict:
     )
     resp.raise_for_status()
 
-    raw = resp.json()["content"][0]["text"].strip()
+    resp_json = resp.json()
+    if resp_json.get("stop_reason") == "max_tokens":
+        raise ValueError(
+            f"Claude response was truncated (hit max_tokens={MAX_TOKENS}). "
+            "Increase MAX_TOKENS or reduce the prompt size."
+        )
+    raw = resp_json["content"][0]["text"].strip()
 
     if raw.startswith("```"):
         raw = raw.split("```")[1]
