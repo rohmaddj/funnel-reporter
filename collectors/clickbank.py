@@ -48,6 +48,8 @@ class ClickBankCollector(BaseCollector):
                 if isinstance(resp, list):
                     all_orders.extend(resp)
                     break
+                if not isinstance(resp, dict):
+                    break
                 orders = resp.get("orderData", [])
                 all_orders.extend(orders)
                 if status_code != 206 or len(orders) < 100:
@@ -102,6 +104,8 @@ class ClickBankCollector(BaseCollector):
             lines    = line_raw if isinstance(line_raw, list) else [line_raw]
 
             for line in lines:
+                if not isinstance(line, dict):
+                    continue
                 sku       = line.get("itemNo", "unknown")
                 amount    = float(line.get("accountAmount", 0))
                 line_type = line.get("lineItemType", "")
