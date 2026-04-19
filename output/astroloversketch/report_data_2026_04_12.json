@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-13T02:24:11.069093Z",
+    "generated_at": "2026-04-19T17:26:17.590148Z",
     "period_start": "2026-04-06",
     "period_end": "2026-04-12",
     "project": "astroloversketch",
@@ -8,39 +8,39 @@
     "errors": []
   },
   "funnel_snapshot": {
-    "landing_page_views": 12243,
-    "optin_page_views": 2679,
-    "optin_completions": 2068,
-    "offer_page_views": 2416,
-    "checkout_clicks": 1635,
-    "frontend_sales": 113,
-    "total_revenue_usd": 5904.5,
-    "avg_revenue_per_buyer_usd": 52.25,
-    "landing_to_optin_pct": 16.89,
-    "optin_to_offer_pct": 116.83,
-    "offer_to_checkout_pct": 67.67,
-    "checkout_to_sale_pct": 6.91,
-    "overall_rate_pct": 0.92
+    "landing_page_views": 12708,
+    "optin_page_views": 2775,
+    "optin_completions": 2227,
+    "offer_page_views": 2590,
+    "checkout_clicks": 1766,
+    "frontend_sales": 115,
+    "total_revenue_usd": 6074.18,
+    "avg_revenue_per_buyer_usd": 52.82,
+    "landing_to_optin_pct": 17.52,
+    "optin_to_offer_pct": 116.3,
+    "offer_to_checkout_pct": 68.19,
+    "checkout_to_sale_pct": 6.51,
+    "overall_rate_pct": 0.9
   },
   "funnel_variants": {
     "funnel_v4": {
       "label": "Funnel v4 (/c/)",
-      "landing_page_views": 3046,
-      "optin_page_views": 1959,
-      "lead_submit_count": 761,
-      "offer_page_views": 1081,
-      "landing_to_optin_page_pct": 64.31,
-      "optin_page_to_submit_pct": 38.85,
+      "landing_page_views": 3201,
+      "optin_page_views": 2054,
+      "lead_submit_count": 808,
+      "offer_page_views": 1128,
+      "landing_to_optin_page_pct": 64.17,
+      "optin_page_to_submit_pct": 39.34,
       "has_custom_events": true
     },
     "funnel_v2": {
       "label": "Funnel v2 (/a/ /b/)",
       "landing_page_views": 1287,
-      "optin_page_views": 720,
+      "optin_page_views": 721,
       "lead_submit_count": 330,
-      "offer_page_views": 398,
-      "landing_to_optin_page_pct": 55.94,
-      "optin_page_to_submit_pct": 45.83,
+      "offer_page_views": 399,
+      "landing_to_optin_page_pct": 56.02,
+      "optin_page_to_submit_pct": 45.77,
       "has_custom_events": true
     }
   },
@@ -49,12 +49,12 @@
       "82": {
         "label": "astroloversketch.com - Organic Traffic",
         "source": "organic",
-        "views": 2402,
+        "views": 2495,
         "conversions": 5,
         "revenue": 143.05,
-        "cr_pct": 0.21,
+        "cr_pct": 0.2,
         "status": "weak",
-        "checkout_clicks": 315
+        "checkout_clicks": 333
       },
       "91": {
         "label": "astroloversketch.com - Maropost Traffic",
@@ -69,12 +69,12 @@
       "92": {
         "label": "astroloversketch.com - Maropost Traffic - Follow Up #1",
         "source": "email",
-        "views": 351,
-        "conversions": 0,
-        "revenue": 0.0,
-        "cr_pct": 0.0,
-        "status": "dead",
-        "checkout_clicks": 3
+        "views": 366,
+        "conversions": 1,
+        "revenue": 42.07,
+        "cr_pct": 0.27,
+        "status": "weak",
+        "checkout_clicks": 4
       },
       "95": {
         "label": "astroloversketch.com - Maropost Traffic - Split Test - Price Point",
@@ -109,12 +109,12 @@
       "101": {
         "label": "astroloversketch.com - Maropost Traffic - Variant C - Offer V4 - OTO TSL",
         "source": "email",
-        "views": 2492,
-        "conversions": 5,
-        "revenue": 212.31,
-        "cr_pct": 0.2,
+        "views": 2502,
+        "conversions": 6,
+        "revenue": 216.53,
+        "cr_pct": 0.24,
         "status": "weak",
-        "checkout_clicks": 351
+        "checkout_clicks": 357
       },
       "102": {
         "label": "astroloversketch.com - Maropost Traffic - Variant B - Offer V2 - OTO TSL",
@@ -124,48 +124,48 @@
         "revenue": 761.63,
         "cr_pct": 0.6,
         "status": "active",
-        "checkout_clicks": 204
+        "checkout_clicks": 214
       },
       "104": {
         "label": "astroloversketch.com - Maropost Traffic - Variant C-V2 - Offer V4-V2 - OTO1 VSL OTO2 TSL",
         "source": "email",
-        "views": 1673,
+        "views": 1680,
         "conversions": 11,
         "revenue": 694.44,
-        "cr_pct": 0.66,
+        "cr_pct": 0.65,
         "status": "active",
-        "checkout_clicks": 203
+        "checkout_clicks": 205
       },
       "105": {
         "label": "astroloversketch.com - Maropost Traffic - Variant C - Offer Split (V4&V4-v2) - OTO TSL",
         "source": "email",
-        "views": 3909,
-        "conversions": 73,
-        "revenue": 5722.11,
-        "cr_pct": 1.87,
+        "views": 4264,
+        "conversions": 74,
+        "revenue": 5896.36,
+        "cr_pct": 1.74,
         "status": "active",
-        "checkout_clicks": 549
+        "checkout_clicks": 643
       }
     },
     "totals_by_source": {
       "organic": {
-        "views": 2402,
+        "views": 2495,
         "conversions": 5,
         "revenue": 143.05
       },
       "email": {
-        "views": 10192,
-        "conversions": 100,
-        "revenue": 7433.29
+        "views": 10579,
+        "conversions": 103,
+        "revenue": 7653.83
       }
     },
-    "total_conversions": 105,
-    "total_revenue": 7576.34,
-    "checkout_clicks_total": 1635,
+    "total_conversions": 108,
+    "total_revenue": 7796.88,
+    "checkout_clicks_total": 1766,
     "checkout_clicks_by_campaign": {
       "82": {
         "label": "astroloversketch.com - Organic Traffic",
-        "checkout_clicks": 315
+        "checkout_clicks": 333
       },
       "91": {
         "label": "astroloversketch.com - Maropost Traffic",
@@ -173,7 +173,7 @@
       },
       "92": {
         "label": "astroloversketch.com - Maropost Traffic - Follow Up #1",
-        "checkout_clicks": 3
+        "checkout_clicks": 4
       },
       "93": {
         "label": "astroloversketch.com - Maropost Traffic - OTO1 ",
@@ -205,19 +205,31 @@
       },
       "101": {
         "label": "astroloversketch.com - Maropost Traffic - Variant C - Offer V4 - OTO TSL",
-        "checkout_clicks": 351
+        "checkout_clicks": 357
       },
       "102": {
         "label": "astroloversketch.com - Maropost Traffic - Variant B - Offer V2 - OTO TSL",
-        "checkout_clicks": 204
+        "checkout_clicks": 214
       },
       "104": {
         "label": "astroloversketch.com - Maropost Traffic - Variant C-V2 - Offer V4-V2 - OTO1 VSL OTO2 TSL",
-        "checkout_clicks": 203
+        "checkout_clicks": 205
       },
       "105": {
         "label": "astroloversketch.com - Maropost Traffic - Variant C - Offer Split (V4&V4-v2) - OTO TSL",
-        "checkout_clicks": 549
+        "checkout_clicks": 643
+      },
+      "107": {
+        "label": "astroloversketch.com - Maropost Traffic - Control Variant - Interstitial - Offer V4-v3 - OTO TSL",
+        "checkout_clicks": 0
+      },
+      "109": {
+        "label": "astroloversketch.com - Maropost Traffic - Variant D-V3 - Offer Split (V4-V4-v2) - OTO TSL",
+        "checkout_clicks": 0
+      },
+      "110": {
+        "label": "astroloversketch.com - Maropost Traffic - Variant D-V1 - Offer Split (V4-V4-v2) - OTO TSL",
+        "checkout_clicks": 0
       }
     },
     "funnel_totals": {
@@ -227,15 +239,15 @@
         ],
         "offer_path": "/offer/v4/",
         "flow_label": "/c/ \u2192 /offer/v4/",
-        "landing_page_views": 6947,
-        "optin_completions": 1162,
-        "offer_page_views": 1159,
-        "checkout_clicks": 968,
-        "purchases": 67,
-        "landing_to_optin_rate": 16.73,
-        "offer_to_checkout_rate": 83.52,
-        "checkout_to_purchase_rate": 6.92,
-        "overall_rate": 0.96
+        "landing_page_views": 7177,
+        "optin_completions": 1243,
+        "offer_page_views": 1240,
+        "checkout_clicks": 1035,
+        "purchases": 68,
+        "landing_to_optin_rate": 17.32,
+        "offer_to_checkout_rate": 83.47,
+        "checkout_to_purchase_rate": 6.57,
+        "overall_rate": 0.95
       },
       "c\u2192offer_v4_v2": {
         "landing_paths": [
@@ -243,15 +255,15 @@
         ],
         "offer_path": "/offer/v4-v2",
         "flow_label": "/c/ \u2192 /offer/v4-v2",
-        "landing_page_views": 1856,
-        "optin_completions": 304,
-        "offer_page_views": 304,
-        "checkout_clicks": 247,
-        "purchases": 16,
-        "landing_to_optin_rate": 16.38,
-        "offer_to_checkout_rate": 81.25,
-        "checkout_to_purchase_rate": 6.48,
-        "overall_rate": 0.86
+        "landing_page_views": 2084,
+        "optin_completions": 363,
+        "offer_page_views": 363,
+        "checkout_clicks": 298,
+        "purchases": 17,
+        "landing_to_optin_rate": 17.42,
+        "offer_to_checkout_rate": 82.09,
+        "checkout_to_purchase_rate": 5.7,
+        "overall_rate": 0.82
       },
       "landing\u2192offer": {
         "landing_paths": [
@@ -261,13 +273,13 @@
         "flow_label": " \u2192 /offer",
         "landing_page_views": 25,
         "optin_completions": 1,
-        "offer_page_views": 352,
-        "checkout_clicks": 3,
-        "purchases": 0,
+        "offer_page_views": 367,
+        "checkout_clicks": 4,
+        "purchases": 1,
         "landing_to_optin_rate": 4.0,
-        "offer_to_checkout_rate": 0.85,
-        "checkout_to_purchase_rate": 0.0,
-        "overall_rate": 0.0
+        "offer_to_checkout_rate": 1.09,
+        "checkout_to_purchase_rate": 25.0,
+        "overall_rate": 4.0
       },
       "landing\u2192offer_v3": {
         "landing_paths": [
@@ -308,13 +320,13 @@
         "offer_path": "/offer/v2",
         "flow_label": "/b \u2192 /offer/v2",
         "landing_page_views": 1677,
-        "optin_completions": 340,
-        "offer_page_views": 340,
-        "checkout_clicks": 206,
+        "optin_completions": 355,
+        "offer_page_views": 355,
+        "checkout_clicks": 216,
         "purchases": 11,
-        "landing_to_optin_rate": 20.27,
-        "offer_to_checkout_rate": 60.59,
-        "checkout_to_purchase_rate": 5.34,
+        "landing_to_optin_rate": 21.17,
+        "offer_to_checkout_rate": 60.85,
+        "checkout_to_purchase_rate": 5.09,
         "overall_rate": 0.66
       },
       "c_v2\u2192offer_v4": {
@@ -323,15 +335,15 @@
         ],
         "offer_path": "/offer/v4/",
         "flow_label": "/c-v2 \u2192 /offer/v4/",
-        "landing_page_views": 911,
-        "optin_completions": 135,
-        "offer_page_views": 135,
-        "checkout_clicks": 105,
+        "landing_page_views": 927,
+        "optin_completions": 139,
+        "offer_page_views": 139,
+        "checkout_clicks": 108,
         "purchases": 6,
-        "landing_to_optin_rate": 14.82,
-        "offer_to_checkout_rate": 77.78,
-        "checkout_to_purchase_rate": 5.71,
-        "overall_rate": 0.66
+        "landing_to_optin_rate": 14.99,
+        "offer_to_checkout_rate": 77.7,
+        "checkout_to_purchase_rate": 5.56,
+        "overall_rate": 0.65
       },
       "c_v2\u2192offer_v4_v2": {
         "landing_paths": [
@@ -339,24 +351,24 @@
         ],
         "offer_path": "/offer/v4-v2",
         "flow_label": "/c-v2 \u2192 /offer/v4-v2",
-        "landing_page_views": 762,
+        "landing_page_views": 753,
         "optin_completions": 113,
         "offer_page_views": 113,
-        "checkout_clicks": 98,
+        "checkout_clicks": 97,
         "purchases": 5,
-        "landing_to_optin_rate": 14.83,
-        "offer_to_checkout_rate": 86.73,
-        "checkout_to_purchase_rate": 5.1,
+        "landing_to_optin_rate": 15.01,
+        "offer_to_checkout_rate": 85.84,
+        "checkout_to_purchase_rate": 5.15,
         "overall_rate": 0.66
       }
     }
   },
   "funnel_backend": {
-    "total_revenue": 5904.5,
-    "gross_revenue": 6173.5,
+    "total_revenue": 6074.18,
+    "gross_revenue": 6343.18,
     "total_refunds": 7,
     "total_refund_amount": 0,
-    "frontend_sales_count": 113,
+    "frontend_sales_count": 115,
     "variant_sales": {
       "funnel_v4": {
         "sales": 19,
@@ -367,8 +379,8 @@
         "revenue": 329.98
       },
       "other": {
-        "sales": 84,
-        "revenue": 2688.88
+        "sales": 86,
+        "revenue": 2755.1
       }
     },
     "sku_breakdown": {
@@ -376,33 +388,33 @@
         "label": "Front-end $37",
         "stage": "frontend",
         "price": 37,
-        "new_sales": 113,
+        "new_sales": 115,
         "rebills": 0,
         "refunds": 5,
-        "revenue": 3330.489999999996,
+        "revenue": 3396.709999999996,
         "refund_amount": 165.54
       },
       "alsv1-blueprint": {
         "label": "OTO1 Blueprint",
         "stage": "oto1",
         "price": 67,
-        "new_sales": 33,
+        "new_sales": 34,
         "rebills": 0,
         "refunds": 1,
-        "revenue": 1910.7800000000004,
+        "revenue": 1971.7600000000004,
         "refund_amount": 60.98,
-        "take_rate_pct": 29.2
+        "take_rate_pct": 29.6
       },
       "alsv1-timeline": {
         "label": "OTO2 Timeline",
         "stage": "oto2",
         "price": 47,
-        "new_sales": 19,
+        "new_sales": 20,
         "rebills": 0,
         "refunds": 1,
-        "revenue": 759.2199999999999,
+        "revenue": 801.6999999999999,
         "refund_amount": 42.48,
-        "take_rate_pct": 16.8
+        "take_rate_pct": 17.4
       },
       "alsv1-timeline-discount": {
         "label": "OTO2 Downsell (Timeline Discount)",
@@ -427,16 +439,16 @@
     }
   },
   "cross_check": {
-    "cb_new_sales": 113,
-    "cb_revenue": 5904.5,
-    "cpv_conversions": 105,
-    "cpv_revenue_sgd": 7576.34,
-    "cpv_revenue_usd": 5606.49,
+    "cb_new_sales": 115,
+    "cb_revenue": 6074.18,
+    "cpv_conversions": 108,
+    "cpv_revenue_sgd": 7796.88,
+    "cpv_revenue_usd": 5769.69,
     "sgd_to_usd_rate": 0.74,
-    "revenue_diff": 298.01,
+    "revenue_diff": 304.49,
     "diff_pct": 5.0,
     "status": "warn",
-    "note": "CPV conversions (105) < CB frontend sales (113) \u2014 postbacks may be missing.",
+    "note": "CPV conversions (108) < CB frontend sales (115) \u2014 postbacks may be missing.",
     "currency_note": "CPV revenue in SGD (\u00d70.74 \u2192 USD). CB revenue is net vendor USD after ClickBank fees."
   }
 }
