@@ -1,0 +1,396 @@
+{
+  "meta": {
+    "generated_at": "2026-04-26T17:31:00.679921Z",
+    "model": "claude-sonnet-4-6",
+    "mode": "live"
+  },
+  "analysis": {
+    "period_summary": "For the week of 2026-04-13 to 2026-04-19, the funnel generated $4,510.63 USD net revenue (ClickBank) across 106 frontend sales, with CPV and ClickBank purchase counts in perfect alignment. The single most critical finding is a near-universal checkout-to-purchase conversion rate collapse: across all materially-sized flows, checkout-to-purchase rates range from 2.70% to 7.49%, all well below the 15% critical threshold, meaning the ClickBank checkout page is the primary revenue leak this week.",
+    "funnel_scorecard": {
+      "upsell1_take_rate_pct": 25.5,
+      "downsell1_take_rate_pct": 6.6,
+      "upsell2_take_rate_pct": 7.5,
+      "downsell2_take_rate_pct": 2.8,
+      "weakest_step": "checkout \u2192 purchase",
+      "weakest_step_rate_pct": 3.04,
+      "weakest_flow": " \u2192 /offer/v4/",
+      "commentary": "The funnel top-of-funnel and CTA engagement are healthy (landing-to-optin 19\u201329%, offer-to-checkout 72\u201386%), but the ClickBank checkout step is critically underperforming across every active flow (2.7\u20137.5%), resulting in low overall conversion rates (0.46\u20131.50%). Backend monetization is also weak, with OTO1 at the borderline average/weak threshold and OTO2 well below benchmark."
+    },
+    "variant_comparison": [
+      {
+        "variant": "landing\u2192offer_v4",
+        "label": " \u2192 /offer/v4/",
+        "landing_page_views": 1848,
+        "optin_completions": 353,
+        "offer_page_views": 351,
+        "checkout_clicks": 296,
+        "purchases": 9,
+        "landing_to_optin_rate": 19.1,
+        "offer_to_checkout_rate": 84.33,
+        "checkout_to_purchase_rate": 3.04,
+        "revenue": null,
+        "status": "weaker",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "fix"
+      },
+      {
+        "variant": "landing\u2192offer_v4_v2",
+        "label": " \u2192 /offer/v4-v2",
+        "landing_page_views": 1401,
+        "optin_completions": 267,
+        "offer_page_views": 266,
+        "checkout_clicks": 228,
+        "purchases": 11,
+        "landing_to_optin_rate": 19.06,
+        "offer_to_checkout_rate": 85.71,
+        "checkout_to_purchase_rate": 4.82,
+        "revenue": null,
+        "status": "weaker",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "fix"
+      },
+      {
+        "variant": "landing\u2192offer",
+        "label": " \u2192 /offer",
+        "landing_page_views": 8,
+        "optin_completions": 2,
+        "offer_page_views": 319,
+        "checkout_clicks": 3,
+        "purchases": 0,
+        "landing_to_optin_rate": 25.0,
+        "offer_to_checkout_rate": 0.94,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "offer \u2192 checkout",
+        "action": "monitor"
+      },
+      {
+        "variant": "landing\u2192offer_v3",
+        "label": " \u2192 /offer/v3",
+        "landing_page_views": 5,
+        "optin_completions": 1,
+        "offer_page_views": 1,
+        "checkout_clicks": 1,
+        "purchases": 0,
+        "landing_to_optin_rate": 20.0,
+        "offer_to_checkout_rate": 100.0,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "monitor"
+      },
+      {
+        "variant": "a\u2192?",
+        "label": "/a \u2192 ?",
+        "landing_page_views": 20,
+        "optin_completions": 0,
+        "offer_page_views": 0,
+        "checkout_clicks": 0,
+        "purchases": 0,
+        "landing_to_optin_rate": 0.0,
+        "offer_to_checkout_rate": 0.0,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "landing \u2192 optin",
+        "action": "monitor"
+      },
+      {
+        "variant": "c\u2192?",
+        "label": "/c/ \u2192 ?",
+        "landing_page_views": 1,
+        "optin_completions": 0,
+        "offer_page_views": 0,
+        "checkout_clicks": 0,
+        "purchases": 0,
+        "landing_to_optin_rate": 0.0,
+        "offer_to_checkout_rate": 0.0,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "landing \u2192 optin",
+        "action": "monitor"
+      },
+      {
+        "variant": "c\u2192offer_v4",
+        "label": "/c/ \u2192 /offer/v4/",
+        "landing_page_views": 1173,
+        "optin_completions": 313,
+        "offer_page_views": 313,
+        "checkout_clicks": 246,
+        "purchases": 9,
+        "landing_to_optin_rate": 26.68,
+        "offer_to_checkout_rate": 78.59,
+        "checkout_to_purchase_rate": 3.66,
+        "revenue": null,
+        "status": "weaker",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "fix"
+      },
+      {
+        "variant": "b\u2192offer_v2",
+        "label": "/b \u2192 /offer/v2",
+        "landing_page_views": 47,
+        "optin_completions": 13,
+        "offer_page_views": 13,
+        "checkout_clicks": 6,
+        "purchases": 0,
+        "landing_to_optin_rate": 27.66,
+        "offer_to_checkout_rate": 46.15,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "offer \u2192 checkout",
+        "action": "monitor"
+      },
+      {
+        "variant": "c_v2\u2192offer_v4_v2",
+        "label": "/c-v2 \u2192 /offer/v4-v2",
+        "landing_page_views": 132,
+        "optin_completions": 31,
+        "offer_page_views": 31,
+        "checkout_clicks": 23,
+        "purchases": 0,
+        "landing_to_optin_rate": 23.48,
+        "offer_to_checkout_rate": 74.19,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "monitor"
+      },
+      {
+        "variant": "c_v2\u2192offer_v4",
+        "label": "/c-v2 \u2192 /offer/v4/",
+        "landing_page_views": 218,
+        "optin_completions": 51,
+        "offer_page_views": 51,
+        "checkout_clicks": 37,
+        "purchases": 1,
+        "landing_to_optin_rate": 23.39,
+        "offer_to_checkout_rate": 72.55,
+        "checkout_to_purchase_rate": 2.7,
+        "revenue": null,
+        "status": "weaker",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "fix"
+      },
+      {
+        "variant": "c\u2192offer_v4_v2",
+        "label": "/c/ \u2192 /offer/v4-v2",
+        "landing_page_views": 987,
+        "optin_completions": 291,
+        "offer_page_views": 291,
+        "checkout_clicks": 239,
+        "purchases": 12,
+        "landing_to_optin_rate": 29.48,
+        "offer_to_checkout_rate": 82.13,
+        "checkout_to_purchase_rate": 5.02,
+        "revenue": null,
+        "status": "stronger",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "protect"
+      },
+      {
+        "variant": "landing\u2192offer_v4_v3",
+        "label": " \u2192 /offer/v4-v3",
+        "landing_page_views": 1951,
+        "optin_completions": 447,
+        "offer_page_views": 447,
+        "checkout_clicks": 237,
+        "purchases": 12,
+        "landing_to_optin_rate": 22.91,
+        "offer_to_checkout_rate": 53.02,
+        "checkout_to_purchase_rate": 5.06,
+        "revenue": null,
+        "status": "weaker",
+        "weakest_step": "offer \u2192 checkout",
+        "action": "fix"
+      },
+      {
+        "variant": "d_v3\u2192offer_v4",
+        "label": "/d-v3/ \u2192 /offer/v4/",
+        "landing_page_views": 1872,
+        "optin_completions": 461,
+        "offer_page_views": 461,
+        "checkout_clicks": 374,
+        "purchases": 28,
+        "landing_to_optin_rate": 24.63,
+        "offer_to_checkout_rate": 81.13,
+        "checkout_to_purchase_rate": 7.49,
+        "revenue": null,
+        "status": "stronger",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "protect"
+      },
+      {
+        "variant": "d_v3\u2192offer_v4_v2",
+        "label": "/d-v3/ \u2192 /offer/v4-v2",
+        "landing_page_views": 1912,
+        "optin_completions": 471,
+        "offer_page_views": 471,
+        "checkout_clicks": 386,
+        "purchases": 24,
+        "landing_to_optin_rate": 24.63,
+        "offer_to_checkout_rate": 81.95,
+        "checkout_to_purchase_rate": 6.22,
+        "revenue": null,
+        "status": "stronger",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "protect"
+      },
+      {
+        "variant": "d\u2192offer_v4_v2",
+        "label": "/d/ \u2192 /offer/v4-v2",
+        "landing_page_views": 4,
+        "optin_completions": 1,
+        "offer_page_views": 1,
+        "checkout_clicks": 1,
+        "purchases": 0,
+        "landing_to_optin_rate": 25.0,
+        "offer_to_checkout_rate": 100.0,
+        "checkout_to_purchase_rate": 0.0,
+        "revenue": null,
+        "status": "insufficient_data",
+        "weakest_step": "checkout \u2192 purchase",
+        "action": "monitor"
+      }
+    ],
+    "funnel_leaks": [
+      {
+        "variant": "all",
+        "step": "checkout \u2192 purchase",
+        "rate_pct": 5.04,
+        "severity": "critical",
+        "evidence_type": "observed",
+        "why_it_matters": "With 2,296 total checkout clicks this week and a blended ~5% checkout-to-purchase rate, improving to even 15% would roughly triple frontend revenue from the same traffic and email spend."
+      },
+      {
+        "variant": "landing\u2192offer_v4_v3",
+        "step": "offer \u2192 checkout",
+        "rate_pct": 53.02,
+        "severity": "high",
+        "evidence_type": "observed",
+        "why_it_matters": "The v4-v3 offer page loses nearly half its visitors before the checkout CTA click, compared to 78\u201386% for other v4 variants, costing an estimated 210 additional checkout clicks per 1,951 landing views."
+      },
+      {
+        "variant": "landing\u2192offer",
+        "step": "offer \u2192 checkout",
+        "rate_pct": 0.94,
+        "severity": "high",
+        "evidence_type": "observed",
+        "why_it_matters": "The base /offer path shows 319 offer page views but only 3 checkout clicks (0.94%), suggesting a broken or missing CTA link on this legacy offer page that is leaking re-routed traffic."
+      },
+      {
+        "variant": "b\u2192offer_v2",
+        "step": "offer \u2192 checkout",
+        "rate_pct": 46.15,
+        "severity": "medium",
+        "evidence_type": "observed",
+        "why_it_matters": "The /b landing + /offer/v2 combination has a below-benchmark offer-to-checkout rate of 46.15% with 0 purchases from 6 checkout clicks; sample is small but directionally weak and warrants investigation."
+      },
+      {
+        "variant": "all",
+        "step": "OTO2 take rate",
+        "rate_pct": 7.5,
+        "severity": "medium",
+        "evidence_type": "observed",
+        "why_it_matters": "OTO2 (Timeline) at 7.5% take rate is well below the 15% minimum benchmark, and combined OTO2 + downsell reaches only 10.4%, meaning backend monetization from buyers who declined OTO1 is severely underperforming."
+      }
+    ],
+    "upsell_analysis": {
+      "frontend_sales": 106,
+      "oto1_sales": 27,
+      "oto1_take_rate_pct": 25.5,
+      "oto1_downsell_sales": 7,
+      "oto2_sales": 8,
+      "oto2_take_rate_pct": 7.5,
+      "oto2_downsell_sales": 3,
+      "total_backend_revenue": 4510.63,
+      "avg_revenue_per_buyer": 42.55,
+      "commentary": "OTO1 take rate of 25.5% sits at the borderline weak/average threshold, and the combined OTO1 + downsell acceptance of 32.1% leaves meaningful revenue on the table from 68 buyers who declined both. OTO2 at 7.5% is critically low (benchmark 15%+), suggesting either a sequence issue, mismatch between the offer and buyer intent, or a technical redirect problem that should be audited immediately."
+    },
+    "needle_movers": [
+      {
+        "rank": 1,
+        "priority": "critical",
+        "area": "ClickBank checkout conversion",
+        "variant": "all",
+        "evidence_type": "observed",
+        "why": "All active flows show checkout-to-purchase rates between 2.70% and 7.49%, all critically below the 15% threshold. With 2,296 checkout clicks this week, lifting the blended rate from ~5% to 15% would add approximately 230 additional frontend sales (~$8,510 revenue at $37 AOV) from identical traffic volume.",
+        "what": [
+          "Audit the ClickBank order form for friction: form length, required fields, payment security badges, and mobile UX \u2014 check for any recent changes coinciding with the rate drop",
+          "Test a price-point reduction or trial offer (e.g. $27 or $17 trial) on a split of checkout clicks to identify whether price resistance is the primary barrier",
+          "Add a checkout page bump or pre-checkout bridge page reinforcing the core value proposition and urgency before the ClickBank form loads"
+        ],
+        "revenue_impact": "Lifting checkout-to-purchase from ~5% blended to 15% on 2,296 weekly checkout clicks = ~230 incremental sales \u00d7 $37 = ~$8,510 additional frontend revenue per week, plus downstream OTO lift"
+      },
+      {
+        "rank": 2,
+        "priority": "high",
+        "area": "Offer v4-v3 CTA engagement",
+        "variant": "landing\u2192offer_v4_v3",
+        "evidence_type": "observed",
+        "why": "The /offer/v4-v3 page achieves only 53.02% offer-to-checkout rate versus 78\u201386% for other v4 variants, despite 447 offer page views \u2014 indicating the CTA placement, copy, or page structure is materially underperforming and costing ~130 checkout clicks per week vs. peers.",
+        "what": [
+          "Compare /offer/v4-v3 CTA button placement, copy, and frequency against /offer/v4/ and /offer/v4-v2 to identify structural differences",
+          "Review heatmap or scroll-depth data for /offer/v4-v3 to determine if users are dropping before reaching the primary CTA",
+          "A/B test replacing the v4-v3 CTA section with the highest-converting v4 CTA block while keeping the rest of the page copy intact"
+        ],
+        "revenue_impact": "Lifting offer-to-checkout from 53% to 80% on 447 weekly offer views = ~121 additional checkout clicks; at current 5.06% purchase rate that is ~6 incremental sales = ~$222/week, with upside if checkout rate also improves"
+      },
+      {
+        "rank": 3,
+        "priority": "high",
+        "area": "OTO2 (Timeline) sequence and redirect",
+        "variant": "all",
+        "evidence_type": "observed",
+        "why": "OTO2 take rate of 7.5% (8 sales from 106 buyers) is critically below the 15% benchmark, and the OTO2 downsell adds only 3 more sales (2.8%), suggesting the offer or its delivery is broken or the sequence is being skipped for a large proportion of buyers.",
+        "what": [
+          "Verify ClickBank OTO2 redirect URL is correctly configured and firing for all frontend buyers, not just a subset \u2014 check for any conditional logic errors in the funnel sequence",
+          "Review OTO2 (Timeline) page copy and price point ($47) for relevance to the buyer who just purchased the $37 front-end \u2014 test a more congruent bridge or reduced price ($37) as the primary offer",
+          "Audit OTO1 \u2192 OTO2 flow timing and whether buyers who purchase OTO1 are correctly bypassing to OTO2 or falling out of the sequence"
+        ],
+        "revenue_impact": "Lifting OTO2 take rate from 7.5% to 20% on 106 buyers = ~13 incremental OTO2 sales \u00d7 $47 = ~$611 additional backend revenue per week"
+      },
+      {
+        "rank": 4,
+        "priority": "high",
+        "area": "OTO1 take rate improvement",
+        "variant": "all",
+        "evidence_type": "observed",
+        "why": "OTO1 at 25.5% is borderline weak (below the 25\u201339% average range midpoint), and 68 buyers declined both OTO1 and its downsell this week, representing significant unrealised backend value at $67 and $47 respectively.",
+        "what": [
+          "Test OTO1 page headline and lead copy \u2014 ensure the Blueprint offer has a clear, immediate, and congruent benefit bridge from the front-end purchase the buyer just made",
+          "Add a video or animated proof element (testimonials, sample pages) to the OTO1 page to increase perceived value before the buy button",
+          "Test the OTO1 downsell at $37 instead of $47 to improve downsell capture rate among price-sensitive buyers"
+        ],
+        "revenue_impact": "Lifting OTO1 from 25.5% to 35% take rate on 106 buyers = ~10 incremental OTO1 sales \u00d7 $67 = ~$670 additional revenue per week, with compounding effect on OTO2 exposure"
+      },
+      {
+        "rank": 5,
+        "priority": "medium",
+        "area": "Legacy /offer and /a tracking gaps",
+        "variant": "landing\u2192offer",
+        "evidence_type": "inferred",
+        "why": "The base /offer path shows 319 offer page views but only 3 checkout clicks (0.94%), and the /a landing path (20 views) shows 0 optin completions and unknown offer routing \u2014 both indicate either a broken redirect/CTA or untracked traffic segments that may be inflating view counts without commercial intent.",
+        "what": [
+          "Audit the /offer base URL for a broken or missing checkout CTA \u2014 compare current live HTML against the working /offer/v4/ version to identify any missing button or JavaScript errors",
+          "Investigate the source of 319 /offer page views with only 8 corresponding landing page views \u2014 determine if direct traffic, old email links, or referral traffic is landing mid-funnel without proper tracking parameters",
+          "Resolve the /a landing path routing so it correctly flows to a tracked offer page, or pause it to avoid polluting aggregate metrics"
+        ],
+        "revenue_impact": "Fixing /offer CTA would convert a portion of 316 stranded offer viewers; even a 53% offer-to-checkout rate (v4-v3 baseline) \u00d7 5% purchase rate = ~8 incremental sales = ~$296/week currently being lost"
+      }
+    ],
+    "cpv_cb_discrepancy": {
+      "cpv_purchases": 106,
+      "cb_frontend_sales": 106,
+      "revenue_diff_usd": 216.75,
+      "status": "ok",
+      "note": "CPV and ClickBank purchase counts match exactly at 106; the $216.75 USD revenue difference (4.8%) is within expected range and attributable to OTO postback timing and the SGD-to-USD conversion approximation."
+    },
+    "data_notes": "1) GA4 funnel_v4 shows landing_to_optin_page_pct of 153.1%, which is impossible and indicates a GA4 session inflation or cross-domain tracking issue where the optin page is receiving sessions not originated from the tracked landing page \u2014 do not use this ratio for decision-making. 2) The /offer base path flow has a severe mismatch between landing_page_views (8) and offer_page_views (319), suggesting significant direct or mid-funnel traffic arriving at /offer without passing through the tracked landing page, which distorts the offer_to_checkout_rate (0.94%) for that flow. 3) funnel_backend.variant_sales shows 82 of 106 sales attributed to 'other' with no matching funnel_totals breakdown, limiting per-variant revenue analysis \u2014 variant-level revenue fields in variant_comparison are set to null. 4) The /a\u2192? and /c/\u2192? flows with zero completions are likely routing or tracking configuration gaps rather than genuine zero-conversion traffic, given the /c/ landing variant performs well in other flows."
+  }
+}
