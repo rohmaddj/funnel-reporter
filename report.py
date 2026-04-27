@@ -256,6 +256,10 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
     email_camps = {k: v for k, v in tracking["campaigns"].items() if v["source"] == "email"}
     paid_camps  = {k: v for k, v in tracking["campaigns"].items() if v["source"] == "facebook"}
 
+    # When the Facebook collector is disabled (e.g. Ask Sabrina), traffic_sources.paid
+    # is None — hide the paid sections and show 0 for ad spend.
+    has_paid = bool((data.get("traffic_sources", {}) or {}).get("paid"))
+
     def camp_rows(camps):
         rows = ""
         for cid, c in sorted(camps.items(), key=lambda x: -x[1]["revenue"]):
@@ -272,7 +276,8 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
 
     def paid_rows():
         rows = ""
-        paid_data = data["traffic_sources"]["paid"]["campaigns"]
+        paid = (data.get("traffic_sources", {}) or {}).get("paid") or {}
+        paid_data = paid.get("campaigns", {})
         for key, camp in paid_data.items():
             for platform, pd in camp["platforms"].items():
                 roi_color = "#16a34a" if (pd.get("purchases", 0) > 0 and pd.get("cpa_sgd") and pd["cpa_sgd"] < 110) else "#dc2626"
@@ -368,7 +373,7 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
             <div><p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Revenue</p><p style="margin:0;font-size:24px;font-weight:700;color:#111">${snap['total_revenue_usd']:,.2f}</p></div>
             <div><p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">FE Sales</p><p style="margin:0;font-size:24px;font-weight:700;color:#111">{snap['frontend_sales']}</p></div>
             <div><p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Avg/Buyer</p><p style="margin:0;font-size:24px;font-weight:700;color:#111">${snap['avg_revenue_per_buyer_usd']:,.2f}</p></div>
-            <div><p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Ad Spend</p><p style="margin:0;font-size:24px;font-weight:700;color:#111">S${snap['paid_traffic_spend_sgd']:,.2f}</p><p style="margin:2px 0 0;font-size:11px;color:#9ca3af">~${snap['paid_traffic_spend_usd']:,.2f} USD</p></div>
+            {('<div><p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Ad Spend</p><p style="margin:0;font-size:24px;font-weight:700;color:#111">S$' + f"{snap['paid_traffic_spend_sgd']:,.2f}" + '</p><p style="margin:2px 0 0;font-size:11px;color:#9ca3af">~$' + f"{snap['paid_traffic_spend_usd']:,.2f}" + ' USD</p></div>') if has_paid else '<div><p style="margin:0 0 4px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em">Checkout Clicks</p><p style="margin:0;font-size:24px;font-weight:700;color:#111">' + f"{snap.get('checkout_clicks', 0):,}" + '</p></div>'}
           </div>
           {cross_block}
         </div>
@@ -423,20 +428,7 @@ def build_email_html(data: dict, analysis: dict, doc_url: str = None) -> str:
         </div>
 
         <!-- Paid campaigns -->
-        <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
-          <h2 style="margin:0 0 12px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Paid Traffic (Facebook / Instagram)</h2>
-          <table style="width:100%;border-collapse:collapse">
-            <thead><tr style="background:#f9fafb">
-              <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Campaign</th>
-              <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Impressions</th>
-              <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Spend</th>
-              <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">LP CTR</th>
-              <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Sales</th>
-              <th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">CR%</th>
-            </tr></thead>
-            <tbody>{paid_rows()}</tbody>
-          </table>
-        </div>
+        {('<div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0"><h2 style="margin:0 0 12px;font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.08em">Paid Traffic (Facebook / Instagram)</h2><table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f9fafb"><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Campaign</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Impressions</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Spend</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">LP CTR</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Sales</th><th style="padding:8px 10px;font-size:11px;color:#6b7280;text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.06em">CR%</th></tr></thead><tbody>' + paid_rows() + '</tbody></table></div>') if has_paid else ''}
 
         <!-- Funnel backend -->
         <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #f0f0f0">
@@ -571,7 +563,7 @@ def append_sheets_row(services, data: dict, analysis: dict, doc_url: str = None)
 
     email_totals = tracking["totals_by_source"].get("email", {})
     paid_totals  = tracking["totals_by_source"].get("facebook", {})
-    paid_data    = data["traffic_sources"]["paid"]
+    paid_data    = (data.get("traffic_sources", {}) or {}).get("paid") or {}
 
     oto1_take = backend["sku_breakdown"].get("SSR", {}).get("take_rate_pct", 0)
     oto2_take = backend["sku_breakdown"].get("dhr", {}).get("take_rate_pct", 0)

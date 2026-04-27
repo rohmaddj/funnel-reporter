@@ -19,8 +19,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from collectors.clickbank import ClickBankCollector
-from collectors.cpvlabs import CPVLabsCollector
-from collectors.facebook import FacebookCollector
+# CPVLabsAstroCollector extends the base CPV collector with landing-stats /
+# funnel_totals (per-flow funnel step aggregation). Despite the name, it is
+# project-agnostic — Ask Sabrina uses it too.
+from collectors.cpvlabs_astro import CPVLabsAstroCollector as CPVLabsExtendedCollector
+# Facebook ad-spend collector intentionally not imported — Ask Sabrina has no
+# active paid traffic, so we don't run the FB Marketing API call. CPV Labs
+# still surfaces any Facebook-tagged campaigns via the cpvlabs collector.
+# from collectors.facebook import FacebookCollector
 from collectors.maropost import MaropostCollector
 from collectors.ga4 import GA4Collector
 from utils.date_helpers import get_week_range
@@ -93,8 +99,8 @@ def main():
     # ── Run each collector ───────────────────────────────────────────────────
     collectors = {
         "clickbank": ClickBankCollector(mock=args.mock),
-        "cpvlabs":   CPVLabsCollector(mock=args.mock),
-        "facebook":  FacebookCollector(mock=args.mock),
+        "cpvlabs":   CPVLabsExtendedCollector(mock=args.mock),
+        # "facebook":  FacebookCollector(mock=args.mock),  # disabled — no paid traffic
         "maropost":  MaropostCollector(mock=args.mock),
         "ga4":       GA4Collector(mock=args.mock),
     }
@@ -131,11 +137,11 @@ def main():
         },
         "funnel_snapshot": build_funnel_snapshot(results),
         "traffic_sources": {
-            "email":    results["maropost"],
-            "paid":     results["facebook"],
-            "tracking": results["cpvlabs"],
+            "email":    results.get("maropost"),
+            "paid":     results.get("facebook"),  # None when FB collector disabled
+            "tracking": results.get("cpvlabs"),
         },
-        "funnel_backend": results["clickbank"],
+        "funnel_backend": results.get("clickbank"),
         "cross_check": cross_check,
         "funnel_variants": results.get("ga4"),
     }
@@ -159,18 +165,32 @@ def build_funnel_snapshot(results: dict) -> dict:
     """
     Roll up top-line numbers from all sources into a single snapshot dict.
     This is what populates the 'Funnel Snapshot' table in your report.
-    """
-    cb = results.get("clickbank") or {}
-    fb = results.get("facebook") or {}
-    mp = results.get("maropost") or {}
-    cpv_email = (results.get("cpvlabs") or {}).get("totals_by_source", {}).get("email", {})
 
-    total_revenue = cb.get("total_revenue", 0)
+    funnel_totals (CPV landing-stats) provides per-flow funnel step volumes
+    (landing → optin → offer → checkout → purchase) which we sum across all
+    detected flows. New CPV campaigns / sales pages get picked up automatically.
+    """
+    cb  = results.get("clickbank") or {}
+    fb  = results.get("facebook")  or {}
+    cpv = results.get("cpvlabs")   or {}
+    cpv_email = cpv.get("totals_by_source", {}).get("email", {})
+
+    total_revenue  = cb.get("total_revenue", 0)
     frontend_sales = cb.get("frontend_sales_count", 0)
-    avg_per_buyer = round(total_revenue / frontend_sales, 2) if frontend_sales else 0
+    avg_per_buyer  = round(total_revenue / frontend_sales, 2) if frontend_sales else 0
 
     fb_spend_sgd = fb.get("total_spend_sgd", 0)
     fb_spend_usd = fb.get("total_spend_usd", 0)
+
+    # ── Sum funnel step volumes across all flows (dynamic) ──────────────────
+    funnel_totals = cpv.get("funnel_totals", {})
+    total_landing    = sum(v.get("landing_page_views", 0) for v in funnel_totals.values())
+    total_optin_comp = sum(v.get("optin_completions",  0) for v in funnel_totals.values())
+    total_offer      = sum(v.get("offer_page_views",   0) for v in funnel_totals.values())
+    total_checkout   = sum(v.get("checkout_clicks",    0) for v in funnel_totals.values())
+
+    def rate(num, den):
+        return round(num / den * 100, 2) if den else 0.0
 
     return {
         "total_revenue_usd": total_revenue,
@@ -181,6 +201,16 @@ def build_funnel_snapshot(results: dict) -> dict:
         "email_total_views":       cpv_email.get("views", 0),
         "email_total_conversions": cpv_email.get("conversions", 0),
         "email_total_revenue":     cpv_email.get("revenue", 0),
+        # Funnel step volumes (CPV landing-stats, summed across all flows)
+        "landing_page_views":   total_landing,
+        "optin_completions":    total_optin_comp,
+        "offer_page_views":     total_offer,
+        "checkout_clicks":      total_checkout,
+        # Funnel rates
+        "landing_to_optin_pct":   rate(total_optin_comp, total_landing),
+        "offer_to_checkout_pct":  rate(total_checkout,   total_offer),
+        "checkout_to_sale_pct":   rate(frontend_sales,   total_checkout),
+        "overall_rate_pct":       rate(frontend_sales,   total_landing),
     }
 
 

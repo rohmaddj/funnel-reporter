@@ -176,12 +176,16 @@ CRITICAL output rules:
 
 
 def build_user_prompt(data: dict) -> str:
+    ts = data.get("traffic_sources", {}) or {}
+    tracking = ts.get("tracking") or {}
+    paid     = ts.get("paid")     or {}
     slim = {
         "period": f"{data['meta']['period_start']} to {data['meta']['period_end']}",
         "funnel_snapshot": data.get("funnel_snapshot"),
-        "email_campaigns": data.get("traffic_sources", {}).get("tracking", {}).get("campaigns"),
-        "paid_campaigns": data.get("traffic_sources", {}).get("paid", {}).get("campaigns"),
-        "tracking_totals_by_source": data.get("traffic_sources", {}).get("tracking", {}).get("totals_by_source"),
+        "email_campaigns": tracking.get("campaigns"),
+        "paid_campaigns": paid.get("campaigns"),
+        "tracking_totals_by_source": tracking.get("totals_by_source"),
+        "cpv_funnel_totals": tracking.get("funnel_totals"),
         "funnel_backend": data.get("funnel_backend"),
         "cross_check": data.get("cross_check"),
         "funnel_variants": data.get("funnel_variants"),
