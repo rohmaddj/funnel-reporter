@@ -1,0 +1,220 @@
+{
+  "meta": {
+    "generated_at": "2026-05-03T17:38:43.196780Z",
+    "model": "claude-sonnet-4-5",
+    "mode": "live"
+  },
+  "analysis": {
+    "period_summary": "Week delivered $4,517.64 from 158 frontend buyers at $28.59 average revenue per buyer. Email traffic drove 39 tracked conversions and $2,041.80 revenue with no paid spend active. The most critical commercial issue is a severe backend monetization gap: OTO1 combined take rate is only 20.3% (far below the 40% strong benchmark), and OTO2 combined take rate is just 3.8%.",
+    "northstar": {
+      "operating_focus": "tracked funnel performance and revenue efficiency",
+      "commercial_metric": "Revenue Per Visitor (RPV)",
+      "email_rpv": 0.4,
+      "paid_rpv_usd": null,
+      "avg_funnel_value": 28.59,
+      "commentary": "Email RPV at $0.40 is directionally healthy for warm traffic, but backend take rates are suppressing average order value significantly."
+    },
+    "funnel_leaks": [
+      {
+        "area": "OTO1 combined",
+        "metric": "OTO1 total take rate",
+        "value": "20.3% (24 main + 8 downsell / 158 frontend)",
+        "why_it_matters": "At 20.3% combined, OTO1 is capturing less than half the strong 40%+ benchmark, leaving significant immediate revenue on the table."
+      },
+      {
+        "area": "OTO2 combined",
+        "metric": "OTO2 total take rate",
+        "value": "3.8% (4 main + 2 downsell / 158 frontend)",
+        "why_it_matters": "OTO2 at 3.8% is critically weak and represents a near-total monetization failure at the final upsell stage."
+      },
+      {
+        "area": "OTO1 downsell efficiency",
+        "metric": "OTO1 downsell take rate",
+        "value": "5.1% (8 sales / 158 frontend)",
+        "why_it_matters": "Downsell is only capturing 5.1% of frontend buyers, indicating poor downsell trigger logic or offer positioning after OTO1 main rejection."
+      }
+    ],
+    "needle_movers": [
+      {
+        "rank": 1,
+        "priority": "critical",
+        "area": "OTO1 combined monetization",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "OTO1 combined take rate is 20.3% (24 main at 15.2% + 8 downsell at 5.1%), less than half the 40%+ strong benchmark. This is the single largest backend revenue gap. Backend SKU data confirms 32 total OTO1 sales from 158 frontend buyers.",
+        "what": [
+          "Audit OTO1 main offer page for friction: confirm page load, check copy clarity, validate CTA prominence",
+          "Test OTO1 price anchor: evaluate whether $67 main offer needs repositioning or social proof reinforcement",
+          "Improve downsell trigger: current 5.1% downsell take suggests poor exit-intent logic or weak downsell offer differentiation"
+        ],
+        "revenue_impact": "Directional: lifting OTO1 combined from 20.3% to 35% would add approximately 23 incremental OTO1 sales per week at blended $57 average, worth ~$1,300 additional weekly revenue."
+      },
+      {
+        "rank": 2,
+        "priority": "critical",
+        "area": "OTO2 combined monetization",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "OTO2 combined take rate is 3.8% (4 main + 2 downsell from 158 frontend buyers). At below 10%, this represents a near-total failure to monetize the final upsell stage. Backend SKU data confirms only 6 total OTO2 sales.",
+        "what": [
+          "Audit OTO2 presentation timing: confirm it triggers correctly after OTO1 acceptance/rejection",
+          "Validate OTO2 offer relevance: ensure Divine Helper positioning aligns with customer intent at this stage",
+          "Test OTO2 downsell flow: 2 downsell sales vs 4 main sales suggests downsell may not be triggering for all OTO2 main rejections"
+        ],
+        "revenue_impact": "Directional: lifting OTO2 combined from 3.8% to 12% would add approximately 13 incremental OTO2 sales per week at blended $87 average, worth ~$1,130 additional weekly revenue."
+      },
+      {
+        "rank": 3,
+        "priority": "high",
+        "area": "Campaign #111 email performance",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "Campaign #111 (Revamp UI & Copy) drove 3,202 views, 28 conversions, and $1,554.50 revenue at 0.87% CR. This is the highest-volume email campaign and converted nearly 3x the weak 0.3% benchmark. Represents 71.8% of total conversions and 76.1% of total revenue from tracked email campaigns.",
+        "what": [
+          "Protect this campaign structure and creative approach as the clear email winner",
+          "Analyze UI & copy changes from #111 vs older email campaigns to identify repeatable winning elements",
+          "Test scaled deployment: expand #111-style creative to additional email segments"
+        ],
+        "revenue_impact": "Observed: Campaign #111 already delivered $1,554.50 this week. Scaling this approach could replace underperforming email variants and improve overall email RPV."
+      },
+      {
+        "rank": 4,
+        "priority": "high",
+        "area": "Campaign #51 Facebook efficiency",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "Campaign #51 (Facebook V17 TSL) delivered 263 views, 17 conversions, and $1,332.09 revenue at 6.46% CR. This is an exceptionally strong conversion rate well above the 0.3\u20130.5% email benchmark, indicating high-intent warm Facebook traffic. No paid spend tracked this week, but historical performance justifies testing controlled paid scale.",
+        "what": [
+          "Test controlled paid scale: allocate modest daily budget to Campaign #51 Facebook traffic source",
+          "Monitor paid CPA closely: ensure buyer economics remain below $14.29 target when spend is active",
+          "Protect V17 TSL funnel path as demonstrated winner for Facebook traffic"
+        ],
+        "revenue_impact": "Cannot quantify without active paid spend data. At 6.46% tracking CR, paid scale is commercially viable if CPA remains under target."
+      },
+      {
+        "rank": 5,
+        "priority": "medium",
+        "area": "destiny_v1 vs destiny_v2 variant test",
+        "evidence_type": "mixed",
+        "confidence": "medium",
+        "why": "destiny_v2 has lower bounce (42.2% vs 58.3%) and higher checkout-from-optin efficiency (21.21% vs 19.73%), but destiny_v1 has higher overall checkout rate (1.36% vs 1.53%) and drove significantly more attributed revenue in variant_sales ($24.28 vs $126.82 for v2, though both are tiny vs 'other' at $2,107.40). Session-based funnel signals favor v2, but attributed sales are too small and attribution too weak to declare a definitive winner.",
+        "what": [
+          "Continue controlled A/B test between destiny_v1 and destiny_v2 with equal traffic allocation",
+          "Focus evaluation on sessions-to-checkout efficiency rather than attributed sales until attribution improves",
+          "Audit why 'other' captures $2,107.40 in variant_sales while named variants capture minimal attributed revenue"
+        ],
+        "revenue_impact": "Mixed signals prevent clean revenue impact estimate. Variant attribution issue must be resolved before projecting lift."
+      }
+    ],
+    "variant_read": [
+      {
+        "variant": "destiny_v1",
+        "label": "/destiny (full-screen)",
+        "status": "mixed",
+        "why": "17,232 sessions with 58.3% bounce, 6.88% optin rate, and 1.36% checkout rate. Checkout-from-optin is 19.73%, slightly below destiny_v2's 21.21%. Attributed variant_sales shows only $24.28, but the vast majority of sales fall into 'other' ($2,107.40), making attribution unreliable. Session-based signals show functional performance but higher bounce than v2.",
+        "action": "test"
+      },
+      {
+        "variant": "destiny_v2",
+        "label": "/destiny/v2 (with-headline)",
+        "status": "mixed",
+        "why": "917 sessions with lower bounce (42.2% vs destiny_v1's 58.3%), 7.2% optin rate, and 1.53% checkout rate. Checkout-from-optin is 21.21%, slightly better than v1's 19.73%. Attributed variant_sales shows $126.82 vs v1's $24.28, but both are tiny compared to 'other' at $2,107.40. Session-based funnel signals favor v2, but sample size and attribution weakness prevent definitive conclusion.",
+        "action": "test"
+      },
+      {
+        "variant": "index_v17",
+        "label": "/index-v17 (TSL)",
+        "status": "strong",
+        "why": "No GA4 session data tracked for index_v17 variant in funnel_variants, but CPV funnel data shows 263 LP views, 18.63% landing-to-optin, 59.18% offer-to-checkout, 58.62% checkout-to-purchase, and 6.46% overall conversion. This TSL path drove 17 tracked conversions and $1,332.09 revenue via Campaign #51 Facebook. Attributed variant_sales shows $776.41 from 17 sales. Strong tracked performance across all funnel stages.",
+        "action": "protect"
+      }
+    ],
+    "scorecard": [
+      {
+        "area": "Campaign #111 Email",
+        "cpv_id_or_sku": "#111",
+        "status": "green",
+        "status_reason": "0.87% CR, $1,554.50 revenue, top email performer",
+        "action": "protect"
+      },
+      {
+        "area": "Campaign #51 Facebook",
+        "cpv_id_or_sku": "#51",
+        "status": "green",
+        "status_reason": "6.46% CR, $1,332.09 revenue, strong warm traffic",
+        "action": "test scale"
+      },
+      {
+        "area": "Campaign #69 Abandoned",
+        "cpv_id_or_sku": "#69",
+        "status": "green",
+        "status_reason": "3.97% CR, $186.11 revenue, small but functional",
+        "action": "protect"
+      },
+      {
+        "area": "Campaign #80 Reactivation",
+        "cpv_id_or_sku": "#80",
+        "status": "yellow",
+        "status_reason": "2.0% CR, 1 conversion from 50 views, low sample",
+        "action": "test"
+      },
+      {
+        "area": "Campaign #87 Interactive V2",
+        "cpv_id_or_sku": "#87",
+        "status": "red",
+        "status_reason": "0.25% CR, 4 conversions from 1,589 views, underperforming",
+        "action": "audit"
+      },
+      {
+        "area": "Campaign #53 Organic",
+        "cpv_id_or_sku": "#53",
+        "status": "yellow",
+        "status_reason": "0.48% CR at high volume, weak but large traffic source",
+        "action": "test"
+      },
+      {
+        "area": "OTO1 Main Offer",
+        "cpv_id_or_sku": "SSR",
+        "status": "yellow",
+        "status_reason": "15.2% take rate, below 40% strong benchmark",
+        "action": "fix"
+      },
+      {
+        "area": "OTO1 Downsell",
+        "cpv_id_or_sku": "SSR-D",
+        "status": "yellow",
+        "status_reason": "5.1% take rate, weak downsell capture",
+        "action": "fix"
+      },
+      {
+        "area": "OTO2 Main Offer",
+        "cpv_id_or_sku": "dhr",
+        "status": "red",
+        "status_reason": "2.5% take rate, critically weak",
+        "action": "fix"
+      },
+      {
+        "area": "OTO2 Downsell",
+        "cpv_id_or_sku": "dhr-d",
+        "status": "red",
+        "status_reason": "1.3% take rate, near-zero monetization",
+        "action": "fix"
+      },
+      {
+        "area": "Order Bump Free Trial",
+        "cpv_id_or_sku": "SPR-OB2",
+        "status": "green",
+        "status_reason": "34 new sales, 38 rebills, $296.71 revenue",
+        "action": "protect"
+      },
+      {
+        "area": "Frontend Advanced Mix",
+        "cpv_id_or_sku": "abdt-advanced",
+        "status": "green",
+        "status_reason": "67.1% of frontend sales, healthy premium mix",
+        "action": "protect"
+      }
+    ],
+    "data_notes": "Attribution weakness: variant_sales captures only $1,361.86 across all named variants vs $2,107.40 in 'other', indicating most sales are not attributed to specific landing variants. CPV conversions (143) are 9.5% below ClickBank frontend sales (158), suggesting some postback loss. Currency note: CPV revenue is SGD converted to USD at 0.74 rate; ClickBank revenue is net vendor USD after fees, explaining the 18.7% revenue\u5dee. No paid spend tracked this week, so paid CPA and paid RPV are null. index_v17 has no GA4 session data in funnel_variants but strong CPV funnel data via Campaign #51."
+  }
+}

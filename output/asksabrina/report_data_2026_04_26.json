@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-27T06:34:02.850394Z",
+    "generated_at": "2026-05-03T17:37:30.726396Z",
     "period_start": "2026-04-20",
     "period_end": "2026-04-26",
     "project": "asksabrina",
@@ -13,16 +13,16 @@
     "avg_revenue_per_buyer_usd": 28.59,
     "paid_traffic_spend_sgd": 0,
     "paid_traffic_spend_usd": 0,
-    "email_total_views": 5085,
+    "email_total_views": 5095,
     "email_total_conversions": 39,
     "email_total_revenue": 2041.8,
-    "landing_page_views": 23436,
-    "optin_completions": 1887,
-    "offer_page_views": 476,
-    "checkout_clicks": 100,
-    "landing_to_optin_pct": 8.05,
-    "offer_to_checkout_pct": 21.01,
-    "checkout_to_sale_pct": 158.0,
+    "landing_page_views": 23449,
+    "optin_completions": 1899,
+    "offer_page_views": 480,
+    "checkout_clicks": 102,
+    "landing_to_optin_pct": 8.1,
+    "offer_to_checkout_pct": 21.25,
+    "checkout_to_sale_pct": 154.9,
     "overall_rate_pct": 0.67
   },
   "traffic_sources": {
@@ -49,12 +49,12 @@
         "53": {
           "label": "asksabrina.com - Organic Traffic",
           "source": "unknown",
-          "views": 18086,
+          "views": 18089,
           "conversions": 87,
           "revenue": 1590.38,
           "cr_pct": 0.48,
           "status": "weak",
-          "checkout_clicks": 234
+          "checkout_clicks": 235
         },
         "54": {
           "label": "asksabrina.com - Maropost Traffic With Headlines Split Test",
@@ -99,7 +99,7 @@
         "77": {
           "label": "asksabrina.com - Maropost Traffic - Interactive VSL - Lead",
           "source": "email",
-          "views": 33,
+          "views": 34,
           "conversions": 0,
           "revenue": 0.0,
           "cr_pct": 0.0,
@@ -139,7 +139,7 @@
         "87": {
           "label": "asksabrina.com - Maropost Traffic - Interactive VSL - Lead V2",
           "source": "email",
-          "views": 1588,
+          "views": 1589,
           "conversions": 4,
           "revenue": 239.1,
           "cr_pct": 0.25,
@@ -149,12 +149,12 @@
         "111": {
           "label": "asksabrina.com - Maropost Traffic - Revamp UI & Copy",
           "source": "email",
-          "views": 3194,
+          "views": 3202,
           "conversions": 28,
           "revenue": 1554.5,
-          "cr_pct": 0.88,
+          "cr_pct": 0.87,
           "status": "active",
-          "checkout_clicks": 69
+          "checkout_clicks": 72
         }
       },
       "totals_by_source": {
@@ -164,19 +164,19 @@
           "revenue": 1332.09
         },
         "unknown": {
-          "views": 18086,
+          "views": 18089,
           "conversions": 87,
           "revenue": 1590.38
         },
         "email": {
-          "views": 5085,
+          "views": 5095,
           "conversions": 39,
           "revenue": 2041.8
         }
       },
       "total_conversions": 143,
       "total_revenue": 4964.27,
-      "checkout_clicks_total": 476,
+      "checkout_clicks_total": 480,
       "checkout_clicks_by_campaign": {
         "50": {
           "label": "asksabrina_default_vs_discount_price",
@@ -192,7 +192,7 @@
         },
         "53": {
           "label": "asksabrina.com - Organic Traffic",
-          "checkout_clicks": 234
+          "checkout_clicks": 235
         },
         "54": {
           "label": "asksabrina.com - Maropost Traffic With Headlines Split Test",
@@ -284,7 +284,7 @@
         },
         "111": {
           "label": "asksabrina.com - Maropost Traffic - Revamp UI & Copy",
-          "checkout_clicks": 69
+          "checkout_clicks": 72
         }
       },
       "funnel_totals": {
@@ -310,14 +310,14 @@
           ],
           "offer_path": "/offer/",
           "flow_label": " \u2192 /offer/",
-          "landing_page_views": 21280,
-          "optin_completions": 1756,
-          "offer_page_views": 427,
-          "checkout_clicks": 71,
+          "landing_page_views": 21291,
+          "optin_completions": 1768,
+          "offer_page_views": 431,
+          "checkout_clicks": 73,
           "purchases": 30,
-          "landing_to_optin_rate": 8.25,
-          "offer_to_checkout_rate": 16.63,
-          "checkout_to_purchase_rate": 42.25,
+          "landing_to_optin_rate": 8.3,
+          "offer_to_checkout_rate": 16.94,
+          "checkout_to_purchase_rate": 41.1,
           "overall_rate": 0.14
         },
         "index_v17.html_index_v18.html\u2192?": {
@@ -391,12 +391,12 @@
           ],
           "offer_path": "unknown",
           "flow_label": "/destiny \u2192 ?",
-          "landing_page_views": 35,
+          "landing_page_views": 36,
           "optin_completions": 2,
           "offer_page_views": 0,
           "checkout_clicks": 0,
           "purchases": 0,
-          "landing_to_optin_rate": 5.71,
+          "landing_to_optin_rate": 5.56,
           "offer_to_checkout_rate": 0.0,
           "checkout_to_purchase_rate": 0.0,
           "overall_rate": 0.0
@@ -455,12 +455,12 @@
           ],
           "offer_path": "unknown",
           "flow_label": "/destiny/v2/ \u2192 ?",
-          "landing_page_views": 1588,
+          "landing_page_views": 1589,
           "optin_completions": 80,
           "offer_page_views": 0,
           "checkout_clicks": 0,
           "purchases": 0,
-          "landing_to_optin_rate": 5.04,
+          "landing_to_optin_rate": 5.03,
           "offer_to_checkout_rate": 0.0,
           "checkout_to_purchase_rate": 0.0,
           "overall_rate": 0.0
