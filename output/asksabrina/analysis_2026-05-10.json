@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "generated_at": "2026-05-10T17:41:56.201309Z",
+    "model": "claude-sonnet-4-5",
+    "mode": "live"
+  },
+  "analysis": {
+    "period_summary": "Week ending 2026-05-03 generated $1,591.25 revenue from 38 frontend sales at $41.88 per buyer. The most important commercial takeaway: the funnel is running 100% on email traffic with zero paid spend, producing a healthy $0.70 email RPV, but backend monetization is severely underperforming with OTO1 at 23.7% take rate and OTO1 downsell at just 5.3%, leaving $400\u2013600 in unrealized weekly revenue.",
+    "northstar": {
+      "operating_focus": "tracked funnel performance and revenue efficiency",
+      "commercial_metric": "Revenue Per Visitor (RPV)",
+      "email_rpv": 0.7,
+      "paid_rpv_usd": null,
+      "avg_funnel_value": 41.88,
+      "commentary": "Email RPV of $0.70 is strong and above typical email benchmarks, but backend efficiency is dragging down average buyer value significantly."
+    },
+    "funnel_leaks": [
+      {
+        "area": "OTO1 Main Offer",
+        "metric": "take_rate_pct",
+        "value": "18.4%",
+        "why_it_matters": "OTO1 main offer at 18.4% is 52% below the 40%+ strong benchmark, leaving $150\u2013200/week unrealized."
+      },
+      {
+        "area": "OTO1 Downsell",
+        "metric": "take_rate_pct",
+        "value": "5.3%",
+        "why_it_matters": "OTO1 downsell at 5.3% represents severe monetization failure, recovering only 2 of 29 OTO1 declines."
+      },
+      {
+        "area": "Email campaign #111",
+        "metric": "conversions",
+        "value": "0 from 329 views",
+        "why_it_matters": "Largest email send this week (329 views) produced zero conversions, wasting 55% of total email traffic."
+      },
+      {
+        "area": "Broken email flows",
+        "metric": "checkout_clicks with 0 conversions",
+        "value": "16 checkout clicks (#80), 14 checkout clicks (#79), 24 checkout clicks (#69)",
+        "why_it_matters": "Multiple email campaigns show checkout intent but attribution or conversion tracking appears broken, obscuring true performance."
+      }
+    ],
+    "needle_movers": [
+      {
+        "rank": 1,
+        "priority": "critical",
+        "area": "OTO1 monetization recovery",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "Combined OTO1 main + downsell take rate is 23.7% vs 40%+ benchmark. At 38 frontend sales/week, fixing to 40% would add ~6 OTO1 sales worth $300\u2013400 incremental weekly revenue. This is the single largest unrealized revenue opportunity in the current funnel.",
+        "what": [
+          "Audit OTO1 offer page for clarity, urgency, and pricing alignment with frontend promise",
+          "Test downsell offer positioning to recover more of the 29 OTO1 main declines",
+          "Review OTO1 postback flow to confirm all conversions are being attributed correctly"
+        ],
+        "revenue_impact": "Directional estimate: $300\u2013400/week if OTO1 combined take rate recovers to 40% baseline. Based on 38 frontend sales \u00d7 (40% target - 23.7% current) \u00d7 $57 avg OTO1 value."
+      },
+      {
+        "rank": 2,
+        "priority": "critical",
+        "area": "Email campaign #111 total failure",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "Campaign #111 sent 329 views (55% of email traffic) with 5 checkout clicks but 0 conversions. This is the largest single email send and it completely failed to convert, representing massive waste of warm traffic.",
+        "what": [
+          "Pause campaign #111 immediately until root cause is identified",
+          "Audit postback tracking and ClickBank integration for this campaign ID",
+          "Review landing page and offer flow for technical breaks or variant mismatch"
+        ],
+        "revenue_impact": "At 0.7% email CR baseline, 329 views should produce 2\u20133 sales worth $80\u2013125. Currently producing $0."
+      },
+      {
+        "rank": 3,
+        "priority": "high",
+        "area": "Email attribution and conversion tracking audit",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "Email campaigns #69, #79, #80 show significant checkout clicks (24, 14, 16 respectively) but attribution appears broken. Campaign #69 shows 24 checkout clicks and 4 conversions (16.7% checkout-to-conversion), while #80 shows 16 checkout clicks and 0 conversions despite being labeled 'Reactivation'. This suggests either tracking breaks or severe checkout friction that varies by campaign.",
+        "what": [
+          "Audit postback integration for email campaigns with high checkout clicks but low/zero conversions",
+          "Verify CPV Labs tracking pixels are firing correctly on checkout and thank-you pages",
+          "Cross-reference ClickBank order IDs with CPV campaign attribution for mismatches"
+        ],
+        "revenue_impact": "Cannot quantify cleanly from this data due to attribution uncertainty, but resolving tracking would likely reveal 2\u20135 additional attributed conversions per week."
+      },
+      {
+        "rank": 4,
+        "priority": "high",
+        "area": "Variant destiny_v1 vs destiny_v2 head-to-head unclear",
+        "evidence_type": "mixed",
+        "confidence": "medium",
+        "why": "destiny_v1 has slightly higher bounce (52.1% vs 49.4%), better choice engagement (17.43% vs 10.13%), better optin rate (9.32% vs 6.33%), but worse checkout rate from optin (28.24% vs 20.0%). With only 1 checkout from destiny_v2 in 79 sessions vs 24 from destiny_v1 in 912 sessions, session-based signals favor v1 but sample size for v2 is too small to declare definitively. variant_sales shows 0 attributed revenue for both, though cross_check notes CPV conversions may be missing postbacks.",
+        "what": [
+          "Continue running both variants until destiny_v2 reaches 200+ sessions for cleaner read",
+          "Monitor checkout_from_optin_pct and choice_to_optin1 dropoff as primary decision signals",
+          "Do not scale either variant until attribution clarity improves and sample confidence is higher"
+        ],
+        "revenue_impact": "Directional only: if destiny_v2 proves 30% better at checkout efficiency at scale, it could add $50\u2013100/week in email-driven revenue, but current sample is too small to bank on."
+      },
+      {
+        "rank": 5,
+        "priority": "medium",
+        "area": "Index-v17 email variant has zero GA4 session data",
+        "evidence_type": "observed",
+        "confidence": "high",
+        "why": "funnel_variants shows index_v17 with 0 sessions, 0 users, and all funnel metrics at zero, despite CPV tracking showing 558 views, 78 optins, 30 checkout clicks, and 12 conversions for the index_v17 flow. This is a GA4 integration gap, not a traffic problem, but it prevents session-based optimization and variant comparison.",
+        "what": [
+          "Audit GA4 tagging on /index-v17.html and /offer/index-v16.html paths",
+          "Verify GA4 config includes CPV campaign IDs 51, 54, 63 in variant grouping logic",
+          "Backfill session-level metrics from GA4 if data exists but is not being surfaced in this report"
+        ],
+        "revenue_impact": "No direct revenue impact, but session-based optimization is currently blind for the second-largest converting flow."
+      }
+    ],
+    "variant_read": [
+      {
+        "variant": "destiny_v1",
+        "label": "/destiny (full-screen)",
+        "status": "mixed",
+        "why": "912 sessions with 52.1% bounce, 9.32% optin rate, and 28.24% checkout-from-optin. Choice engagement at 17.43% is reasonable, but optin rate is slightly below the 10%+ target and checkout-from-optin is below the 30%+ healthy range. variant_sales shows 0 attributed revenue, though cross_check indicates postback gaps may obscure true attribution. Session-based signals are functional but not strong.",
+        "action": "test"
+      },
+      {
+        "variant": "destiny_v2",
+        "label": "/destiny/v2 (with-headline)",
+        "status": "mixed",
+        "why": "79 sessions with 49.4% bounce (slightly better than v1), but weaker choice engagement (10.13% vs 17.43%), weaker optin rate (6.33% vs 9.32%), and lower checkout-from-optin (20.0% vs 28.24%). Only 1 checkout in 79 sessions makes this too small to judge definitively. variant_sales shows 0 attributed revenue. Lower bounce suggests better initial engagement, but downstream conversion is weaker.",
+        "action": "test scale"
+      },
+      {
+        "variant": "index_v17",
+        "label": "/index-v17 (TSL)",
+        "status": "strong",
+        "why": "CPV tracking shows 558 views, 13.98% landing-to-optin, 38.46% offer-to-checkout, and 2.15% overall conversion rate, all strong. However, GA4 funnel_variants shows 0 sessions, indicating a tracking integration gap. variant_sales attributes 14 sales and $570.49 revenue (caveat: understates true performance due to 'other' bucket). CPV-level efficiency is clearly the strongest flow this week.",
+        "action": "protect"
+      }
+    ],
+    "scorecard": [
+      {
+        "area": "Email #51 (Facebook Traffic V17)",
+        "cpv_id_or_sku": "#51",
+        "status": "green",
+        "status_reason": "2.15% CR, $775 revenue, strong",
+        "action": "protect"
+      },
+      {
+        "area": "Email #53 (Organic)",
+        "cpv_id_or_sku": "#53",
+        "status": "yellow",
+        "status_reason": "1.23% CR below 1.5% email target, but largest view count",
+        "action": "test"
+      },
+      {
+        "area": "Email #69 (Abandoned)",
+        "cpv_id_or_sku": "#69",
+        "status": "green",
+        "status_reason": "9.3% CR, $201 revenue, strong small-sample",
+        "action": "test scale"
+      },
+      {
+        "area": "Email #79 (Urgency)",
+        "cpv_id_or_sku": "#79",
+        "status": "green",
+        "status_reason": "15% CR, $93 revenue, strong small-sample",
+        "action": "test scale"
+      },
+      {
+        "area": "Email #80 (Reactivation)",
+        "cpv_id_or_sku": "#80",
+        "status": "red",
+        "status_reason": "0% CR despite 16 checkout clicks, broken",
+        "action": "pause"
+      },
+      {
+        "area": "Email #87 (Interactive VSL V2)",
+        "cpv_id_or_sku": "#87",
+        "status": "red",
+        "status_reason": "0% CR from 75 views, dead",
+        "action": "pause"
+      },
+      {
+        "area": "Email #111 (Revamp UI)",
+        "cpv_id_or_sku": "#111",
+        "status": "red",
+        "status_reason": "0% CR from 329 views, largest failure",
+        "action": "pause"
+      },
+      {
+        "area": "OTO1 Main Offer",
+        "cpv_id_or_sku": "SSR",
+        "status": "yellow",
+        "status_reason": "18.4% take rate vs 40% benchmark",
+        "action": "fix"
+      },
+      {
+        "area": "OTO1 Downsell",
+        "cpv_id_or_sku": "SSR-D",
+        "status": "red",
+        "status_reason": "5.3% take rate, severe monetization gap",
+        "action": "fix"
+      },
+      {
+        "area": "Order Bump Legacy",
+        "cpv_id_or_sku": "SPR-OB1",
+        "status": "yellow",
+        "status_reason": "Only 1 new sale, low attach",
+        "action": "test"
+      },
+      {
+        "area": "Order Bump Free Trial",
+        "cpv_id_or_sku": "SPR-OB2",
+        "status": "green",
+        "status_reason": "51 rebills, $320 revenue, strong recurring",
+        "action": "protect"
+      },
+      {
+        "area": "Frontend Advanced Mix",
+        "cpv_id_or_sku": "abdt-advanced",
+        "status": "green",
+        "status_reason": "71.1% advanced mix, healthy upsell preference",
+        "action": "protect"
+      }
+    ],
+    "data_notes": "Cross-check shows CPV conversions (34) are 10.5% below ClickBank frontend sales (38), indicating postback gaps. Revenue diff is 33.8%, partially explained by SGD-to-USD conversion and ClickBank net vendor fees, but also suggests attribution leakage. Email campaign #111 (329 views, 0 conversions) and campaigns #80, #87 (combined 125 views, 0 conversions) appear broken or severely misattributed. GA4 funnel_variants shows 0 sessions for index_v17 despite CPV tracking showing 558 views and 12 conversions, indicating GA4 integration gap. Multiple email campaigns show checkout clicks with zero or very low conversion attribution, suggesting either tracking breaks or severe checkout friction variability by source."
+  }
+}
